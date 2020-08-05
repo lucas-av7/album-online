@@ -63,6 +63,6 @@ export default {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
-    margin-top: 20px;
+    margin-top: 10px;
   }
 </style>
