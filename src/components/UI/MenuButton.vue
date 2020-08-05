@@ -1,7 +1,7 @@
 <template>
   <div class="menuButton">
-    <div class="menuIcon">
-      <span class="dotMenu" @click="menu = true"></span>
+    <div class="menuIcon" @click="menu = true">
+      <span class="dotMenu"></span>
     </div>
     <div class="menuDropDown" v-show="menu">
       <div class="overlay" @click="menu = false"></div>
