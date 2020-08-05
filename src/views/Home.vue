@@ -19,7 +19,7 @@ export default {
   components: { CreateAlbumPhoto, Albums, NewAlbum },
   computed: {
     firstAlbum() {
-      return true
+      return false
     }
   },
   data() {
