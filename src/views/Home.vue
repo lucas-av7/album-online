@@ -1,18 +1,18 @@
 <template>
   <div class="home">
     <h1>Welcome to your online photo album</h1>
-    <CreateAlbum v-if="firstAlbum" firstAlbum />
+    <CreateAlbumPhoto v-if="firstAlbum" firstAlbum type="album" />
     <Albums v-else />
   </div>
 </template>
 
 <script>
-import CreateAlbum from '../components/CreateAlbum'
+import CreateAlbumPhoto from '../components/CreateAlbumPhoto'
 import Albums from '../components/Albums'
 
 export default {
   name: 'Home',
-  components: { CreateAlbum, Albums },
+  components: { CreateAlbumPhoto, Albums },
   computed: {
     firstAlbum() {
       return false

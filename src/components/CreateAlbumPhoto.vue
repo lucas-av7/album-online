@@ -1,18 +1,28 @@
 <template>
   <div class="createAlbum">
-    <div class="createAlbumFrame" :class="{ firstAlbum }">
-      <i class="fas fa-book albumIcon"></i>
-      <h2>New album</h2>
-    </div>
-    <h2 v-if="firstAlbum">Create your first album</h2>
+    <template v-if="type == 'album'">
+      <div class="createAlbumFrame" :class="{ firstAlbum }">
+        <i class="fas fa-book albumIcon"></i>
+        <h2>New album</h2>
+      </div>
+      <h2 v-if="firstAlbum">Create your first album</h2>
+    </template>
+
+    <template v-if="type == 'photo'">
+      <div class="createAlbumFrame">
+        <i class="far fa-image albumIcon"></i>
+        <h2>New photo</h2>
+      </div>
+    </template>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'CreateAlbum',
+  name: 'CreateAlbumPhoto',
   props: {
-    firstAlbum: { type: Boolean, default: false }
+    firstAlbum: { type: Boolean, default: false },
+    type: { type: String }
   }
 }
 </script>

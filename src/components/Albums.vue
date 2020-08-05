@@ -5,17 +5,17 @@
     <Album />
     <Album />
     <Album />
-    <CreateAlbum />
+    <CreateAlbumPhoto type="album" />
   </div>
 </template>
 
 <script>
 import Album from './Album'
-import CreateAlbum from './CreateAlbum'
+import CreateAlbumPhoto from './CreateAlbumPhoto'
 
 export default {
   name: 'Albums',
-  components: { Album ,CreateAlbum }
+  components: { Album ,CreateAlbumPhoto }
 }
 </script>
 
