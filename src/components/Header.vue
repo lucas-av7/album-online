@@ -12,8 +12,9 @@ export default {
 
 <style>
   header {
-    width: 100%;
+    width: 90%;
     height: 55px;
+    margin: 0 auto;
     border-bottom: 1px solid #ddda;
     display: flex;
     align-items: center;
