@@ -5,8 +5,8 @@
     </div>
     <div class="menuDropDown" v-show="menu">
         <div class="overlay"
-          v-touch:start="startHandler"
-          @click="menu = false">
+          @click="menu = false"
+          v-touch:swipe="swipeHandler">
         </div>
       <div class="menuContent"
         @click="menu = false"
@@ -26,7 +26,7 @@ export default {
     }
   },
   methods: {
-    startHandler () {
+    swipeHandler () {
       this.menu = false
     }
   }
