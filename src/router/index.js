@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import AlbumView from '../views/AlbumView'
+import PhotoView from '../views/PhotoView'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ Vue.use(VueRouter)
     path: '/album',
     name: 'AlbumView',
     component: AlbumView
+  },
+  {
+    path: '/photo',
+    name: 'PhotoView',
+    component: PhotoView
   },
 ]
 

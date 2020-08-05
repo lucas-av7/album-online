@@ -27,10 +27,11 @@ export default {
     --secondary-text-color: #000;
     --text-warning: #fc8600;
     --border-color: #DDDA;
+    --link-keywords: #073b4c;
   }
 
   body {
-    background: linear-gradient(-45deg, #4CA8DA, #63AE99);
+    background: linear-gradient(to right, #4CA8DA, #63AEAC);
     font-family: 'Roboto', sans-serif;
     font-size: 62,5%;
     color: var(--primary-text-color);
