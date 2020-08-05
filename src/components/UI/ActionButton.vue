@@ -36,4 +36,14 @@ export default {
     color: var(--secondary-text-color);
   }
 
+  .actionButton.danger {
+    background-color: var(--danger);
+    color: var(--primary-text-color);
+  }
+
+    .actionButton.warning {
+    background-color: var(--warning);
+    color: var(--primary-text-color);
+  }
+
 </style>
