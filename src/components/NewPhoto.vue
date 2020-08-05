@@ -13,8 +13,8 @@
       <label for="description">Description</label>
       <input type="text" name="description" placeholder="Photo description">
 
-      <label for="keyswords">Keyswords</label>
-      <input type="text" name="keyswords" placeholder="Comma-separated. Ex: flower, garden, sunrise">
+      <label for="keywords">Keywords</label>
+      <input type="text" name="keywords" placeholder="Comma-separated. Ex: flower, garden, sunrise">
     </Forms>
     <template slot="buttonsArea">
       <ActionButton
