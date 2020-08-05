@@ -1,7 +1,7 @@
 <template>
     <button
       class="actionButton"
-      @click="$emit('clicked')"
+      @click="$emit('clicked'), options()"
       :class="type">
       {{ text }}
     </button>
@@ -10,7 +10,14 @@
 <script>
 export default {
   name: 'ActionButton',
-  props: ['text', 'type']
+  props: ['text', 'type', 'option'],
+  methods: {
+    options() {
+      if(this.option == 'closeModal') {
+        document.body.style.overflow = 'initial'
+      }
+    }
+  }
 }
 </script>
 

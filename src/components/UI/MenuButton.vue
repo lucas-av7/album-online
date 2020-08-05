@@ -4,8 +4,13 @@
       <span class="dotMenu"></span>
     </div>
     <div class="menuDropDown" v-show="menu">
-      <div class="overlay" @click="menu = false"></div>
-      <div class="menuContent" @click="menu = false">
+      <div class="overlay"
+        @click="menu = false"
+        @touchstart="menu = false">
+      </div>
+      <div class="menuContent"
+        @click="menu = false"
+        @mouseleave="menu = false">
         <slot></slot>
       </div>
     </div>
@@ -72,13 +77,12 @@ export default {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     user-select: none;
   }
 
   .overlay {
     z-index: 9;
-    background-color: #0007;
   }
   
   .menuContent {

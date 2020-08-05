@@ -21,6 +21,7 @@
       <ActionButton
         @clicked="editFotoModal = false"
         text="Cancel"
+        option="closeModal"
         type="secondary" />
       <ActionButton
         text="Save"
@@ -34,6 +35,7 @@
       <ActionButton
         @clicked="deleteFotoModal = false"
         text="Cancel"
+        option="closeModal"
         type="secondary" />
       <ActionButton
         text="Delete"
@@ -55,6 +57,7 @@
       <ActionButton
         @clicked="moveFotoModal = false"
         text="Cancel"
+        option="closeModal"
         type="secondary" />
       <ActionButton
         text="Move"
