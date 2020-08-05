@@ -1,13 +1,13 @@
 <template>
   <Modal @clicked="$emit('close')">
     <h1>New album</h1>
-    <div class="newAlbumDataForm">
+    <Forms>
       <label for="title">Title</label>
       <input type="text" name="title" placeholder="Album title">
 
       <label for="description">Description</label>
       <input type="text" name="description" placeholder="Album description">
-    </div>
+    </Forms>
     <template slot="buttonsArea">
       <ActionButton
         @clicked="$emit('close')"
@@ -23,34 +23,10 @@
 <script>
 import ActionButton from './UI/ActionButton'
 import Modal from './UI/Modal'
+import Forms from './UI/Forms'
 
 export default {
   name: 'NewAlbum',
-  components: { ActionButton, Modal }
+  components: { ActionButton, Modal, Forms }
 }
 </script>
-
-<style>
-  .newAlbumDataForm {
-    display: flex;
-    width: 95%;
-    flex-direction: column;
-    color: var(--secondary-text-color);
-  }
-
-  .newAlbumDataForm input {
-    border: none;
-    outline: none;
-    height: 45px;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    background-color: white;
-    border-bottom: 2px solid var(--border-color);
-  }
-
-  .newAlbumDataForm input:focus {
-    border-bottom: 2px solid var(--primary-color);
-  }
-
-</style>

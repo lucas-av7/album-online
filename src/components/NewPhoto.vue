@@ -1,7 +1,7 @@
 <template>
   <Modal @clicked="$emit('close')">
     <h1>Upload photo</h1>
-    <div class="newPhotoDataForm">
+    <Forms>
       <div class="imagePreview" @click="$refs.uploadPhotoButton.click()">
         <i class="far fa-file-image"></i>
       </div>
@@ -15,8 +15,8 @@
 
       <label for="keyswords">Keyswords</label>
       <input type="text" name="keyswords" placeholder="Comma-separated. Ex: flower, garden, sunrise">
-    </div>
-    <div class="newPhotoDataButtons">
+    </Forms>
+    <template slot="buttonsArea">
       <ActionButton
         @clicked="$emit('close')"
         text="Cancel"
@@ -24,29 +24,23 @@
       <ActionButton
         text="Upload"
         type="primary" />
-    </div>
+    </template>
   </Modal>
 </template>
 
 <script>
 import ActionButton from './UI/ActionButton'
 import Modal from './UI/Modal'
+import Forms from './UI/Forms'
 
 export default {
   name: 'NewPhoto',
-  components: { ActionButton, Modal }
+  components: { ActionButton, Modal, Forms }
 }
 </script>
 
 <style>
-  .newPhotoDataForm {
-    display: flex;
-    width: 95%;
-    flex-direction: column;
-    color: var(--secondary-text-color);
-  }
-
-  .newPhotoDataForm .imagePreview {
+  .imagePreview {
     align-self: center;
     width: 120px;
     height: 120px;
@@ -60,30 +54,7 @@ export default {
     cursor: pointer;
   }
 
-  .newPhotoDataForm input {
-    border: none;
-    outline: none;
-    height: 45px;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    background-color: white;
-    border-bottom: 2px solid var(--border-color);
-  }
-
-    .newPhotoDataForm input:focus {
-    border-bottom: 2px solid var(--primary-color);
-  }
-
-  .newPhotoDataForm input[name=photo] {
+  input[name=photo] {
     display: none;
   }
-
-  .newPhotoDataButtons {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 20px;
-  }
-
 </style>
