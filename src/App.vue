@@ -25,9 +25,10 @@ export default {
     --secondary-color: #F6F9FC;
     --primary-text-color: #FFF;
     --secondary-text-color: #000;
-    --text-warning: #fc8600;
+    --warning: #FC8600;
+    --danger: #E63946 ;
     --border-color: #DDDA;
-    --link-keywords: #073b4c;
+    --link-keywords: #073B4C;
   }
 
   body {
