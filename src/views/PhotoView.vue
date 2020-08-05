@@ -85,7 +85,7 @@
         </button>
       </div>
       <div class="comments">
-        <div class="comment">
+        <div v-for="i in 5" :key="i" class="comment">
           <div class="user">
             <i class="fas fa-user-alt"></i>
           </div>
@@ -118,7 +118,7 @@ export default {
 <style>
   .photoView {
     width: 95%;
-    height: calc(100vh - 55px);
+    min-height: calc(100vh - 110px);
     margin: 0 auto;
     display: flex;
     flex-direction: column;
