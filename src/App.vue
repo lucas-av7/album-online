@@ -1,5 +1,6 @@
 <template>
-  <div id="app" v-touch:swipe="swipeHandler">
+  <div id="app"
+    v-scroll="handleScroll">
     <Header />
     <router-view />
     <transition name="footerTransition">
@@ -20,9 +21,12 @@ export default {
     }
   },
   methods: {
-    swipeHandler (direction) {
-      if(direction == 'top') this.showFooter = false
-      if(direction == 'bottom') this.showFooter = true
+    handleScroll() {
+      if (window.scrollY > 0) {
+        this.showFooter = false
+      } else {
+        this.showFooter = true
+      }
     }
   }
 }
