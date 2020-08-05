@@ -12,6 +12,9 @@
       placeholder="Album description"
       v-model="descriptionAlbum">
     </Forms>
+    <div v-show="error" class="errosInput">
+      <p>{{ error }}</p>
+    </div>
     <template slot="buttonsArea">
       <ActionButton
         @clicked="$emit('close')"
@@ -39,7 +42,8 @@ export default {
   data() {
     return {
       titleAlbum: '',
-      descriptionAlbum: ''
+      descriptionAlbum: '',
+      error: ''
     }
   },
   watch: {
@@ -54,14 +58,33 @@ export default {
     create() {
       const allowCreate = this.checkErros()
       if(allowCreate) {
-        console.log('Created')
-      } else {
-        console.log('Has errors')
+        const newAlbum = {
+          title: this.titleAlbum.trim(),
+          description: this.descriptionAlbum.trim(),
+          photos: []
+        }
+        this.$store.dispatch('createAlbum', newAlbum)
+        this.$emit('close')
       }
     },
     checkErros() {
-      return this.titleAlbum != '' && this.descriptionAlbum != ''
+      if(this.titleAlbum == '') {
+        this.error = 'Error: Title is blank'
+        return false
+      } else if (this.descriptionAlbum == '') {
+        this.error = 'Error: Description is blank'
+        return false
+      } else {
+        this.error = ''
+        return true
+      }
     }
   }
 }
 </script>
+
+<style>
+  .errosInput p {
+    color: var(--danger);
+  }
+</style>

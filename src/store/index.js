@@ -5,12 +5,20 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    albums: []
+    albums: [],
+    albumId: 1,
+    photoId: 1
   },
   mutations: {
+    createAlbum(state, payload) {
+      state.albums.push(payload)
+      console.log(payload)
+    }
   },
   actions: {
-  },
-  modules: {
+    createAlbum({ commit, state }, payload) {
+      payload.albumId = state.albumId++
+      commit('createAlbum', payload)
+    }
   }
 })
