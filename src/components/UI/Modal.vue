@@ -3,6 +3,9 @@
     <div class="overlayModal" @click="$emit('clicked')"></div>
     <div class="modalData">
       <slot></slot>
+    <div class="buttonsArea">
+      <slot name="buttonsArea"></slot>
+    </div>
     </div>
   </div>
 </template>
@@ -54,5 +57,12 @@ export default {
   .modalData h1 {
     color: var(--secondary-text-color);
     margin-bottom: 20px;
+  }
+
+  .buttonsArea {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
   }
 </style>

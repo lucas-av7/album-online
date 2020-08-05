@@ -8,7 +8,7 @@
       <label for="description">Description</label>
       <input type="text" name="description" placeholder="Album description">
     </div>
-    <div class="newAlbumDataButtons">
+    <template slot="buttonsArea">
       <ActionButton
         @clicked="$emit('close')"
         text="Cancel"
@@ -16,7 +16,7 @@
       <ActionButton
         text="Upload"
         type="primary" />
-    </div>
+    </template>
   </Modal>
 </template>
 
@@ -51,13 +51,6 @@ export default {
 
   .newAlbumDataForm input:focus {
     border-bottom: 2px solid var(--primary-color);
-  }
-
-  .newAlbumDataButtons {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 20px;
   }
 
 </style>
