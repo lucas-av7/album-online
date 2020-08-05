@@ -22,11 +22,13 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    user-select: none;
+    margin: 3px;
   }
 
   .createAlbumFrame {
-    width: 50px;
-    height: 50px;
+    width: 110px;
+    height: 110px;
     border: 2px solid var(--border-color);
     border-radius: 10%;
     display: flex;
@@ -36,11 +38,23 @@ export default {
     cursor: pointer;
   }
 
+  .albumIcon {
+    font-size: 2.5rem;
+  }
+
+  .createAlbumFrame > h2 {
+    font-size: 1.0rem;
+  }
+
   .firstAlbum {
     width: 225px;
     height: 225px;
-    margin: 50px auto;
+    margin: 70px auto;
     animation: inductionClick 10s ease infinite;
+  }
+
+  .firstAlbum > h2 {
+    font-size: 1.5rem;
   }
 
   .firstAlbum .albumIcon {
