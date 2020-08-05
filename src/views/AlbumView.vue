@@ -2,7 +2,7 @@
   <div class="albumView">
     <h1>Album name</h1>
     <MenuButton>
-      <p>Change name</p>
+      <p>Edit</p>
       <p>Delete album</p>
     </MenuButton>
     <Photos />
