@@ -12,7 +12,8 @@ export default {
 
 <style>
   header {
-    width: 95%;
+    width: 100%;
+    padding: 0 15px;
     height: 55px;
     margin: 0 auto;
     border-bottom: 1px solid var(--border-color);
