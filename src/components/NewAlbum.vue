@@ -1,80 +1,36 @@
 <template>
-  <div class="newAlbum">
-    <div class="overlaynewAlbum" @click="$emit('close')"></div>
-    <div class="newAlbumData">
-      <h1>New album</h1>
-      <div class="newAlbumDataForm">
-        <label for="title">Title</label>
-        <input type="text" name="title" placeholder="Album title">
+  <Modal @clicked="$emit('close')">
+    <h1>New album</h1>
+    <div class="newAlbumDataForm">
+      <label for="title">Title</label>
+      <input type="text" name="title" placeholder="Album title">
 
-        <label for="description">Description</label>
-        <input type="text" name="description" placeholder="Album description">
-      </div>
-      <div class="newAlbumDataButtons">
-        <ActionButton
-          @clicked="$emit('close')"
-          text="Cancel"
-          type="secondary" />
-        <ActionButton
-          text="Upload"
-          type="primary" />
-      </div>
+      <label for="description">Description</label>
+      <input type="text" name="description" placeholder="Album description">
     </div>
-  </div>
+    <div class="newAlbumDataButtons">
+      <ActionButton
+        @clicked="$emit('close')"
+        text="Cancel"
+        type="secondary" />
+      <ActionButton
+        text="Upload"
+        type="primary" />
+    </div>
+  </Modal>
 </template>
 
 <script>
 import ActionButton from './UI/ActionButton'
+import Modal from './UI/Modal'
 
 export default {
   name: 'NewAlbum',
-  components: { ActionButton }
+  components: { ActionButton, Modal }
 }
 </script>
 
 <style>
-  .newAlbum {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .overlaynewAlbum {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    user-select: none;
-    z-index: 9;
-    background-color: #0007;
-
-  }
-
-  .newAlbumData {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 90%;
-    padding: 30px 20px;
-    margin: 0 auto;
-    background-color: var(--secondary-color);
-    border-radius: 10px;
-  }
-
-  .newAlbumData h1 {
-    color: var(--secondary-text-color);
-    margin-bottom: 20px;
-  }
-
   .newAlbumDataForm {
     display: flex;
     width: 95%;
@@ -96,7 +52,7 @@ export default {
   .newAlbumDataForm input:focus {
     border-bottom: 2px solid var(--primary-color);
   }
-  
+
   .newAlbumDataButtons {
     width: 100%;
     display: flex;
