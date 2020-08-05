@@ -1,6 +1,7 @@
 <template>
   <div class="albumView">
     <h1>Album name</h1>
+    <p>Album description</p>
     <MenuButton>
       <p @click="editAlbumModal = true">Edit</p>
       <p @click="deleteAlbumModal = true">Delete album</p>
