@@ -18,7 +18,8 @@ export default {
     color: var(--secondary-text-color);
   }
 
-  .forms input {
+  .forms input,
+  .forms select {
     border: none;
     outline: none;
     height: 45px;
