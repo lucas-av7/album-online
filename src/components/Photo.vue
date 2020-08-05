@@ -1,8 +1,8 @@
 <template>
-  <div class="album">
-    <div class="albumFrame">
+  <div class="photo">
+    <div class="photoFrame">
       <i class="far fa-images albumIcon"></i>
-      <h2>Album name</h2>
+      <h2>Photo name</h2>
     </div>
   </div>
 </template>
@@ -14,7 +14,7 @@ export default {
 </script>
 
 <style>
-  .album {
+  .photo {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,7 +22,7 @@ export default {
     margin: 3px;
   }
 
-  .albumFrame {
+  .photoFrame {
     width: 110px;
     height: 110px;
     border: 2px solid var(--border-color);
@@ -34,7 +34,7 @@ export default {
     cursor: pointer;
   }
 
-  .albumFrame > h2 {
+  .photoFrame > h2 {
     font-size: 1.0rem;
   }
 </style>

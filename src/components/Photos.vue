@@ -1,26 +1,27 @@
 <template>
-  <div class="albums">
-    <Album />
-    <Album />
-    <Album />
-    <Album />
-    <Album />
-    <CreateAlbumPhoto type="album" />
+  <div class="photos">
+    <Photo />
+    <Photo />
+    <Photo />
+    <Photo />
+    <Photo />
+    <Photo />
+    <CreateAlbumPhoto type="photo" />
   </div>
 </template>
 
 <script>
-import Album from './Album'
+import Photo from './Photo'
 import CreateAlbumPhoto from './CreateAlbumPhoto'
 
 export default {
-  name: 'Albums',
-  components: { Album, CreateAlbumPhoto }
+  name: 'Photos',
+  components: { Photo, CreateAlbumPhoto }
 }
 </script>
 
 <style>
-  .albums {
+  .photos {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
