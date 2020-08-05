@@ -1,8 +1,10 @@
 <template>
-  <div id="app">
+  <div id="app" v-touch:swipe="swipeHandler">
     <Header />
     <router-view />
-    <Footer />
+    <transition name="footerTransition">
+      <Footer v-show="showFooter" />
+    </transition>
   </div>
 </template>
 
@@ -11,7 +13,18 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 export default {
   name: 'App',
-  components: { Header, Footer }
+  components: { Header, Footer },
+  data() {
+    return {
+      showFooter: true
+    }
+  },
+  methods: {
+    swipeHandler (direction) {
+      if(direction == 'top') this.showFooter = false
+      if(direction == 'bottom') this.showFooter = true
+    }
+  }
 }
 </script>
 
@@ -38,5 +51,23 @@ export default {
     font-family: 'Roboto', sans-serif;
     font-size: 62,5%;
     color: var(--primary-text-color);
+  }
+
+  .footerTransition-enter-active {
+    animation: showFooter 0.5s;
+  }
+
+  .footerTransition-leave-active {
+    animation: hideFooter 0.5s;
+  }
+
+  @keyframes showFooter {
+    from { opacity: 0; bottom: -55px; }
+    to { opacity: 1; bottom: 0; }
+  }
+
+  @keyframes hideFooter {
+    from { opacity: 1; bottom: 0; }
+    to { opacity: 0; bottom: -55px; }
   }
 </style>
