@@ -3,10 +3,14 @@
     <h1>New album</h1>
     <Forms>
       <label for="title">Title</label>
-      <input type="text" name="title" placeholder="Album title">
+      <input type="text" name="title"
+      placeholder="Album title"
+      v-model="titleAlbum">
 
       <label for="description">Description</label>
-      <input type="text" name="description" placeholder="Album description">
+      <input type="text" name="description"
+      placeholder="Album description"
+      v-model="descriptionAlbum">
     </Forms>
     <template slot="buttonsArea">
       <ActionButton
@@ -15,7 +19,8 @@
         option="closeModal"
         type="secondary" />
       <ActionButton
-        text="Upload"
+        @clicked="create()"
+        text="Create"
         type="primary" />
     </template>
   </Modal>
@@ -28,6 +33,17 @@ import Forms from './UI/Forms'
 
 export default {
   name: 'NewAlbum',
-  components: { ActionButton, Modal, Forms }
+  components: { ActionButton, Modal, Forms },
+  data() {
+    return {
+      titleAlbum: '',
+      descriptionAlbum: ''
+    }
+  },
+  methods: {
+    create() {
+
+    }
+  }
 }
 </script>
