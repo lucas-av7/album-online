@@ -1,7 +1,7 @@
 <template>
     <button
       class="actionButton"
-      @click="$emit('cliked')"
+      @click="$emit('clicked')"
       :class="type">
       {{ text }}
     </button>
