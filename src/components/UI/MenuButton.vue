@@ -95,7 +95,7 @@ export default {
   }
 
   .menuContent p {
-    margin: 10px 0;
+    margin: 15px 0;
     font-size: 1.2rem;
   }
 </style>
