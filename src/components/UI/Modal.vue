@@ -26,7 +26,7 @@ export default {
 
 <style>
   .modal {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -34,6 +34,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 8;
   }
 
   .overlayModal {
