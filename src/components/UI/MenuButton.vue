@@ -4,10 +4,10 @@
       <span class="dotMenu"></span>
     </div>
     <div class="menuDropDown" v-show="menu">
-      <div class="overlay"
-        @click="menu = false"
-        @touchstart="menu = false">
-      </div>
+        <div class="overlay"
+          v-touch:start="startHandler"
+          @click="menu = false">
+        </div>
       <div class="menuContent"
         @click="menu = false"
         @mouseleave="menu = false">
@@ -23,6 +23,11 @@ export default {
   data() {
     return {
       menu: false
+    }
+  },
+  methods: {
+    startHandler () {
+      this.menu = false
     }
   }
 }
