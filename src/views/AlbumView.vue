@@ -65,7 +65,7 @@ export default {
 <style>
   .albumView {
     width: 95%;
-    min-height: calc(100vh - 110px);
+    min-height: calc(100vh - 55px);
     margin: 0 auto;
     display: flex;
     flex-direction: column;

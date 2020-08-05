@@ -1,11 +1,6 @@
 <template>
   <div class="photos">
-    <Photo />
-    <Photo />
-    <Photo />
-    <Photo />
-    <Photo />
-    <Photo />
+    <Photo v-for="i in 15" :key="i" />
     <CreateAlbumPhoto type="photo" @clicked="newPhotoModal = true" />
     <NewPhoto v-if="newPhotoModal" @close="newPhotoModal = false" />
   </div>
@@ -34,5 +29,6 @@ export default {
     flex-wrap: wrap;
     margin-top: 20px;
     justify-content: space-evenly;
+    margin-bottom: 55px;
   }
 </style>
