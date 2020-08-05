@@ -96,11 +96,7 @@ export default {
   .newAlbumDataForm input:focus {
     border-bottom: 2px solid var(--primary-color);
   }
-
-  .newAlbumDataForm input[name=photo] {
-    display: none;
-  }
-
+  
   .newAlbumDataButtons {
     width: 100%;
     display: flex;
