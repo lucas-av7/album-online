@@ -5,7 +5,7 @@
     </div>
     <div class="menuDropDown" v-show="menu">
       <div class="overlay" @click="menu = false"></div>
-      <div class="menuContent">
+      <div class="menuContent" @click="menu = false">
         <slot></slot>
       </div>
     </div>
@@ -82,7 +82,6 @@ export default {
   }
   
   .menuContent {
-    /* width: 230px; */
     padding: 10px 35px 10px 10px;
     border-radius: 10px;
     background-color: var(--secondary-color);
