@@ -25,15 +25,15 @@ export default {
 
 <style>
   .menuIcon {
-    width: 38px;
-    height: 15px;
+    width: 45px;
+    height: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     user-select: none;
     position: absolute;
-    top: 20px;
+    top: 10px;
     right: 10px;
   }
 
