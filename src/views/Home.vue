@@ -1,7 +1,10 @@
 <template>
   <div class="home">
     <h1>Welcome to your online photo album</h1>
-    <CreateAlbumPhoto v-if="firstAlbum" firstAlbum type="album" />
+    <template v-if="firstAlbum">
+      <CreateAlbumPhoto  firstAlbum type="album" @clicked="newAlbumModal = true" />
+      <NewAlbum v-if="newAlbumModal" @close="newAlbumModal = false" />
+    </template>
     <Albums v-else />
   </div>
 </template>
@@ -9,13 +12,19 @@
 <script>
 import CreateAlbumPhoto from '../components/CreateAlbumPhoto'
 import Albums from '../components/Albums'
+import NewAlbum from '../components/NewAlbum'
 
 export default {
   name: 'Home',
-  components: { CreateAlbumPhoto, Albums },
+  components: { CreateAlbumPhoto, Albums, NewAlbum },
   computed: {
     firstAlbum() {
       return true
+    }
+  },
+  data() {
+    return {
+      newAlbumModal: false
     }
   }
 }
