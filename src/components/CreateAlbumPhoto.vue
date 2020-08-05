@@ -1,7 +1,9 @@
 <template>
   <div class="createAlbum">
     <template v-if="type == 'album'">
-      <div class="createAlbumFrame" :class="{ firstAlbum }">
+      <div class="createAlbumFrame"
+        :class="{ firstAlbum }"
+        @click="$emit('clicked')">
         <i class="fas fa-book albumIcon"></i>
         <h2>New album</h2>
       </div>
@@ -9,7 +11,8 @@
     </template>
 
     <template v-if="type == 'photo'">
-      <div class="createAlbumFrame">
+      <div class="createAlbumFrame"
+        @click="$emit('clicked')">
         <i class="far fa-image albumIcon"></i>
         <h2>New photo</h2>
       </div>

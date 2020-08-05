@@ -6,17 +6,24 @@
     <Photo />
     <Photo />
     <Photo />
-    <CreateAlbumPhoto type="photo" />
+    <CreateAlbumPhoto type="photo" @clicked="newPhotoModal = true" />
+    <NewPhoto v-if="newPhotoModal" @close="newPhotoModal = false" />
   </div>
 </template>
 
 <script>
 import Photo from './Photo'
 import CreateAlbumPhoto from './CreateAlbumPhoto'
+import NewPhoto from './NewPhoto'
 
 export default {
   name: 'Photos',
-  components: { Photo, CreateAlbumPhoto }
+  components: { Photo, CreateAlbumPhoto, NewPhoto },
+  data() {
+    return {
+      newPhotoModal: false
+    }
+  }
 }
 </script>
 
