@@ -3,10 +3,65 @@
     <h1>Photo Title</h1>
     <p>Album: Family</p>
     <MenuButton>
-      <p>Edit</p>
-      <p>Delete</p>
-      <p>Move</p>
+      <p @click="editFotoModal = true">Edit</p>
+      <p @click="moveFotoModal = true">Move</p>
+      <p @click="deleteFotoModal = true">Delete</p>
     </MenuButton>
+
+    <Modal v-if="editFotoModal" @clicked="editFotoModal = false">
+      <h1>Edit photo</h1>
+      <Forms>
+        <label for="title">Title</label>
+        <input type="text" name="title" placeholder="Photo title">
+
+        <label for="description">Description</label>
+        <input type="text" name="description" placeholder="Photo description">
+      </Forms>
+      <template slot="buttonsArea">
+      <ActionButton
+        @clicked="editFotoModal = false"
+        text="Cancel"
+        type="secondary" />
+      <ActionButton
+        text="Save"
+        type="primary" />
+      </template>
+    </Modal>
+
+    <Modal v-if="deleteFotoModal" @clicked="deleteFotoModal = false">
+      <h1>Delete photo?</h1>
+      <template slot="buttonsArea">
+      <ActionButton
+        @clicked="deleteFotoModal = false"
+        text="Cancel"
+        type="secondary" />
+      <ActionButton
+        text="Delete"
+        type="danger" />
+      </template>
+    </Modal>
+
+    <Modal v-if="moveFotoModal" @clicked="moveFotoModal = false">
+      <h1>Move photo</h1>
+      <Forms>
+        <label for="albumMove">Choose the album</label>
+        <select name="albumMove">
+          <option value="1">Family</option>
+          <option value="2">Vacation</option>
+          <option value="2">Work</option>
+        </select>
+      </Forms>
+      <template slot="buttonsArea">
+      <ActionButton
+        @clicked="moveFotoModal = false"
+        text="Cancel"
+        type="secondary" />
+      <ActionButton
+        text="Move"
+        type="primary" />
+      </template>
+    </Modal>
+
     <figure>
       <img src="https://image.cnbcfm.com/api/v1/image/106482455-1586450808751gettyimages-1209295455.jpeg?v=1586450844&w=1400&h=950" alt="">
       <figcaption>Photo description</figcaption>
@@ -43,10 +98,20 @@
 
 <script>
 import MenuButton from '../components/UI/MenuButton'
+import Modal from '../components/UI/Modal'
+import ActionButton from '../components/UI/ActionButton'
+import Forms from '../components/UI/Forms'
 
 export default {
   name: 'PhotoView',
-  components: { MenuButton }
+  components: { MenuButton, Modal, ActionButton, Forms },
+  data() {
+    return {
+      editFotoModal: false,
+      deleteFotoModal: false,
+      moveFotoModal: false
+    }
+  }
 }
 </script>
 
