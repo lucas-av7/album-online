@@ -26,6 +26,7 @@ export default {
     --primary-text-color: #FFF;
     --secondary-text-color: #000;
     --text-warning: #fc8600;
+    --border-color: #DDDA;
   }
 
   body {

@@ -15,7 +15,7 @@ export default {
     width: 90%;
     height: 55px;
     margin: 0 auto;
-    border-bottom: 1px solid #ddda;
+    border-bottom: 1px solid var(--border-color);
     display: flex;
     align-items: center;
   }
