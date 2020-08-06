@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1>Welcome to your online photo album</h1>
-    <template v-if="firstAlbum">
+    <template v-if="allAlbums.length == 0">
       <CreateAlbumPhoto  firstAlbum type="album" @clicked="newAlbumModal = true" />
       <NewAlbum v-if="newAlbumModal" @close="newAlbumModal = false" />
     </template>
@@ -18,8 +18,8 @@ export default {
   name: 'Home',
   components: { CreateAlbumPhoto, Albums, NewAlbum },
   computed: {
-    firstAlbum() {
-      return true
+    allAlbums() {
+      return this.$store.getters.getAlbums
     }
   },
   data() {

@@ -20,5 +20,10 @@ export default new Vuex.Store({
       payload.albumId = state.albumId++
       commit('createAlbum', payload)
     }
+  },
+  getters: {
+    getAlbums(state) {
+      return state.albums
+    }
   }
 })

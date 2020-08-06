@@ -1,6 +1,8 @@
 <template>
   <div class="albums">
-    <Album v-for="i in 15" :key="i" />
+    <Album v-for="album in allAlbums"
+      :key="album.albumId"
+      :album="album"/>
     <CreateAlbumPhoto type="album" @clicked="newAlbumModal = true" />
     <NewAlbum v-if="newAlbumModal" @close="newAlbumModal = false" />
   </div>
@@ -17,6 +19,11 @@ export default {
   data() {
     return {
       newAlbumModal: false
+    }
+  },
+  computed: {
+    allAlbums() {
+      return this.$store.getters.getAlbums
     }
   }
 }
