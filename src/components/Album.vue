@@ -2,7 +2,8 @@
   <div class="album">
     <router-link :to="`/album/${album.albumId}`" class="linkRouter">
       <div class="albumFrame">
-        <i class="far fa-images albumIcon"></i>
+        <i v-if="photoUrl == ''" class="far fa-folder-open albumIcon"></i>
+        <img v-else :src="photoUrl" :alt="album.title">
       </div>
     </router-link>
     <p>{{ album.title }}</p>
@@ -14,6 +15,13 @@ export default {
   name: 'Album',
   props: {
     album: { type: Object, required: true }
+  },
+  computed: {
+    photoUrl() {
+      if(this.album.photos.length == 0) return ''
+      const foto = this.album.photos[this.album.photos.length - 1]
+      return foto.url.replace(foto.photoId, foto.photoId) || ''
+    }
   }
 }
 </script>
@@ -49,7 +57,13 @@ export default {
     align-items: center;
     justify-content: space-evenly;
     cursor: pointer;
-    padding: 2px;
+    overflow: hidden;
+  }
+
+  .albumFrame img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
   }
 
 </style>
