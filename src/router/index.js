@@ -13,12 +13,12 @@ Vue.use(VueRouter)
     component: Home
   },
   {
-    path: '/album',
+    path: '/album/:id',
     name: 'AlbumView',
     component: AlbumView
   },
   {
-    path: '/photo',
+    path: '/photo/:id',
     name: 'PhotoView',
     component: PhotoView
   },
