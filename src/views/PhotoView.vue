@@ -83,9 +83,7 @@
     <div class="commentsContainer">
       <div class="form">
         <input type="text" placeholder="Write a comment...">
-        <button class="sendButton">
-          <i class="fas fa-paper-plane"></i>
-        </button>
+        <SendButton />
       </div>
       <div class="comments">
         <div v-for="i in 5" :key="i" class="comment">
@@ -104,10 +102,11 @@ import MenuButton from '../components/UI/MenuButton'
 import Modal from '../components/UI/Modal'
 import ActionButton from '../components/UI/ActionButton'
 import Forms from '../components/UI/Forms'
+import SendButton from '../components/UI/SendButton'
 
 export default {
   name: 'PhotoView',
-  components: { MenuButton, Modal, ActionButton, Forms },
+  components: { MenuButton, Modal, ActionButton, Forms, SendButton },
   data() {
     return {
       editFotoModal: false,
@@ -182,18 +181,9 @@ export default {
     padding: 10px;
   }
 
-  .commentsContainer .form input,
-  .commentsContainer .form button {
+  .commentsContainer .form input {
     outline: none;
     border: none;
-  }
-
-  .commentsContainer .form button {
-    width: 60px;
-    cursor: pointer;
-    background-color: var(--primary-color);
-    color: var(--primary-text-color);
-    font-size: 1.35rem;
   }
 
   .commentsContainer .form {
