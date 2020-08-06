@@ -1,9 +1,9 @@
 <template>
   <div class="photo">
     <div class="photoFrame">
-      <i class="far fa-images albumIcon"></i>
+      <img :src="photo.url" :alt="photo.title">
     </div>
-    <p>Photo name</p>
+    <p>{{ photo.title }}</p>
   </div>
 </template>
 
@@ -24,7 +24,7 @@ export default {
     width: 110px;
   }
 
-  .photoFrame > p {
+  .photo > p {
     font-size: 1.0rem;
     text-align: center;
     width: 100%;
@@ -45,7 +45,13 @@ export default {
     align-items: center;
     justify-content: space-evenly;
     cursor: pointer;
-    padding: 2px;
+    overflow: hidden;
+  }
+
+  .photoFrame img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
   }
 
 </style>

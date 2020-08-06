@@ -99,7 +99,7 @@ export default {
           description: this.photoDescription.trim(),
           keywords: this.photoKeywords,
           albumId: parseInt(this.albumId),
-          url: 'https://felipecastro.com/wp-content/uploads/2016/04/teste-img-resources.png'
+          url: 'https://i.pinimg.com/236x/e8/7b/57/e87b57b9d16683a8e556f4c4b4478337.jpg'
         }
         this.$store.dispatch('newPhoto', newPhoto)
         this.$emit('close')

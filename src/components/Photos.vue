@@ -16,19 +16,24 @@ export default {
   components: { Photo, CreateAlbumPhoto, NewPhoto },
   data() {
     return {
-      newPhotoModal: false
+      newPhotoModal: false,
+      photos: []
     }
   },
   props: ['albumId'],
   computed: {
     albums() {
       return this.$store.getters.getAlbums
-    },
-    photos() {
-      const album = this.albums.filter(album => {
-        return album.albumId == this.albumId
-      })
-      return album.photos
+    }
+  },
+  watch: {
+    albums: {
+      deep: true,
+      handler() {
+        this.photos = this.albums.filter(album => {
+          return album.albumId == this.albumId
+        })[0].photos
+      }
     }
   }
 }

@@ -18,7 +18,6 @@ export default new Vuex.Store({
       state.albums.forEach(album => {
         if(album.albumId == albumId) {
           album.photos.push(payload)
-          console.log(album)
         }
       })
     }
