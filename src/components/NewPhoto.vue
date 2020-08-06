@@ -3,9 +3,12 @@
     <h1>Upload photo</h1>
     <Forms>
       <div class="imagePreview" @click="$refs.uploadPhotoButton.click()">
-        <i class="far fa-file-image"></i>
+        <i v-if="imgPreview.length == 0" class="far fa-file-image"></i>
+        <img v-else :src="imgPreview" alt="Image preview">
       </div>
-      <input type="file" name="photo" ref="uploadPhotoButton" accept="image/*">
+      <input type="file" name="photo"
+        ref="uploadPhotoButton" accept="image/*"
+        @change="onFileSelected">
 
       <label for="title">Title</label>
       <input type="text" name="title"
@@ -65,11 +68,13 @@ export default {
   components: { ActionButton, Modal, Forms, SendButton },
   data() {
     return {
+      selectedFile: null,
       photoTitle: '',
       photoDescription: '',
       photoKeywordsText: '',
       photoKeywords: [],
-      error: ''
+      error: '',
+      imgPreview: ''
     }
   },
   watch: {
@@ -99,14 +104,17 @@ export default {
           description: this.photoDescription.trim(),
           keywords: this.photoKeywords,
           albumId: parseInt(this.albumId),
-          url: 'https://i.pinimg.com/236x/e8/7b/57/e87b57b9d16683a8e556f4c4b4478337.jpg'
+          imageToUpload: this.selectedFile
         }
         this.$store.dispatch('newPhoto', newPhoto)
         this.$emit('close')
       }
     },
     checkErros() {
-      if(this.photoTitle == '') {
+      if(this.selectedFile == null) {
+        this.error = 'Error: No photo selected'
+        return false
+      } else if(this.photoTitle == '') {
         this.error = 'Error: Title is blank'
         return false
       } else if (this.photoDescription == '') {
@@ -116,6 +124,11 @@ export default {
         this.error = ''
         return true
       }
+    },
+    onFileSelected(event) {
+      const file = event.target.files[0]
+      this.selectedFile = file
+      this.imgPreview = URL.createObjectURL(file);
     }
   }
 }
@@ -134,6 +147,13 @@ export default {
     border-radius: 10%;
     color: var(--primary-color);
     cursor: pointer;
+    overflow: hidden;
+  }
+
+  .imagePreview img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
   }
 
   input[name=photo] {

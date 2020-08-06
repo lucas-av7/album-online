@@ -2,7 +2,7 @@
   <div class="photo">
     <router-link :to="`/photo/${photo.albumId}/${photo.photoId}`" class="linkRouter">
       <div class="photoFrame">
-        <img :src="photo.url" :alt="photo.title">
+        <img :src="photoUrl" :alt="photo.title">
       </div>
     </router-link>
     <p>{{ photo.title }}</p>
@@ -14,6 +14,11 @@ export default {
   name: 'Photo',
   props: {
     photo: { type: Object, required: true }
+  },
+  computed: {
+    photoUrl() {
+      return this.photo.url.replace(this.photo.photoId, this.photo.photoId + 's')
+    }
   }
 }
 </script>
