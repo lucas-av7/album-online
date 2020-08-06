@@ -15,12 +15,14 @@ Vue.use(VueRouter)
   {
     path: '/album/:id',
     name: 'AlbumView',
-    component: AlbumView
+    component: AlbumView,
+    props: true
   },
   {
     path: '/photo/:id',
     name: 'PhotoView',
     component: PhotoView,
+    props: true
   },
   {
     path: '*',
