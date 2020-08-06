@@ -20,7 +20,7 @@ export default {
     photoUrl() {
       if(this.album.photos.length == 0) return ''
       const foto = this.album.photos[this.album.photos.length - 1]
-      return foto.url.replace(foto.photoId, foto.photoId) || ''
+      return foto.url.replace(foto.photoId, foto.photoId + 'm') || ''
     }
   }
 }

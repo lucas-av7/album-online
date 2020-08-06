@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     photoUrl() {
-      return this.photo.url.replace(this.photo.photoId, this.photo.photoId + 's')
+      return this.photo.url.replace(this.photo.photoId, this.photo.photoId + 'm')
     }
   }
 }
