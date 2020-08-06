@@ -17,23 +17,14 @@ export default {
   data() {
     return {
       newPhotoModal: false,
-      photos: []
     }
   },
   props: ['albumId'],
   computed: {
-    albums() {
-      return this.$store.getters.getAlbums
-    }
-  },
-  watch: {
-    albums: {
-      deep: true,
-      handler() {
-        this.photos = this.albums.filter(album => {
+    photos() {
+      return this.$store.getters.getAlbums.filter(album => {
           return album.albumId == this.albumId
-        })[0].photos
-      }
+        })[0].photos || []
     }
   }
 }
