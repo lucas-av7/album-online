@@ -1,8 +1,10 @@
 <template>
   <button class="sendButton"
+    :style="`width: ${width}px; height: ${height}px`"
     @click="$emit('clicked')">
     <i v-if="type =='plane'" class="fas fa-paper-plane"></i>
     <i v-if="type =='plus'" class="fas fa-plus"></i>
+    <i v-if="type =='search'" class="fas fa-search"></i>
   </button>
 </template>
 
@@ -10,7 +12,9 @@
 export default {
   name: 'SendButton',
   props: {
-    type: { type: String, default: 'plane' }
+    type: { type: String, default: 'plane' },
+    width: { type: String, default: '60' },
+    height: { type: String, default: '45' },
   }
 }
 </script>
@@ -19,8 +23,6 @@ export default {
   .sendButton {
     outline: none;
     border: none;
-    width: 60px;
-    height: 45px;
     cursor: pointer;
     background-color: var(--primary-color);
     color: var(--primary-text-color);
