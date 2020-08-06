@@ -2,7 +2,7 @@
   <div class="photos">
     <Photo v-for="photo in photos" :key="photo.id" :photo="photo" />
     <CreateAlbumPhoto type="photo" @clicked="newPhotoModal = true" />
-    <NewPhoto v-if="newPhotoModal" @close="newPhotoModal = false" :albumId="albumId" />
+    <NewPhoto v-if="newPhotoModal" @close="closeModal()" :albumId="albumId" />
   </div>
 </template>
 
@@ -25,6 +25,12 @@ export default {
       return this.$store.getters.getAlbums.filter(album => {
           return album.albumId == this.albumId
         })[0].photos || []
+    }
+  },
+  methods: {
+    closeModal() {
+      this.newPhotoModal = false
+      document.body.style.overflow = 'initial'
     }
   }
 }

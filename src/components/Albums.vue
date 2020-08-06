@@ -4,7 +4,7 @@
       :key="album.albumId"
       :album="album"/>
     <CreateAlbumPhoto type="album" @clicked="newAlbumModal = true" />
-    <NewAlbum v-if="newAlbumModal" @close="newAlbumModal = false" />
+    <NewAlbum v-if="newAlbumModal" @close="closeModal()" />
   </div>
 </template>
 
@@ -24,6 +24,12 @@ export default {
   computed: {
     allAlbums() {
       return this.$store.getters.getAlbums
+    }
+  },
+  methods: {
+    closeModal() {
+      this.newAlbumModal = false
+      document.body.style.overflow = 'initial'
     }
   }
 }

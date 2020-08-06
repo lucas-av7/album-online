@@ -3,7 +3,7 @@
     <h1>Welcome to your online photo album</h1>
     <template v-if="allAlbums.length == 0">
       <CreateAlbumPhoto  firstAlbum type="album" @clicked="newAlbumModal = true" />
-      <NewAlbum v-if="newAlbumModal" @close="newAlbumModal = false" />
+      <NewAlbum v-if="newAlbumModal" @close="closeModal()" />
     </template>
     <Albums v-else />
   </div>
@@ -25,6 +25,12 @@ export default {
   data() {
     return {
       newAlbumModal: false
+    }
+  },
+  methods: {
+    closeModal() {
+      this.newAlbumModal = false
+      document.body.style.overflow = 'initial'
     }
   }
 }
