@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import AlbumView from '../views/AlbumView'
 import PhotoView from '../views/PhotoView'
+import PhotosRelatedView from '../views/PhotosRelatedView'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,12 @@ Vue.use(VueRouter)
     path: '/photo/:albumId/:photoId',
     name: 'PhotoView',
     component: PhotoView,
+    props: true
+  },
+  {
+    path: '/search/:keyword',
+    name: 'PhotosRelatedView',
+    component: PhotosRelatedView,
     props: true
   },
   {
