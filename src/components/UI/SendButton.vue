@@ -1,13 +1,17 @@
 <template>
   <button class="sendButton"
     @click="$emit('clicked')">
-    <i class="fas fa-paper-plane"></i>
+    <i v-if="type =='plane'" class="fas fa-paper-plane"></i>
+    <i v-if="type =='plus'" class="fas fa-plus"></i>
   </button>
 </template>
 
 <script>
 export default {
-  name: 'SendButton'
+  name: 'SendButton',
+  props: {
+    type: { type: String, default: 'plane' }
+  }
 }
 </script>
 

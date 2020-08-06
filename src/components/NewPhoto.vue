@@ -18,9 +18,12 @@
         v-model="photoDescription">
 
       <label for="keywords">Keywords</label>
-      <input type="text" name="keywords"
-        placeholder="Comma-separated. Ex: flower, garden, sunrise"
-        v-model="photoKeywords">
+      <div class="keywordsCont">
+        <input type="text" name="keywords"
+          placeholder="Comma-separated. Ex: flower, garden, sunrise"
+          v-model="photoKeywords">
+        <SendButton type="plus" />
+      </div>
     </Forms>
     <template slot="buttonsArea">
       <ActionButton
@@ -39,12 +42,13 @@
 import ActionButton from './UI/ActionButton'
 import Modal from './UI/Modal'
 import Forms from './UI/Forms'
+import SendButton from './UI/SendButton'
 import regexMixin from '../mixin/regexMixin'
 
 export default {
   name: 'NewPhoto',
   mixins: [regexMixin],
-  components: { ActionButton, Modal, Forms },
+  components: { ActionButton, Modal, Forms, SendButton },
   data() {
     return {
       photoTitle: '',
@@ -84,5 +88,9 @@ export default {
 
   input[name=photo] {
     display: none;
+  }
+
+  .keywordsCont {
+    display: flex;
   }
 </style>
