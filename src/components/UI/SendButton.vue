@@ -15,6 +15,7 @@ export default {
     outline: none;
     border: none;
     width: 60px;
+    height: 40px;
     cursor: pointer;
     background-color: var(--primary-color);
     color: var(--primary-text-color);
