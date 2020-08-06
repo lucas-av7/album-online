@@ -20,8 +20,12 @@ Vue.use(VueRouter)
   {
     path: '/photo/:id',
     name: 'PhotoView',
-    component: PhotoView
+    component: PhotoView,
   },
+  {
+    path: '*',
+    redirect: '/'
+  }
 ]
 
 const router = new VueRouter({
