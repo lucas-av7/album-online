@@ -82,7 +82,9 @@
     </figure>
     <div class="commentsContainer">
       <div class="form">
-        <input type="text" placeholder="Write a comment...">
+        <Forms>
+          <input type="text" placeholder="Write a comment...">
+        </Forms>
         <SendButton />
       </div>
       <div class="comments">
@@ -170,24 +172,9 @@ export default {
   }
 
   .commentsContainer .form {
-    width: 100%;
+    width: 85%;
     display: flex;
     justify-content: center;
-  }
-
-  .commentsContainer .form input {
-    width: 70%;
-    height: 40px;
-    padding: 10px;
-  }
-
-  .commentsContainer .form input {
-    outline: none;
-    border: none;
-  }
-
-  .commentsContainer .form {
-    display: flex;
   }
 
   .comments {
