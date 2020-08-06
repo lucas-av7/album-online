@@ -24,6 +24,8 @@ export default new Vuex.Store({
   mutations: {
     createAlbum(state, payload) {
       state.albums.push(payload)
+      localStorage.setItem('albumIdClickApp', JSON.stringify(state.albumId))
+      localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
     },
     newPhoto(state, payload) {
       const albumId = payload.albumId
@@ -32,6 +34,13 @@ export default new Vuex.Store({
           album.photos.push(payload)
         }
       })
+      localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
+    },
+    loadLocalStorage(state) {
+      if (localStorage.getItem('albumsClickApp') && localStorage.getItem('albumIdClickApp')) {
+        state.albums = JSON.parse(localStorage.getItem('albumsClickApp'));
+        state.albumId = JSON.parse(localStorage.getItem('albumIdClickApp'));
+      }
     }
   },
   actions: {
