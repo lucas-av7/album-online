@@ -82,16 +82,23 @@
     <div class="commentsContainer">
       <div class="form">
         <Forms>
-          <input type="text" placeholder="Write a comment...">
+          <input type="text"
+            placeholder="Write a comment..."
+            v-model="commentText"
+            @keypress.enter="addComment"
+            ref="commentInput">
         </Forms>
-        <SendButton />
+        <SendButton @clicked="addComment" />
       </div>
       <div class="comments">
         <div v-for="(comment, index) in photo.comments" :key="index" class="comment">
           <div class="user">
             <i class="fas fa-user-alt"></i>
           </div>
-          <p>{{ comment }}</p>
+          <div class="commentText">
+            <h3>Anonymous</h3>
+            <p>{{ comment }}</p> 
+          </div>
         </div>
       </div>
     </div>
@@ -113,7 +120,8 @@ export default {
     return {
       editFotoModal: false,
       deleteFotoModal: false,
-      moveFotoModal: false
+      moveFotoModal: false,
+      commentText: ''
     }
   },
   computed: {
@@ -127,6 +135,19 @@ export default {
       return this.album.photos.filter(photo => {
         return photo.photoId == this.photoId
       })[0]
+    }
+  },
+  methods: {
+    addComment() {
+      if(this.commentText == '') return
+      const commentInfo = {
+        albumId: this.albumId,
+        photoId: this.photoId,
+        comment: this.commentText.trim()
+      }
+      this.$store.dispatch('addComment', commentInfo)
+      this.commentText = ''
+      this.$refs.commentInput.blur()
     }
   },
   created() {
@@ -206,13 +227,17 @@ export default {
   .comment {
     display: flex;
     align-items: center;
-    padding: 5px;
+    padding: 6px;
     border-bottom: 1px solid var(--border-color);
   }
 
   .comment .user {
     margin-right: 10px;
     font-size: 1.6rem;
+  }
+
+  .commentText h3 {
+    font-size: 1.0rem;
   }
 
   .arrow {

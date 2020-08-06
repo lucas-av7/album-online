@@ -104,6 +104,7 @@ export default {
           description: this.photoDescription.trim(),
           keywords: this.photoKeywords,
           albumId: parseInt(this.albumId),
+          comments: [],
           imageToUpload: this.selectedFile
         }
         this.$store.dispatch('newPhoto', newPhoto)

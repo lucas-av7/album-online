@@ -41,6 +41,18 @@ export default new Vuex.Store({
         state.albums = JSON.parse(localStorage.getItem('albumsClickApp'));
         state.albumId = JSON.parse(localStorage.getItem('albumIdClickApp'));
       }
+    },
+    addComment(state, payload) {
+      state.albums.forEach(album => {
+        if(album.albumId == payload.albumId) {
+          album.photos.forEach(photo => {
+            if(photo.photoId == payload.photoId) {
+                photo.comments.push(payload.comment)
+            }
+          })
+        }
+      })
+      localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
     }
   },
   actions: {
@@ -60,6 +72,9 @@ export default new Vuex.Store({
         .catch(function (error) {
           console.log(error);
         });
+    },
+    addComment({ commit }, payload) {
+      commit('addComment', payload)
     }
   },
   getters: {
