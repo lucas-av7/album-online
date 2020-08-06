@@ -5,12 +5,12 @@
       <label for="title">Title</label>
       <input type="text" name="title"
       placeholder="Album title"
-      v-model="titleAlbum">
+      v-model="albumTitle">
 
       <label for="description">Description</label>
       <input type="text" name="description"
       placeholder="Album description"
-      v-model="descriptionAlbum">
+      v-model="albumDescription">
     </Forms>
     <div v-show="error" class="errosInput">
       <p>{{ error }}</p>
@@ -41,17 +41,17 @@ export default {
   components: { ActionButton, Modal, Forms },
   data() {
     return {
-      titleAlbum: '',
-      descriptionAlbum: '',
+      albumTitle: '',
+      albumDescription: '',
       error: ''
     }
   },
   watch: {
-    titleAlbum() {
-      this.titleAlbum = this.removeSpecialCharacters(this.titleAlbum)
+    albumTitle() {
+      this.albumTitle = this.removeSpecialCharacters(this.albumTitle)
     },
-    descriptionAlbum() {
-      this.descriptionAlbum = this.removeSpecialCharacters(this.descriptionAlbum)
+    albumDescription() {
+      this.albumDescription = this.removeSpecialCharacters(this.albumDescription)
     }
   },
   methods: {
@@ -59,8 +59,8 @@ export default {
       const allowCreate = this.checkErros()
       if(allowCreate) {
         const newAlbum = {
-          title: this.titleAlbum.trim(),
-          description: this.descriptionAlbum.trim(),
+          title: this.albumTitle.trim(),
+          description: this.albumDescription.trim(),
           photos: []
         }
         this.$store.dispatch('createAlbum', newAlbum)
@@ -68,10 +68,10 @@ export default {
       }
     },
     checkErros() {
-      if(this.titleAlbum == '') {
+      if(this.albumTitle == '') {
         this.error = 'Error: Title is blank'
         return false
-      } else if (this.descriptionAlbum == '') {
+      } else if (this.albumDescription == '') {
         this.error = 'Error: Description is blank'
         return false
       }
@@ -79,7 +79,7 @@ export default {
       // Checks if the title is already in use
       const albums = this.$store.getters.getAlbums
       const titleDuplicate = albums.filter(album => {
-        return album.title == this.titleAlbum
+        return album.title == this.albumTitle
       }).length > 0
 
       if(titleDuplicate) {
