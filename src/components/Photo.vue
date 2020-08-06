@@ -1,8 +1,10 @@
 <template>
   <div class="photo">
-    <div class="photoFrame">
-      <img :src="photo.url" :alt="photo.title">
-    </div>
+    <router-link :to="`/photo/${photo.albumId}/${photo.photoId}`" class="linkRouter">
+      <div class="photoFrame">
+        <img :src="photo.url" :alt="photo.title">
+      </div>
+    </router-link>
     <p>{{ photo.title }}</p>
   </div>
 </template>
@@ -10,7 +12,9 @@
 <script>
 export default {
   name: 'Photo',
-  props: ['photo']
+  props: {
+    photo: { type: Object, required: true }
+  }
 }
 </script>
 
