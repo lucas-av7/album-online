@@ -64,14 +64,10 @@ export default {
   },
   props: ['id'],
   computed: {
-    allAlbums() {
-      return this.$store.getters.getAlbums
-    },
     album() {
-      const album = this.allAlbums.filter(album => {
+      return this.$store.getters.getAlbums.filter(album => {
         return album.albumId == this.id
-      })
-      return album[0] || []
+      })[0] || []
     }
   },
   created() {
