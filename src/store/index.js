@@ -23,12 +23,6 @@ export default new Vuex.Store({
   getters: {
     getAlbums(state) {
       return state.albums
-    },
-    titleDuplicateCheck: (state) => (payload) => {
-      const duplicate = state.albums.filter(album => {
-        return album.title === payload
-      })
-      return duplicate.length == 0 ? false : true
     }
   }
 })

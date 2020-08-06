@@ -68,20 +68,28 @@ export default {
       }
     },
     checkErros() {
-      const titleDuplicate = this.$store.getters.titleDuplicateCheck(this.titleAlbum)
-      if(titleDuplicate) {
-        this.error = 'Error: Title is already used'
-        return false
-      } else if(this.titleAlbum == '') {
+      if(this.titleAlbum == '') {
         this.error = 'Error: Title is blank'
         return false
       } else if (this.descriptionAlbum == '') {
         this.error = 'Error: Description is blank'
         return false
+      }
+
+      // Checks if the title is already in use
+      const albums = this.$store.getters.getAlbums
+      const titleDuplicate = albums.filter(album => {
+        return album.title == this.titleAlbum
+      }).length > 0
+
+      if(titleDuplicate) {
+        this.error = 'Error: Title is already used'
+        return false
       } else {
         this.error = ''
         return true
       }
+
     }
   }
 }
