@@ -1,7 +1,7 @@
 <template>
   <div class="photoView">
-    <h1>Photo Title</h1>
-    <p>Album: Family</p>
+    <h1>{{ photo.title }}</h1>
+    <p>{{ album.title }}</p>
     <MenuButton>
       <p @click="editFotoModal = true">Edit</p>
       <p @click="moveFotoModal = true">Move</p>
@@ -66,12 +66,11 @@
     </Modal>
 
     <figure>
-      <img src="https://image.cnbcfm.com/api/v1/image/106482455-1586450808751gettyimages-1209295455.jpeg?v=1586450844&w=1400&h=950" alt="">
-      <figcaption>Photo description</figcaption>
+      <img :src="photo.url" :alt="photo.title">
+      <figcaption>{{ photo.description }}</figcaption>
       <div class="keywords">
-        <p>#flowers</p>
-        <p>#garden</p>
-        <p>#sunrise</p>
+        <p v-for="(keyword, index) in photo.keywords"
+          :key="index">#{{ keyword }}</p>
       </div>
       <button class="arrow left">
         <i class="fas fa-arrow-circle-left"></i>
@@ -88,11 +87,11 @@
         <SendButton />
       </div>
       <div class="comments">
-        <div v-for="i in 5" :key="i" class="comment">
+        <div v-for="(comment, index) in photo.comments" :key="index" class="comment">
           <div class="user">
             <i class="fas fa-user-alt"></i>
           </div>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit sint ab, mollitia eum vitae repellat?</p>
+          <p>{{ comment }}</p>
         </div>
       </div>
     </div>
@@ -109,11 +108,30 @@ import SendButton from '../components/UI/SendButton'
 export default {
   name: 'PhotoView',
   components: { MenuButton, Modal, ActionButton, Forms, SendButton },
+  props: ['albumId', 'photoId'],
   data() {
     return {
       editFotoModal: false,
       deleteFotoModal: false,
       moveFotoModal: false
+    }
+  },
+  computed: {
+    album() {
+      return this.$store.getters.getAlbums.filter(album => {
+        return album.albumId == this.albumId
+      })[0] || []
+    },
+    photo() {
+      if(this.album.length == 0) return []
+      return this.album.photos.filter(photo => {
+        return photo.photoId == this.photoId
+      })[0]
+    }
+  },
+  created() {
+    if(this.album.length == 0) {
+      this.$router.push('/')
     }
   }
 }
