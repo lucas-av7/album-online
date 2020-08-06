@@ -2,14 +2,17 @@
   <div class="album">
     <div class="albumFrame">
       <i class="far fa-images albumIcon"></i>
-      <h2>Album name</h2>
     </div>
+    <p>{{ album.title }}</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Album'
+  name: 'Album',
+  props: {
+    album: { type: Object, required: true }
+  }
 }
 </script>
 
@@ -20,6 +23,18 @@ export default {
     align-items: center;
     user-select: none;
     margin: 3px;
+    width: 110px;
+  }
+
+  .album > p {
+    font-size: 1.0rem;
+    text-align: center;
+    width: 100%;
+    height: 20px;
+    word-wrap: break-word;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .albumFrame {
@@ -32,9 +47,7 @@ export default {
     align-items: center;
     justify-content: space-evenly;
     cursor: pointer;
+    padding: 2px;
   }
 
-  .albumFrame > h2 {
-    font-size: 1.0rem;
-  }
 </style>

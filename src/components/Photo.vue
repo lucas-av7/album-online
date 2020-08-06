@@ -2,8 +2,8 @@
   <div class="photo">
     <div class="photoFrame">
       <i class="far fa-images albumIcon"></i>
-      <h2>Photo name</h2>
     </div>
+    <p>Photo name</p>
   </div>
 </template>
 
@@ -20,6 +20,18 @@ export default {
     align-items: center;
     user-select: none;
     margin: 3px;
+    width: 110px;
+  }
+
+  .photoFrame > p {
+    font-size: 1.0rem;
+    text-align: center;
+    width: 100%;
+    height: 20px;
+    word-wrap: break-word;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .photoFrame {
@@ -32,9 +44,7 @@ export default {
     align-items: center;
     justify-content: space-evenly;
     cursor: pointer;
+    padding: 2px;
   }
 
-  .photoFrame > h2 {
-    font-size: 1.0rem;
-  }
 </style>
