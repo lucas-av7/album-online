@@ -22,6 +22,7 @@
       <ActionButton
         @clicked="editAlbumModal = false"
         text="Cancel"
+        option="closeModal"
         type="secondary" />
       <ActionButton
         text="Save"
@@ -35,6 +36,7 @@
       <ActionButton
         @clicked="deleteAlbumModal = false"
         text="Cancel"
+        option="closeModal"
         type="secondary" />
       <ActionButton
         text="Delete"
