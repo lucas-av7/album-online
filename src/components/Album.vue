@@ -1,8 +1,10 @@
 <template>
   <div class="album">
-    <div class="albumFrame">
-      <i class="far fa-images albumIcon"></i>
-    </div>
+    <router-link :to="`/album/${album.albumId}`" class="linkRouter">
+      <div class="albumFrame">
+        <i class="far fa-images albumIcon"></i>
+      </div>
+    </router-link>
     <p>{{ album.title }}</p>
   </div>
 </template>
@@ -48,6 +50,10 @@ export default {
     justify-content: space-evenly;
     cursor: pointer;
     padding: 2px;
+  }
+
+  .linkRouter {
+    color: transparent;
   }
 
 </style>

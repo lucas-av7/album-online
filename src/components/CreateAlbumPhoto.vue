@@ -53,6 +53,7 @@ export default {
 
   .albumIcon {
     font-size: 2.5rem;
+    color: var(--primary-text-color);
   }
 
   .createAlbumFrame > h2 {
