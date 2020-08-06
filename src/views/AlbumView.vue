@@ -1,12 +1,13 @@
 <template>
   <div class="albumView">
-    <h1>Album name</h1>
-    <p>Album description</p>
+    <h1>{{ album.title }}</h1>
+    <p>{{ album.description }}</p>
     <MenuButton>
       <p @click="editAlbumModal = true">Edit</p>
       <p @click="deleteAlbumModal = true">Delete album</p>
     </MenuButton>
-    <Photos />
+
+    <Photos :albumId="id" />
 
     <Modal v-if="editAlbumModal" @clicked="editAlbumModal = false">
       <h1>Edit album</h1>
@@ -59,6 +60,23 @@ export default {
     return {
       editAlbumModal: false,
       deleteAlbumModal: false
+    }
+  },
+  props: ['id'],
+  computed: {
+    allAlbums() {
+      return this.$store.getters.getAlbums
+    },
+    album() {
+      const album = this.allAlbums.filter(album => {
+        return album.albumId == this.id
+      })
+      return album[0] || []
+    }
+  },
+  created() {
+    if(this.album.length == 0) {
+      this.$router.push('/')
     }
   }
 }

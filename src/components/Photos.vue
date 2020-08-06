@@ -1,6 +1,6 @@
 <template>
   <div class="photos">
-    <Photo v-for="i in 15" :key="i" />
+    <Photo v-for="photo in photos" :key="photo.id" :photo="photo" />
     <CreateAlbumPhoto type="photo" @clicked="newPhotoModal = true" />
     <NewPhoto v-if="newPhotoModal" @close="newPhotoModal = false" />
   </div>
@@ -17,6 +17,18 @@ export default {
   data() {
     return {
       newPhotoModal: false
+    }
+  },
+  props: ['albumId'],
+  computed: {
+    albums() {
+      return this.$store.getters.getAlbums
+    },
+    photos() {
+      const album = this.albums.filter(album => {
+        return album.albumId == this.albumId
+      })
+      return album.photos
     }
   }
 }

@@ -9,7 +9,8 @@
 
 <script>
 export default {
-  name: 'Photo'
+  name: 'Photo',
+  props: ['photo']
 }
 </script>
 
