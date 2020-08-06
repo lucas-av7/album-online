@@ -8,13 +8,19 @@
       <input type="file" name="photo" ref="uploadPhotoButton" accept="image/*">
 
       <label for="title">Title</label>
-      <input type="text" name="title" placeholder="Photo title">
+      <input type="text" name="title"
+        placeholder="Photo title"
+        v-model="photoTitle">
 
       <label for="description">Description</label>
-      <input type="text" name="description" placeholder="Photo description">
+      <input type="text" name="description"
+        placeholder="Photo description"
+        v-model="photoDescription">
 
       <label for="keywords">Keywords</label>
-      <input type="text" name="keywords" placeholder="Comma-separated. Ex: flower, garden, sunrise">
+      <input type="text" name="keywords"
+        placeholder="Comma-separated. Ex: flower, garden, sunrise"
+        v-model="photoKeywords">
     </Forms>
     <template slot="buttonsArea">
       <ActionButton
@@ -33,10 +39,31 @@
 import ActionButton from './UI/ActionButton'
 import Modal from './UI/Modal'
 import Forms from './UI/Forms'
+import regexMixin from '../mixin/regexMixin'
 
 export default {
   name: 'NewPhoto',
-  components: { ActionButton, Modal, Forms }
+  mixins: [regexMixin],
+  components: { ActionButton, Modal, Forms },
+  data() {
+    return {
+      photoTitle: '',
+      photoDescription: '',
+      photoKeywords: '',
+      error: ''
+    }
+  },
+  watch: {
+    photoTitle() {
+      this.photoTitle = this.removeSpecialCharacters(this.photoTitle)
+    },
+    photoDescription() {
+      this.photoDescription = this.removeSpecialCharacters(this.photoDescription)
+    },
+    photoKeywords() {
+      this.photoKeywords = this.removeSpecialCharacters(this.photoKeywords)
+    }
+  }
 }
 </script>
 
