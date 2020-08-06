@@ -19,7 +19,7 @@ Vue.use(VueRouter)
     props: true
   },
   {
-    path: '/photo/:id',
+    path: '/photo/:albumId/:photoId',
     name: 'PhotoView',
     component: PhotoView,
     props: true
