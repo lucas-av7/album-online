@@ -2,7 +2,7 @@
   <div class="photos">
     <Photo v-for="photo in photos" :key="photo.id" :photo="photo" />
     <CreateAlbumPhoto type="photo" @clicked="newPhotoModal = true" />
-    <NewPhoto v-if="newPhotoModal" @close="newPhotoModal = false" />
+    <NewPhoto v-if="newPhotoModal" @close="newPhotoModal = false" :albumId="albumId" />
   </div>
 </template>
 

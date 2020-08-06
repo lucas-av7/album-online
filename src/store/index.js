@@ -12,6 +12,15 @@ export default new Vuex.Store({
   mutations: {
     createAlbum(state, payload) {
       state.albums.push(payload)
+    },
+    newPhoto(state, payload) {
+      const albumId = payload.albumId
+      state.albums.forEach(album => {
+        if(album.albumId == albumId) {
+          album.photos.push(payload)
+          console.log(album)
+        }
+      })
     }
   },
   actions: {
@@ -19,6 +28,10 @@ export default new Vuex.Store({
       payload.albumId = state.albumId++
       commit('createAlbum', payload)
     },
+    newPhoto({ commit, state }, payload) {
+      payload.photoId = state.photoId++
+      commit('newPhoto', payload)
+    }
   },
   getters: {
     getAlbums(state) {

@@ -18,13 +18,25 @@
         v-model="photoDescription">
 
       <label for="keywords">Keywords</label>
-      <div class="keywordsCont">
-        <input type="text" name="keywords"
-          placeholder="Comma-separated. Ex: flower, garden, sunrise"
-          v-model="photoKeywords">
-        <SendButton type="plus" />
+      <div class="keywordsContainer">
+        <div class="keywordsForm">
+          <input type="text" name="keywords"
+            placeholder="Photo keywords. Max: 5"
+            v-model="photoKeywordsText"
+            maxlength="10">
+          <SendButton type="plus" @clicked="addKeyword()" />
+        </div>
+        <div class="keywordsList">
+          <p v-for="(keyword, index) in photoKeywords"
+          :key="index">{{ keyword }}</p>
+        </div>
       </div>
     </Forms>
+
+    <div v-show="error" class="errosInput">
+      <p>{{ error }}</p>
+    </div>
+
     <template slot="buttonsArea">
       <ActionButton
         @clicked="$emit('close')"
@@ -32,6 +44,7 @@
         option="closeModal"
         type="secondary" />
       <ActionButton
+        @clicked="upload()"
         text="Upload"
         type="primary" />
     </template>
@@ -48,12 +61,14 @@ import regexMixin from '../mixin/regexMixin'
 export default {
   name: 'NewPhoto',
   mixins: [regexMixin],
+  props: ['albumId'],
   components: { ActionButton, Modal, Forms, SendButton },
   data() {
     return {
       photoTitle: '',
       photoDescription: '',
-      photoKeywords: '',
+      photoKeywordsText: '',
+      photoKeywords: [],
       error: ''
     }
   },
@@ -64,8 +79,43 @@ export default {
     photoDescription() {
       this.photoDescription = this.removeSpecialCharacters(this.photoDescription)
     },
-    photoKeywords() {
-      this.photoKeywords = this.removeSpecialCharacters(this.photoKeywords)
+    photoKeywordsText() {
+      this.photoKeywordsText = this.removeSpecialCharactersKeywords(this.photoKeywordsText)
+    }
+  },
+  methods: {
+    addKeyword() {
+      if(this.photoKeywordsText.length > 2
+        && this.photoKeywords.length < 5) {
+        this.photoKeywords.push(this.photoKeywordsText.toLowerCase())
+        this.photoKeywordsText = ''
+      }
+    },
+    upload() {
+      const allowCreate = this.checkErros()
+      if(allowCreate) {
+        const newPhoto = {
+          title: this.photoTitle.trim(),
+          description: this.photoDescription.trim(),
+          keywords: this.photoKeywords,
+          albumId: parseInt(this.albumId),
+          url: 'https://felipecastro.com/wp-content/uploads/2016/04/teste-img-resources.png'
+        }
+        this.$store.dispatch('newPhoto', newPhoto)
+        this.$emit('close')
+      }
+    },
+    checkErros() {
+      if(this.photoTitle == '') {
+        this.error = 'Error: Title is blank'
+        return false
+      } else if (this.photoDescription == '') {
+        this.error = 'Error: Description is blank'
+        return false
+      } else {
+        this.error = ''
+        return true
+      }
     }
   }
 }
@@ -90,7 +140,31 @@ export default {
     display: none;
   }
 
-  .keywordsCont {
+  .keywordsContainer {
     display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .keywordsForm {
+    display: flex;
+    width: 100%;
+  }
+
+  .keywordsList {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .keywordsList p {
+    padding: 8px 15px;
+    margin: 5px;
+    border: 1px solid var(--link-keywords);
+    border-radius: 5px;
+    color: var(--link-keywords);
+    background-color: var(--border-color) ;
   }
 </style>
