@@ -12,18 +12,23 @@ export default new Vuex.Store({
   mutations: {
     createAlbum(state, payload) {
       state.albums.push(payload)
-      console.log(payload)
     }
   },
   actions: {
     createAlbum({ commit, state }, payload) {
       payload.albumId = state.albumId++
       commit('createAlbum', payload)
-    }
+    },
   },
   getters: {
     getAlbums(state) {
       return state.albums
+    },
+    titleDuplicateCheck: (state) => (payload) => {
+      const duplicate = state.albums.filter(album => {
+        return album.title === payload
+      })
+      return duplicate.length == 0 ? false : true
     }
   }
 })

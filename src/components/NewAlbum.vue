@@ -68,7 +68,11 @@ export default {
       }
     },
     checkErros() {
-      if(this.titleAlbum == '') {
+      const titleDuplicate = this.$store.getters.titleDuplicateCheck(this.titleAlbum)
+      if(titleDuplicate) {
+        this.error = 'Error: Title is already used'
+        return false
+      } else if(this.titleAlbum == '') {
         this.error = 'Error: Title is blank'
         return false
       } else if (this.descriptionAlbum == '') {
