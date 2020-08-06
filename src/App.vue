@@ -74,4 +74,8 @@ export default {
     from { opacity: 1; bottom: 0; }
     to { opacity: 0; bottom: -55px; }
   }
+
+  .linkRouter {
+    color: transparent;
+  }
 </style>

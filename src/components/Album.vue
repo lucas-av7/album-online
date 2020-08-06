@@ -52,8 +52,4 @@ export default {
     padding: 2px;
   }
 
-  .linkRouter {
-    color: transparent;
-  }
-
 </style>
