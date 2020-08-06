@@ -27,7 +27,13 @@ Vue.use(VueRouter)
   },
   {
     path: '/search/:keyword',
-    name: 'PhotosRelatedView',
+    name: 'SearchView',
+    component: PhotosRelatedView,
+    props: true
+  },
+  {
+    path: '/favorites',
+    name: 'FavoritesView',
     component: PhotosRelatedView,
     props: true
   },

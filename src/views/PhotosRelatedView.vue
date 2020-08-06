@@ -1,7 +1,16 @@
 <template>
   <div class="searchView">
-    <h1>Related photos</h1>
-    <h3>#{{ keyword }}</h3>
+
+    <template v-if="keyword">
+      <h1>Related photos</h1>
+      <h3 v-if="keyword">#{{ keyword }}</h3>
+    </template>
+
+    <template v-else>
+      <h1>Favorite photos</h1>
+      <i class="fas fa-heart favoriteIcon"></i>
+    </template>
+
 
     <div class="photos">
       <Photo v-for="photo in photos" :key="photo.id" :photo="photo" />
@@ -9,6 +18,7 @@
 
     <div v-if="photos.length == 0" class="noResults">
       <i class="far fa-times-circle errorIcon"></i>
+      <p></p>
       <p>No results found</p>
     </div>
 
@@ -84,5 +94,10 @@ export default {
     flex-wrap: wrap;
     margin-top: 20px;
     justify-content: space-evenly;
+  }
+
+  .searchView .favoriteIcon {
+    font-size: 3rem;
+    color: #E63946;
   }
 </style>
