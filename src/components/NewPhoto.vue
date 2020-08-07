@@ -85,14 +85,14 @@ export default {
       this.photoDescription = this.removeSpecialCharacters(this.photoDescription)
     },
     photoKeywordsText() {
-      this.photoKeywordsText = this.removeSpecialCharactersKeywords(this.photoKeywordsText)
+      this.photoKeywordsText = this.removeSpecialCharactersKeywords(this.photoKeywordsText).toLowerCase()
     }
   },
   methods: {
     addKeyword() {
       if(this.photoKeywordsText.length > 2
         && this.photoKeywords.length < 5) {
-        this.photoKeywords.push(this.photoKeywordsText.toLowerCase())
+        this.photoKeywords.push(this.photoKeywordsText)
         this.photoKeywordsText = ''
       }
     },
