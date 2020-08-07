@@ -35,7 +35,7 @@ export default {
   mixins: [regexMixin],
   methods: {
     search() {
-      if(this.searchTag == '') return
+      if(this.searchTag == '' || this.$router.currentRoute.path == `/search/${this.searchTag}`) return
       this.$router.push(`/search/${this.searchTag}`)
       this.searchContainer = false
       this.searchTag = ''
