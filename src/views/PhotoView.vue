@@ -114,7 +114,11 @@
       </div>
       <div class="keywords">
         <p v-for="(keyword, index) in photo.keywords"
-          :key="index">#{{ keyword }}</p>
+          :key="index">
+          <router-link class="linkKeywords" :to="`/search/${keyword}`">
+            #{{ keyword }}
+          </router-link>
+          </p>
       </div>
       <button
         class="arrow left"
@@ -391,6 +395,9 @@ export default {
     font-style: italic;
     font-weight: bold;
     margin: 3px;
+  }
+
+  .linkKeywords {
     color: var(--link-keywords);
   }
 
