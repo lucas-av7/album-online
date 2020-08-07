@@ -161,6 +161,7 @@ export default {
     },
     movePhoto() {
       if(this.destinationAlbumId == null) return
+      document.body.style.overflow = 'initial'
       let photoData = {
         photoId: this.photoId,
         albumId: this.albumId,
