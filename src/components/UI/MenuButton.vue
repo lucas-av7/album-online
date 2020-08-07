@@ -112,11 +112,11 @@ export default {
   }
 
   .menuDropDown-enter-active {
-    animation: 0.3s menuOpen ease;
+    animation: 0.15s menuOpen ease;
   }
 
   .menuDropDown-leave-active {
-    animation: 0.3s menuClose ease;
+    animation: 0.15s menuClose ease;
   }
 
   @keyframes menuOpen {
