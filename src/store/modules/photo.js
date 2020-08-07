@@ -55,7 +55,8 @@ export default {
         albumIndex,
         photoIndex,
         newTitle: payload.newTitle,
-        newDescription: payload.newDescription
+        newDescription: payload.newDescription,
+        newKeywords: payload.newKeywords
       }
       commit('editPhoto', editInfo)
     },

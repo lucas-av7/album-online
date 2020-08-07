@@ -24,17 +24,36 @@
           name="description"
           placeholder="Photo description"
           v-model="editDescriptionText">
+
+        <label for="keywords">Keywords</label>
+        <div class="keywordsContainer">
+          <div class="keywordsForm">
+            <input type="text" name="keywords"
+              placeholder="Photo keywords. Max: 5"
+              v-model="photoKeywordsText"
+              maxlength="10" @keypress.enter="editAddKeyword()">
+            <SendButton type="plus" @clicked="editAddKeyword()" />
+          </div>
+          <div class="keywordsList">
+            <p v-for="(keyword, index) in editPhotoKeywords"
+              :key="index">
+              {{ keyword }}
+              <i class="fas fa-times remove"
+                @click="editPhotoKeywords.splice(index, 1)"></i>
+            </p>
+          </div>
+        </div>
       </Forms>
       <template slot="buttonsArea">
-      <ActionButton
-        @clicked="editPhotoModal = false"
-        text="Cancel"
-        option="closeModal"
-        type="secondary" />
-      <ActionButton
-        text="Save"
-        type="primary"
-        @clicked="editPhoto()" />
+        <ActionButton
+          @clicked="editPhotoModal = false"
+          text="Cancel"
+          option="closeModal"
+          type="secondary" />
+        <ActionButton
+          text="Save"
+          type="primary"
+          @clicked="editPhoto()" />
       </template>
     </Modal>
 
@@ -145,7 +164,9 @@ export default {
       commentText: '',
       destinationAlbumId: null,
       editTitleText: '',
-      editDescriptionText: ''
+      editDescriptionText: '',
+      editPhotoKeywords: [],
+      photoKeywordsText: ''
     }
   },
   computed: {
@@ -170,12 +191,16 @@ export default {
     },
     editDescriptionText() {
       this.editDescriptionText = this.removeSpecialCharacters(this.editDescriptionText)
+    },
+    photoKeywordsText() {
+      this.photoKeywordsText = this.removeSpecialCharactersKeywords(this.photoKeywordsText)
     }
   },
   methods: {
     retrieveInfo() {
       this.editTitleText = this.photo.title
       this.editDescriptionText = this.photo.description
+      this.editPhotoKeywords = [...this.photo.keywords]
     },
     addComment() {
       if(this.commentText == '') return
@@ -208,12 +233,22 @@ export default {
       document.body.style.overflow = 'initial'
       this.$router.push(`/album/${this.albumId}`)
     },
+    editAddKeyword() {
+      if(this.photoKeywordsText.length > 2
+        && this.editPhotoKeywords.length < 5) {
+        this.editPhotoKeywords.push(this.photoKeywordsText)
+        this.photoKeywordsText = ''
+      }
+    },
     editPhoto() {
       this.editTitleText = this.editTitleText.trim()
       this.editDescriptionText = this.editDescriptionText.trim()
 
+      // Checks for changes
       if((this.editTitleText == '' || this.editDescriptionText == '')
-        || (this.editTitleText == this.photo.title && this.editDescriptionText == this.photo.description)) {
+        || (this.editTitleText == this.photo.title
+            && this.editDescriptionText == this.photo.description
+            && this.editPhotoKeywords.toString() == this.photo.keywords.toString())) {
         document.body.style.overflow = 'initial'
         this.editPhotoModal = false
       } else {
@@ -221,7 +256,8 @@ export default {
           albumId: this.albumId,
           photoId: this.photoId,
           newTitle: this.editTitleText,
-          newDescription: this.editDescriptionText
+          newDescription: this.editDescriptionText,
+          newKeywords: this.editPhotoKeywords
         }
         this.$store.dispatch('editPhoto', editInfo)
         document.body.style.overflow = 'initial'
@@ -305,6 +341,9 @@ export default {
 
   .keywords {
     margin-top: 5px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .keywords p {
@@ -312,7 +351,7 @@ export default {
     text-decoration: underline;
     font-style: italic;
     font-weight: bold;
-    margin-right: 5px;
+    margin: 3px;
     color: var(--link-keywords);
   }
 

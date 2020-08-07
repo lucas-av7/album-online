@@ -24,13 +24,15 @@ export default {
     localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
   },
   editPhoto(state, payload) {
-    state.albums[payload.albumIndex].photos[payload.photoIndex].title = payload.newTitle
-    state.albums[payload.albumIndex].photos[payload.photoIndex].description = payload.newDescription
+    const photo = state.albums[payload.albumIndex].photos[payload.photoIndex]
+    photo.title = payload.newTitle
+    photo.description = payload.newDescription
+    photo.keywords = payload.newKeywords
     localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
   },
   favoriteToggle(state, payload) {
-    state.albums[payload.albumIndex].photos[payload.photoIndex].favorited
-      = !state.albums[payload.albumIndex].photos[payload.photoIndex].favorited
+    const photo = state.albums[payload.albumIndex].photos[payload.photoIndex]
+    photo.favorited = !photo.favorited
     localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
   }
 }
