@@ -225,7 +225,7 @@ export default {
       this.editDescriptionText = this.removeSpecialCharacters(this.editDescriptionText)
     },
     photoKeywordsText() {
-      this.photoKeywordsText = this.removeSpecialCharactersKeywords(this.photoKeywordsText)
+      this.photoKeywordsText = this.removeSpecialCharactersKeywords(this.photoKeywordsText).toLowerCase()
     }
   },
   methods: {
