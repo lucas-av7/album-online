@@ -299,10 +299,10 @@ export default {
 
   .comments {
     margin-top: 10px;
+    margin-bottom: 20px;
     width: 100%;
     display: flex;
     flex-direction: column;
-
   }
 
   .comment {
