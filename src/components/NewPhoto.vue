@@ -94,6 +94,7 @@ export default {
   },
   methods: {
     addKeyword() {
+      if(this.photoKeywords.includes(this.photoKeywordsText)) return
       if(this.photoKeywordsText.length > 2
         && this.photoKeywords.length < 5) {
         this.photoKeywords.push(this.photoKeywordsText)

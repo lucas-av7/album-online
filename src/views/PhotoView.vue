@@ -234,6 +234,7 @@ export default {
       this.$router.push(`/album/${this.albumId}`)
     },
     editAddKeyword() {
+      if(this.editPhotoKeywords.includes(this.photoKeywordsText)) return
       if(this.photoKeywordsText.length > 2
         && this.editPhotoKeywords.length < 5) {
         this.editPhotoKeywords.push(this.photoKeywordsText)
