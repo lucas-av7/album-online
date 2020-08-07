@@ -126,7 +126,8 @@
             placeholder="Write a comment..."
             v-model="commentText"
             @keypress.enter="addComment"
-            ref="commentInput">
+            ref="commentInput"
+            maxlength="100">
         </Forms>
         <SendButton @clicked="addComment" />
       </div>
@@ -385,6 +386,7 @@ export default {
     align-items: center;
     padding: 6px;
     border-bottom: 1px solid var(--border-color);
+    word-break: break-word;
   }
 
   .comment .user {
