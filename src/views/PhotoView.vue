@@ -37,7 +37,7 @@
             <input type="text" name="keywords"
               placeholder="Photo keywords. Max: 5"
               v-model="photoKeywordsText"
-              maxlength="10" @keypress.enter="editAddKeyword()">
+              maxlength="15" @keypress.enter="editAddKeyword()">
             <SendButton type="plus" @clicked="editAddKeyword()" />
           </div>
           <div class="keywordsList">

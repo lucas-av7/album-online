@@ -10,7 +10,7 @@
         v-model="searchTag"
         @keypress.enter="search()"
         ref="searchInput" class="inputTag"
-        maxlength="10">
+        maxlength="15">
     </Forms>
     <SendButton
       width="110" height="55"
