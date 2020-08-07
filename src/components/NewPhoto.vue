@@ -79,10 +79,10 @@ export default {
   },
   watch: {
     photoTitle() {
-      this.photoTitle = this.removeSpecialCharacters(this.photoTitle).trim()
+      this.photoTitle = this.removeSpecialCharacters(this.photoTitle)
     },
     photoDescription() {
-      this.photoDescription = this.removeSpecialCharacters(this.photoDescription).trim()
+      this.photoDescription = this.removeSpecialCharacters(this.photoDescription)
     },
     photoKeywordsText() {
       this.photoKeywordsText = this.removeSpecialCharactersKeywords(this.photoKeywordsText).toLowerCase()
@@ -100,8 +100,8 @@ export default {
       const allowCreate = this.checkErros()
       if(allowCreate) {
         const newPhoto = {
-          title: this.photoTitle,
-          description: this.photoDescription,
+          title: this.photoTitle.trim(),
+          description: this.photoDescription.trim(),
           keywords: this.photoKeywords,
           albumId: parseInt(this.albumId),
           comments: [],
