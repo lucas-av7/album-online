@@ -29,5 +29,6 @@ export default {
 
   header img {
     width: 145px;
+    cursor: pointer;
   }
 </style>
