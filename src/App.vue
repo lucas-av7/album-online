@@ -2,7 +2,11 @@
   <div id="app"
     v-scroll="handleScroll">
     <Header />
-    <router-view :key="$route.fullPath" />
+
+    <transition name="switchView" mode="out-in">
+      <router-view :key="$route.fullPath" />
+    </transition>
+
     <transition name="footerTransition" mode="out-in">
       <Footer
       v-if="!searchBoxOpen && showFooter"
@@ -105,5 +109,23 @@ export default {
 
   .linkRouter {
     color: transparent;
+  }
+
+  .switchView-enter-active {
+    animation: showView 0.12s ease;
+  }
+
+  .switchView-leave-active {
+    animation: hideView 0.12s ease;
+  }
+
+  @keyframes showView {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes hideView {
+    from { opacity: 1; }
+    to { opacity: 0; }
   }
 </style>
