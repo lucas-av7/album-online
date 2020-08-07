@@ -5,12 +5,14 @@
       <label for="title">Title</label>
       <input type="text" name="title"
       placeholder="Album title"
-      v-model="albumTitle">
+      v-model="albumTitle"
+      maxlength="25">
 
       <label for="description">Description</label>
       <input type="text" name="description"
       placeholder="Album description (optional)"
-      v-model="albumDescription">
+      v-model="albumDescription"
+      maxlength="50">
     </Forms>
     <div v-show="error" class="errosInput">
       <p>{{ error }}</p>

@@ -16,14 +16,16 @@
           type="text"
           name="title"
           placeholder="Photo title"
-          v-model="editTitleText">
+          v-model="editTitleText"
+          maxlength="25">
 
         <label for="description">Description</label>
         <input
           type="text"
           name="description"
           placeholder="Photo description"
-          v-model="editDescriptionText">
+          v-model="editDescriptionText"
+          maxlength="50">
 
         <label for="keywords">Keywords</label>
         <div class="keywordsContainer">
@@ -317,6 +319,7 @@ export default {
 
   figcaption {
     text-align: center;
+    word-wrap: break-word;
   }
 
   .favorite {

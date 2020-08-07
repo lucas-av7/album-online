@@ -17,14 +17,16 @@
           type="text"
           name="title"
           placeholder="Album title"
-          v-model="editTitleText">
+          v-model="editTitleText"
+          maxlength="25">
 
         <label for="description">Description</label>
         <input 
           type="text"
           name="description"
           placeholder="Album description"
-          v-model="editDescriptionText">
+          v-model="editDescriptionText"
+          maxlength="50">
       </Forms>
       <template slot="buttonsArea">
       <ActionButton

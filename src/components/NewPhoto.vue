@@ -13,12 +13,14 @@
       <label for="title">Title</label>
       <input type="text" name="title"
         placeholder="Photo title"
-        v-model="photoTitle">
+        v-model="photoTitle"
+        maxlength="25">
 
       <label for="description">Description</label>
       <input type="text" name="description"
         placeholder="Photo description (optional)"
-        v-model="photoDescription">
+        v-model="photoDescription"
+        maxlength="50">
 
       <label for="keywords">Keywords</label>
       <div class="keywordsContainer">
