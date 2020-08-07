@@ -112,11 +112,11 @@ export default {
   }
 
   .switchView-enter-active {
-    animation: showView 0.12s ease;
+    animation: showView 0.15s ease;
   }
 
   .switchView-leave-active {
-    animation: hideView 0.12s ease;
+    animation: hideView 0.15s ease;
   }
 
   @keyframes showView {
