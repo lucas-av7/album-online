@@ -2,7 +2,7 @@
   <div class="searchView">
 
     <template v-if="keyword">
-      <h1>Related photos</h1>
+      <h1>Tag search</h1>
       <h3 v-if="keyword">#{{ keyword }}</h3>
     </template>
 
@@ -31,22 +31,30 @@ import Photo from '../components/Photo'
 export default {
   name: 'SearchView',
   components: { Photo },
-  props: ['type' ,'keyword'],
+  props: ['keyword'],
   data() {
     return {
       photos: []
     }
   },
   created() {
-    this.$store.getters.getAlbums.map(album => {
-      album.photos.map(photo => {
-        if(this.keyword != '') {
+    if(this.keyword) {
+      this.$store.getters.getAlbums.map(album => {
+        album.photos.map(photo => {
           if(photo.keywords.includes(this.keyword)) {
             this.photos.push(photo)
           }
-        }
+        })
       })
-    })
+    } else {
+      this.$store.getters.getAlbums.map(album => {
+        album.photos.map(photo => {
+          if(photo.favorited == true) {
+            this.photos.push(photo)
+          }
+        })
+      })
+    }
   }
 }
 </script>
