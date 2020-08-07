@@ -9,52 +9,54 @@
 
     <Photos v-if="albumIndex != -1" :albumId="id" />
 
-    <Modal v-if="editAlbumModal" @clicked="editAlbumModal = false">
-      <h1>Edit album</h1>
-      <Forms>
-        <label for="title">Title</label>
-        <input
-          type="text"
-          name="title"
-          placeholder="Album title"
-          v-model="editTitleText"
-          maxlength="25">
+    <transition name="modal">
+      <Modal v-if="editAlbumModal" @clicked="editAlbumModal = false">
+        <h1>Edit album</h1>
+        <Forms>
+          <label for="title">Title</label>
+          <input
+            type="text"
+            name="title"
+            placeholder="Album title"
+            v-model="editTitleText"
+            maxlength="25">
 
-        <label for="description">Description</label>
-        <input 
-          type="text"
-          name="description"
-          placeholder="Album description"
-          v-model="editDescriptionText"
-          maxlength="50">
-      </Forms>
-      <template slot="buttonsArea">
-      <ActionButton
-        @clicked="editAlbumModal = false"
-        text="Cancel"
-        option="closeModal"
-        type="secondary" />
-      <ActionButton
-        text="Save"
-        type="primary"
-        @clicked="editAlbum()"  />
-      </template>
-    </Modal>
+          <label for="description">Description</label>
+          <input 
+            type="text"
+            name="description"
+            placeholder="Album description"
+            v-model="editDescriptionText"
+            maxlength="50">
+        </Forms>
+        <template slot="buttonsArea">
+        <ActionButton
+          @clicked="editAlbumModal = false"
+          text="Cancel"
+          option="closeModal"
+          type="secondary" />
+        <ActionButton
+          text="Save"
+          type="primary"
+          @clicked="editAlbum()"  />
+        </template>
+      </Modal>
 
-    <Modal v-if="deleteAlbumModal" @clicked="deleteAlbumModal = false">
-      <h1>Delete album?</h1>
-      <template slot="buttonsArea">
-      <ActionButton
-        @clicked="deleteAlbumModal = false"
-        text="Cancel"
-        option="closeModal"
-        type="secondary" />
-      <ActionButton
-        text="Delete"
-        type="danger"
-        @clicked="deleteAlbum()"  />
-      </template>
-    </Modal>
+      <Modal v-if="deleteAlbumModal" @clicked="deleteAlbumModal = false">
+        <h1>Delete album?</h1>
+        <template slot="buttonsArea">
+        <ActionButton
+          @clicked="deleteAlbumModal = false"
+          text="Cancel"
+          option="closeModal"
+          type="secondary" />
+        <ActionButton
+          text="Delete"
+          type="danger"
+          @clicked="deleteAlbum()"  />
+        </template>
+      </Modal>
+    </transition>
   </div>
 </template>
 

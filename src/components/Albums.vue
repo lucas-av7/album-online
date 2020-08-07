@@ -4,7 +4,9 @@
       :key="album.albumId"
       :album="album"/>
     <CreateAlbumPhoto type="album" @clicked="newAlbumModal = true" />
-    <NewAlbum v-if="newAlbumModal" @close="closeModal()" />
+    <transition name="modal">
+      <NewAlbum v-if="newAlbumModal" @close="closeModal()" />
+    </transition>
   </div>
 </template>
 

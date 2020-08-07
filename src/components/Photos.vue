@@ -2,7 +2,9 @@
   <div class="photos">
     <Photo v-for="photo in photos" :key="photo.id" :photo="photo" />
     <CreateAlbumPhoto type="photo" @clicked="newPhotoModal = true" />
-    <NewPhoto v-if="newPhotoModal" @close="closeModal()" :albumId="albumId" />
+    <transition name="modal">
+      <NewPhoto v-if="newPhotoModal" @close="closeModal()" :albumId="albumId" />
+    </transition>
   </div>
 </template>
 
@@ -43,5 +45,23 @@ export default {
     flex-wrap: wrap;
     margin-top: 20px;
     justify-content: space-evenly;
+  }
+
+  .modal-enter-active {
+    animation: 0.15s modalOpen ease;
+  }
+
+  .modal-leave-active {
+    animation: 0.15s modalClose ease;
+  }
+
+  @keyframes modalOpen {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes modalClose {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(0); }
   }
 </style>

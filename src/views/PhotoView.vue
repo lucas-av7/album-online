@@ -11,100 +11,100 @@
       <p @click="movePhotoModal = true">Move</p>
       <p @click="deletePhotoModal = true">Delete</p>
     </MenuButton>
+    <transition name="modal">
+      <Modal v-if="editPhotoModal" @clicked="editPhotoModal = false">
+        <h1>Edit photo</h1>
+        <Forms>
+          <label for="title">Title</label>
+          <input
+            type="text"
+            name="title"
+            placeholder="Photo title"
+            v-model="editTitleText"
+            maxlength="25">
 
-    <Modal v-if="editPhotoModal" @clicked="editPhotoModal = false">
-      <h1>Edit photo</h1>
-      <Forms>
-        <label for="title">Title</label>
-        <input
-          type="text"
-          name="title"
-          placeholder="Photo title"
-          v-model="editTitleText"
-          maxlength="25">
+          <label for="description">Description</label>
+          <input
+            type="text"
+            name="description"
+            placeholder="Photo description"
+            v-model="editDescriptionText"
+            maxlength="50">
 
-        <label for="description">Description</label>
-        <input
-          type="text"
-          name="description"
-          placeholder="Photo description"
-          v-model="editDescriptionText"
-          maxlength="50">
-
-        <label for="keywords">Keywords</label>
-        <div class="keywordsContainer">
-          <div class="keywordsForm">
-            <input type="text" name="keywords"
-              placeholder="Photo keywords. Max: 5"
-              v-model="photoKeywordsText"
-              maxlength="15" @keypress.enter="editAddKeyword()">
-            <SendButton type="plus" @clicked="editAddKeyword()" />
+          <label for="keywords">Keywords</label>
+          <div class="keywordsContainer">
+            <div class="keywordsForm">
+              <input type="text" name="keywords"
+                placeholder="Photo keywords. Max: 5"
+                v-model="photoKeywordsText"
+                maxlength="15" @keypress.enter="editAddKeyword()">
+              <SendButton type="plus" @clicked="editAddKeyword()" />
+            </div>
+            <div class="keywordsList">
+              <p v-for="(keyword, index) in editPhotoKeywords"
+                :key="index">
+                {{ keyword }}
+                <i class="fas fa-times remove"
+                  @click="editPhotoKeywords.splice(index, 1)"></i>
+              </p>
+            </div>
           </div>
-          <div class="keywordsList">
-            <p v-for="(keyword, index) in editPhotoKeywords"
-              :key="index">
-              {{ keyword }}
-              <i class="fas fa-times remove"
-                @click="editPhotoKeywords.splice(index, 1)"></i>
-            </p>
-          </div>
-        </div>
-      </Forms>
-      <template slot="buttonsArea">
+        </Forms>
+        <template slot="buttonsArea">
+          <ActionButton
+            @clicked="editPhotoModal = false"
+            text="Cancel"
+            option="closeModal"
+            type="secondary" />
+          <ActionButton
+            text="Save"
+            type="primary"
+            @clicked="editPhoto()" />
+        </template>
+      </Modal>
+
+      <Modal v-if="deletePhotoModal" @clicked="deletePhotoModal = false">
+        <h1>Delete photo?</h1>
+        <template slot="buttonsArea">
         <ActionButton
-          @clicked="editPhotoModal = false"
+          @clicked="deletePhotoModal = false"
           text="Cancel"
           option="closeModal"
           type="secondary" />
         <ActionButton
-          text="Save"
-          type="primary"
-          @clicked="editPhoto()" />
-      </template>
-    </Modal>
+          @clicked="deletePhoto()"
+          text="Delete"
+          type="danger" />
+        </template>
+      </Modal>
 
-    <Modal v-if="deletePhotoModal" @clicked="deletePhotoModal = false">
-      <h1>Delete photo?</h1>
-      <template slot="buttonsArea">
-      <ActionButton
-        @clicked="deletePhotoModal = false"
-        text="Cancel"
-        option="closeModal"
-        type="secondary" />
-      <ActionButton
-        @clicked="deletePhoto()"
-        text="Delete"
-        type="danger" />
-      </template>
-    </Modal>
-
-    <Modal v-if="movePhotoModal" @clicked="movePhotoModal = false">
-      <h1>Move photo</h1>
-      <Forms>
-        <label for="albumMove">Choose the album</label>
-        <select name="albumMove" v-model="destinationAlbumId">
-          <option disabled selected :value="null">Select one album</option>
-          <option
-            v-for="(albumItem, index) in albums"
-            :value="albumItem.albumId" :key="index"
-            :hidden="albumItem.albumId == albumId">
-            {{ albumItem.title }}
-          </option>
-        </select>
-      </Forms>
-      <template slot="buttonsArea">
-      <ActionButton
-        @clicked="movePhotoModal = false"
-        text="Cancel"
-        option="closeModal"
-        type="secondary" />
-      <ActionButton
-        @clicked="movePhoto()"
-        text="Move"
-        type="primary" />
-      </template>
-    </Modal>
-
+      <Modal v-if="movePhotoModal" @clicked="movePhotoModal = false">
+        <h1>Move photo</h1>
+        <Forms>
+          <label for="albumMove">Choose the album</label>
+          <select name="albumMove" v-model="destinationAlbumId">
+            <option disabled selected :value="null">Select one album</option>
+            <option
+              v-for="(albumItem, index) in albums"
+              :value="albumItem.albumId" :key="index"
+              :hidden="albumItem.albumId == albumId">
+              {{ albumItem.title }}
+            </option>
+          </select>
+        </Forms>
+        <template slot="buttonsArea">
+        <ActionButton
+          @clicked="movePhotoModal = false"
+          text="Cancel"
+          option="closeModal"
+          type="secondary" />
+        <ActionButton
+          @clicked="movePhoto()"
+          text="Move"
+          type="primary" />
+        </template>
+      </Modal>
+    </transition>
     <figure>
       <img :src="photo.url" :alt="photo.title">
       <figcaption>{{ photo.description }}</figcaption>
