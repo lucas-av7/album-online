@@ -1,20 +1,21 @@
 <template>
-    <footer>
-      <div class="menuFooter">
-        <i class="fas fa-book"></i>
-      </div>
-      <div class="menuFooter">
-        <i class="fas fa-heart"></i>
-      </div>
-      <div class="menuFooter">
-        <i class="fas fa-search"></i>
-      </div>
-    </footer>
+  <footer>
+    <div class="menuFooter">
+      <i class="fas fa-book"></i>
+    </div>
+    <div class="menuFooter">
+      <i class="fas fa-heart"></i>
+    </div>
+    <div class="menuFooter"
+      @click="$emit('search')">
+      <i class="fas fa-search"></i>
+    </div>
+  </footer>
 </template>
 
 <script>
 export default {
-  name: 'Footer'
+  name: 'Footer',
 }
 </script>
 
@@ -32,7 +33,6 @@ export default {
     position: fixed;
     bottom: 0;
     left: 0;
-
   }
 
   .menuFooter {

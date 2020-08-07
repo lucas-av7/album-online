@@ -2,9 +2,15 @@
   <div id="app"
     v-scroll="handleScroll">
     <Header />
-    <router-view />
-    <transition name="footerTransition">
-      <Footer v-show="showFooter" />
+    <router-view :key="$route.fullPath" />
+    <transition name="footerTransition" mode="out-in">
+      <Footer
+      v-if="!searchBoxOpen && showFooter"
+      @search="searchBoxOpen = true"/>
+
+      <SearchBox
+      v-if="searchBoxOpen"
+      @close="searchBoxOpen = false" />
     </transition>
   </div>
 </template>
@@ -12,12 +18,15 @@
 <script>
 import Header from './components/Header'
 import Footer from './components/Footer'
+import SearchBox from './components/SearchBox'
+
 export default {
   name: 'App',
-  components: { Header, Footer },
+  components: { Header, Footer, SearchBox },
   data() {
     return {
-      showFooter: true
+      showFooter: true,
+      searchBoxOpen: false
     }
   },
   methods: {
@@ -58,11 +67,11 @@ export default {
   }
 
   .footerTransition-enter-active {
-    animation: showFooter 0.5s;
+    animation: showFooter 0.3s ease-out;
   }
 
   .footerTransition-leave-active {
-    animation: hideFooter 0.5s;
+    animation: hideFooter 0.3s ease-out;
   }
 
   @keyframes showFooter {
