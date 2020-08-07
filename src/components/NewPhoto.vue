@@ -26,12 +26,16 @@
           <input type="text" name="keywords"
             placeholder="Photo keywords. Max: 5"
             v-model="photoKeywordsText"
-            maxlength="10">
+            maxlength="10" @keypress.enter="addKeyword()">
           <SendButton type="plus" @clicked="addKeyword()" />
         </div>
         <div class="keywordsList">
           <p v-for="(keyword, index) in photoKeywords"
-          :key="index">{{ keyword }}</p>
+            :key="index">
+            {{ keyword }}
+            <i class="fas fa-times remove"
+              @click="photoKeywords.splice(index, 1)"></i>
+          </p>
         </div>
       </div>
     </Forms>
@@ -188,5 +192,16 @@ export default {
     border-radius: 5px;
     color: var(--link-keywords);
     background-color: var(--border-color) ;
+    position: relative;
+  }
+
+  .keywordsList .remove {
+    position: absolute;
+    top: -10px;
+    right: -8px;
+    font-size: 1.2rem;
+    padding: 2px;
+    color: var(--danger);
+    cursor: pointer;
   }
 </style>
