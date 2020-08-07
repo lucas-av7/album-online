@@ -1,12 +1,18 @@
 <template>
     <header>
-      <img src="../assets/logo.png" alt="Logo Click">
+      <img @click="toHome()" src="../assets/logo.png" alt="Logo Click">
     </header>
 </template>
 
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+  methods: {
+    toHome() {
+      if(this.$router.currentRoute.path == '/') return
+      this.$router.push('/')
+    }
+  }
 }
 </script>
 
