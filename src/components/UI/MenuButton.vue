@@ -3,17 +3,20 @@
     <div class="menuIcon" @click="menu = true">
       <span class="dotMenu"></span>
     </div>
-    <div class="menuDropDown" v-show="menu">
-        <div class="overlay"
+    
+    <transition name="menuDropDown">
+      <div class="menuDropDown" v-show="menu">
+          <div class="overlay"
+            @click="menu = false"
+            v-touch:swipe="swipeHandler">
+          </div>
+        <div class="menuContent"
           @click="menu = false"
-          v-touch:swipe="swipeHandler">
+          @mouseleave="menu = false">
+          <slot></slot>
         </div>
-      <div class="menuContent"
-        @click="menu = false"
-        @mouseleave="menu = false">
-        <slot></slot>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -106,5 +109,23 @@ export default {
     margin: 15px 0;
     font-size: 1.2rem;
     cursor: pointer;
+  }
+
+  .menuDropDown-enter-active {
+    animation: 0.3s menuOpen ease;
+  }
+
+  .menuDropDown-leave-active {
+    animation: 0.3s menuClose ease;
+  }
+
+  @keyframes menuOpen {
+    from { opacity: 0; transform: scale(0.3); transform-origin: top right; }
+    to { opacity: 1; transform: scale(1); transform-origin: top right; z-index: 10;}
+  }
+
+  @keyframes menuClose {
+    from { opacity: 1; transform: scale(1); transform-origin: top right; z-index: 10;}
+    to { opacity: 0; transform: scale(0.3); transform-origin: top right; }
   }
 </style>
