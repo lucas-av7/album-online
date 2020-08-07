@@ -1,9 +1,11 @@
 <template>
   <footer>
-    <div class="menuFooter">
+    <div class="menuFooter"
+      @click="toHome()">
       <i class="fas fa-book"></i>
     </div>
-    <div class="menuFooter">
+    <div class="menuFooter"
+      @click="toFavorites()">
       <i class="fas fa-heart"></i>
     </div>
     <div class="menuFooter"
@@ -16,6 +18,16 @@
 <script>
 export default {
   name: 'Footer',
+  methods: {
+    toHome() {
+      if(this.$router.currentRoute.path == '/') return
+      this.$router.push('/')
+    },
+    toFavorites() {
+      if(this.$router.currentRoute.path == '/favorites') return
+      this.$router.push('/favorites')
+    }
+  }
 }
 </script>
 
