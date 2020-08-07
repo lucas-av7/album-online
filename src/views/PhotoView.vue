@@ -359,7 +359,7 @@ export default {
   figure {
     width: 85%;
     padding: 10px;
-    margin: 15px auto;
+    margin: 5px auto;
     position: relative;
   }
 
