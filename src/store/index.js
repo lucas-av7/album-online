@@ -63,13 +63,13 @@ export default new Vuex.Store({
     newPhoto({ commit }, payload) {
       data.append('image', payload.imageToUpload)
       axios(config)
-        .then(function (response) {
+        .then(response => {
           payload.url = response.data.data.link
           payload.photoId = response.data.data.id
           delete payload.imageToUpload
           commit('newPhoto', payload)
         })
-        .catch(function (error) {
+        .catch(error => {
           console.log(error);
         });
     },
