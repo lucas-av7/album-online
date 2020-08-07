@@ -43,6 +43,12 @@ export default new Vuex.Store({
         }
       })
       localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
+    },
+    movePhoto(state, payload) {
+      const photo = state.albums[payload.albumIndex].photos.splice(payload.photoIndex, 1)[0]
+      photo.albumId = payload.destinationAlbumId
+      state.albums[payload.destinationAlbumIndex].photos.push(photo)
+      localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
     }
   },
   actions: {
@@ -64,6 +70,31 @@ export default new Vuex.Store({
     },
     addComment({ commit }, payload) {
       commit('addComment', payload)
+    },
+    movePhoto({ commit, state }, payload) {
+      const albumIndex = state.albums.indexOf(
+        state.albums.filter(album => {
+        return album.albumId == payload.albumId
+      })[0]) 
+
+      const destinationAlbumIndex = state.albums.indexOf(
+        state.albums.filter(album => {
+        return album.albumId == payload.destinationAlbumId
+      })[0])
+      
+      const photoIndex = state.albums[albumIndex].photos.indexOf(
+        state.albums[albumIndex].photos.filter(photo => {
+        return photo.photoId == payload.photoId
+      })[0])
+
+      const moveInfo = {
+        albumIndex,
+        destinationAlbumIndex,
+        photoIndex,
+        destinationAlbumId: payload.destinationAlbumId
+      }
+
+      commit('movePhoto', moveInfo)
     }
   },
   getters: {

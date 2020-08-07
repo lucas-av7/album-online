@@ -4,8 +4,8 @@
     <p>{{ album.title }}</p>
     <MenuButton>
       <p @click="editFotoModal = true">Edit</p>
-      <p @click="moveFotoModal = true">Move</p>
-      <p @click="deleteFotoModal = true">Delete</p>
+      <p @click="movePhotoModal = true">Move</p>
+      <p @click="deletePhotoModal = true">Delete</p>
     </MenuButton>
 
     <Modal v-if="editFotoModal" @clicked="editFotoModal = false">
@@ -29,37 +29,43 @@
       </template>
     </Modal>
 
-    <Modal v-if="deleteFotoModal" @clicked="deleteFotoModal = false">
+    <Modal v-if="deletePhotoModal" @clicked="deletePhotoModal = false">
       <h1>Delete photo?</h1>
       <template slot="buttonsArea">
       <ActionButton
-        @clicked="deleteFotoModal = false"
+        @clicked="deletePhotoModal = false"
         text="Cancel"
         option="closeModal"
         type="secondary" />
       <ActionButton
+        @clicked="movePhoto()"
         text="Delete"
         type="danger" />
       </template>
     </Modal>
 
-    <Modal v-if="moveFotoModal" @clicked="moveFotoModal = false">
+    <Modal v-if="movePhotoModal" @clicked="movePhotoModal = false">
       <h1>Move photo</h1>
       <Forms>
         <label for="albumMove">Choose the album</label>
-        <select name="albumMove">
-          <option value="1">Family</option>
-          <option value="2">Vacation</option>
-          <option value="2">Work</option>
+        <select name="albumMove" v-model="destinationAlbumId">
+          <option disabled selected :value="null">Select one album</option>
+          <option
+            v-for="(albumItem, index) in albums"
+            :value="albumItem.albumId" :key="index"
+            :hidden="albumItem.albumId == albumId">
+            {{ albumItem.title }}
+          </option>
         </select>
       </Forms>
       <template slot="buttonsArea">
       <ActionButton
-        @clicked="moveFotoModal = false"
+        @clicked="movePhotoModal = false"
         text="Cancel"
         option="closeModal"
         type="secondary" />
       <ActionButton
+        @clicked="movePhoto()"
         text="Move"
         type="primary" />
       </template>
@@ -119,14 +125,18 @@ export default {
   data() {
     return {
       editFotoModal: false,
-      deleteFotoModal: false,
-      moveFotoModal: false,
-      commentText: ''
+      deletePhotoModal: false,
+      movePhotoModal: false,
+      commentText: '',
+      destinationAlbumId: null
     }
   },
   computed: {
+    albums() {
+      return this.$store.getters.getAlbums
+    },
     album() {
-      return this.$store.getters.getAlbums.filter(album => {
+      return this.albums.filter(album => {
         return album.albumId == this.albumId
       })[0] || []
     },
@@ -148,6 +158,16 @@ export default {
       this.$store.dispatch('addComment', commentInfo)
       this.commentText = ''
       this.$refs.commentInput.blur()
+    },
+    movePhoto() {
+      if(this.destinationAlbumId == null) return
+      let photoData = {
+        photoId: this.photoId,
+        albumId: this.albumId,
+        destinationAlbumId: this.destinationAlbumId
+      }
+      this.$store.dispatch('movePhoto', photoData)
+      this.$router.push(`/album/${this.destinationAlbumId}`)
     }
   },
   created() {
