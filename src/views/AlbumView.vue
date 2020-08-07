@@ -40,7 +40,8 @@
         type="secondary" />
       <ActionButton
         text="Delete"
-        type="danger" />
+        type="danger"
+        @clicked="deleteAlbum()"  />
       </template>
     </Modal>
   </div>
@@ -72,6 +73,13 @@ export default {
   },
   created() {
     if(this.album.length == 0) {
+      this.$router.push('/')
+    }
+  },
+  methods: {
+    deleteAlbum() {
+      this.$store.dispatch('deleteAlbum', this.id)
+      document.body.style.overflow = 'initial'
       this.$router.push('/')
     }
   }

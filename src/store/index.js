@@ -49,6 +49,10 @@ export default new Vuex.Store({
       photo.albumId = payload.destinationAlbumId
       state.albums[payload.destinationAlbumIndex].photos.push(photo)
       localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
+    },
+    deleteAlbum(state, payload) {
+      state.albums.splice(payload, 1)
+      localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
     }
   },
   actions: {
@@ -95,6 +99,14 @@ export default new Vuex.Store({
       }
 
       commit('movePhoto', moveInfo)
+    },
+    deleteAlbum({ commit, state }, payload ) {
+      const albumIndex = state.albums.indexOf(
+        state.albums.filter(album => {
+        return album.albumId == payload
+      })[0])
+
+      commit('deleteAlbum', albumIndex)
     }
   },
   getters: {
