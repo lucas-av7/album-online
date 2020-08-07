@@ -44,6 +44,17 @@ export default {
       }
 
       commit('deletePhoto', photoInfo)
+    },
+    editPhoto({ commit, getters  }, payload ) {
+      const albumIndex = getters.getAlbumIndex(payload.albumId)
+      const photoIndex = getters.getPhotoIndex({ albumIndex, photoId: payload.photoId })
+      const editInfo = {
+        albumIndex,
+        photoIndex,
+        newTitle: payload.newTitle,
+        newDescription: payload.newDescription
+      }
+      commit('editPhoto', editInfo)
     }
   },
   getters: {

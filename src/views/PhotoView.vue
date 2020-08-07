@@ -1,9 +1,9 @@
 <template>
   <div class="photoView">
     <h1>{{ photo.title }}</h1>
-    <p>{{ album.title }}</p>
+    <p>Album: {{ album.title }}</p>
     <MenuButton>
-      <p @click="editPhotoModal = true">Edit</p>
+      <p @click="editPhotoModal = true, retrieveInfo()">Edit</p>
       <p @click="movePhotoModal = true">Move</p>
       <p @click="deletePhotoModal = true">Delete</p>
     </MenuButton>
@@ -12,10 +12,18 @@
       <h1>Edit photo</h1>
       <Forms>
         <label for="title">Title</label>
-        <input type="text" name="title" placeholder="Photo title">
+        <input
+          type="text"
+          name="title"
+          placeholder="Photo title"
+          v-model="editTitleText">
 
         <label for="description">Description</label>
-        <input type="text" name="description" placeholder="Photo description">
+        <input
+          type="text"
+          name="description"
+          placeholder="Photo description"
+          v-model="editDescriptionText">
       </Forms>
       <template slot="buttonsArea">
       <ActionButton
@@ -25,7 +33,8 @@
         type="secondary" />
       <ActionButton
         text="Save"
-        type="primary" />
+        type="primary"
+        @clicked="editPhoto()" />
       </template>
     </Modal>
 
@@ -117,18 +126,22 @@ import Modal from '../components/UI/Modal'
 import ActionButton from '../components/UI/ActionButton'
 import Forms from '../components/UI/Forms'
 import SendButton from '../components/UI/SendButton'
+import regexMixin from '../mixin/regexMixin'
 
 export default {
   name: 'PhotoView',
   components: { MenuButton, Modal, ActionButton, Forms, SendButton },
   props: ['albumId', 'photoId'],
+  mixins: [regexMixin],
   data() {
     return {
       editPhotoModal: false,
       deletePhotoModal: false,
       movePhotoModal: false,
       commentText: '',
-      destinationAlbumId: null
+      destinationAlbumId: null,
+      editTitleText: '',
+      editDescriptionText: ''
     }
   },
   computed: {
@@ -147,7 +160,19 @@ export default {
       })[0]
     }
   },
+  watch: {
+    editTitleText() {
+      this.editTitleText = this.removeSpecialCharacters(this.editTitleText)
+    },
+    editDescriptionText() {
+      this.editDescriptionText = this.removeSpecialCharacters(this.editDescriptionText)
+    }
+  },
   methods: {
+    retrieveInfo() {
+      this.editTitleText = this.photo.title
+      this.editDescriptionText = this.photo.description
+    },
     addComment() {
       if(this.commentText == '') return
       const commentInfo = {
@@ -178,6 +203,26 @@ export default {
       this.$store.dispatch('deletePhoto', photoInfo)
       document.body.style.overflow = 'initial'
       this.$router.push(`/album/${this.albumId}`)
+    },
+    editPhoto() {
+      this.editTitleText = this.editTitleText.trim()
+      this.editDescriptionText = this.editDescriptionText.trim()
+
+      if((this.editTitleText == '' || this.editDescriptionText == '')
+        || (this.editTitleText == this.photo.title && this.editDescriptionText == this.photo.description)) {
+        document.body.style.overflow = 'initial'
+        this.editPhotoModal = false
+      } else {
+        const editInfo = {
+          albumId: this.albumId,
+          photoId: this.photoId,
+          newTitle: this.editTitleText,
+          newDescription: this.editDescriptionText
+        }
+        this.$store.dispatch('editPhoto', editInfo)
+        document.body.style.overflow = 'initial'
+        this.editPhotoModal = false
+      }
     }
   },
   created() {

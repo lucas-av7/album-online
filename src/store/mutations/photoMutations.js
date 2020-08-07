@@ -22,5 +22,10 @@ export default {
   deletePhoto(state, payload) {
     state.albums[payload.albumIndex].photos.splice(payload.photoIndex, 1)
     localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
-  }
+  },
+  editPhoto(state, payload) {
+    state.albums[payload.albumIndex].photos[payload.photoIndex].title = payload.newTitle
+    state.albums[payload.albumIndex].photos[payload.photoIndex].description = payload.newDescription
+    localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
+  },
 }
