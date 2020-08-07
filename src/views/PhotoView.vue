@@ -38,7 +38,7 @@
         option="closeModal"
         type="secondary" />
       <ActionButton
-        @clicked="movePhoto()"
+        @clicked="deletePhoto()"
         text="Delete"
         type="danger" />
       </template>
@@ -169,6 +169,15 @@ export default {
       }
       this.$store.dispatch('movePhoto', photoData)
       this.$router.push(`/album/${this.destinationAlbumId}`)
+    },
+    deletePhoto() {
+      const photoInfo = {
+        photoId: this.photoId,
+        albumId: this.albumId
+      }
+      this.$store.dispatch('deletePhoto', photoInfo)
+      document.body.style.overflow = 'initial'
+      this.$router.push(`/album/${this.albumId}`)
     }
   },
   created() {
