@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { uploadPhoto } from '../services/imgurService'
+import album from './modules/album'
+import photo from './modules/photo'
 
 Vue.use(Vuex)
 
@@ -9,6 +10,10 @@ export default new Vuex.Store({
   state: {
     albums: [],
     albumId: 1,
+  },
+  modules: {
+    album,
+    photo
   },
   mutations: {
     createAlbum(state, payload) {
@@ -33,15 +38,8 @@ export default new Vuex.Store({
       }
     },
     addComment(state, payload) {
-      state.albums.forEach(album => {
-        if(album.albumId == payload.albumId) {
-          album.photos.forEach(photo => {
-            if(photo.photoId == payload.photoId) {
-                photo.comments.push(payload.comment)
-            }
-          })
-        }
-      })
+      state.albums[payload.albumIndex].photos[payload.photoIndex]
+        .comments.push(payload.comment)
       localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
     },
     movePhoto(state, payload) {
@@ -50,90 +48,17 @@ export default new Vuex.Store({
       state.albums[payload.destinationAlbumIndex].photos.push(photo)
       localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
     },
-    deleteAlbum(state, payload) {
-      state.albums.splice(payload, 1)
-      localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
-    },
     deletePhoto(state, payload) {
       state.albums[payload.albumIndex].photos.splice(payload.photoIndex, 1)
+      localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
+    },
+    deleteAlbum(state, payload) {
+      state.albums.splice(payload, 1)
       localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
     }
   },
   actions: {
-    createAlbum({ commit, state }, payload) {
-      payload.albumId = state.albumId++
-      commit('createAlbum', payload)
-    },
-    newPhoto({ commit }, payload) {
-      uploadPhoto(payload)
-        .then(response => {
-          payload.url = response.data.data.link
-          payload.photoId = response.data.data.id
-          delete payload.imageToUpload
-          commit('newPhoto', payload)
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    },
-    addComment({ commit }, payload) {
-      commit('addComment', payload)
-    },
-    movePhoto({ commit, state }, payload) {
-      const albumIndex = state.albums.indexOf(
-        state.albums.filter(album => {
-        return album.albumId == payload.albumId
-      })[0]) 
-
-      const destinationAlbumIndex = state.albums.indexOf(
-        state.albums.filter(album => {
-        return album.albumId == payload.destinationAlbumId
-      })[0])
-      
-      const photoIndex = state.albums[albumIndex].photos.indexOf(
-        state.albums[albumIndex].photos.filter(photo => {
-        return photo.photoId == payload.photoId
-      })[0])
-
-      const moveInfo = {
-        albumIndex,
-        destinationAlbumIndex,
-        photoIndex,
-        destinationAlbumId: payload.destinationAlbumId
-      }
-
-      commit('movePhoto', moveInfo)
-    },
-    deleteAlbum({ commit, state }, payload ) {
-      const albumIndex = state.albums.indexOf(
-        state.albums.filter(album => {
-        return album.albumId == payload
-      })[0])
-
-      commit('deleteAlbum', albumIndex)
-    },
-    deletePhoto({ commit, state }, payload ) {
-      const albumIndex = state.albums.indexOf(
-        state.albums.filter(album => {
-        return album.albumId == payload.albumId
-      })[0])
-
-      const photoIndex = state.albums[albumIndex].photos.indexOf(
-        state.albums[albumIndex].photos.filter(photo => {
-        return photo.photoId == payload.photoId
-      })[0])
-
-      const photoInfo = {
-        albumIndex,
-        photoIndex
-      }
-
-      commit('deletePhoto', photoInfo)
-    }
   },
   getters: {
-    getAlbums(state) {
-      return state.albums
-    }
   }
 })
