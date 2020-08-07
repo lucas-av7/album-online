@@ -13,6 +13,7 @@ export default new Vuex.Store({
   state: {
     albums: [],
     albumId: 1,
+    globalLoading: false
   },
   modules: {
     album,
@@ -29,4 +30,9 @@ export default new Vuex.Store({
       }
     }
   },
+  getters: {
+    globalLoading(state) {
+      return state.globalLoading
+    }
+  }
 })

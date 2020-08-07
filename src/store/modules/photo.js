@@ -2,15 +2,18 @@ import { uploadPhoto } from '../../services/imgurService'
 
 export default {
   actions: {
-    newPhoto({ commit }, payload) {
+    newPhoto({ commit, rootState }, payload) {
+      rootState.globalLoading = true
       uploadPhoto(payload)
         .then(response => {
           payload.url = response.data.data.link
           payload.photoId = response.data.data.id
           delete payload.imageToUpload
           commit('newPhoto', payload)
+          rootState.globalLoading = false
         })
         .catch(error => {
+          rootState.globalLoading = false
           console.log(error);
         });
     },

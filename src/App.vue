@@ -12,6 +12,8 @@
       v-if="searchBoxOpen"
       @close="searchBoxOpen = false" />
     </transition>
+
+    <GlobalLoading v-if="globalLoading" />
   </div>
 </template>
 
@@ -19,14 +21,20 @@
 import Header from './components/Header'
 import Footer from './components/Footer'
 import SearchBox from './components/SearchBox'
+import GlobalLoading from './components/UI/GlobalLoading'
 
 export default {
   name: 'App',
-  components: { Header, Footer, SearchBox },
+  components: { Header, Footer, SearchBox, GlobalLoading },
   data() {
     return {
       showFooter: true,
       searchBoxOpen: false
+    }
+  },
+  computed: {
+    globalLoading() {
+      return this.$store.getters.globalLoading
     }
   },
   methods: {
