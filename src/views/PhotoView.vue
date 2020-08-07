@@ -3,12 +3,12 @@
     <h1>{{ photo.title }}</h1>
     <p>{{ album.title }}</p>
     <MenuButton>
-      <p @click="editFotoModal = true">Edit</p>
+      <p @click="editPhotoModal = true">Edit</p>
       <p @click="movePhotoModal = true">Move</p>
       <p @click="deletePhotoModal = true">Delete</p>
     </MenuButton>
 
-    <Modal v-if="editFotoModal" @clicked="editFotoModal = false">
+    <Modal v-if="editPhotoModal" @clicked="editPhotoModal = false">
       <h1>Edit photo</h1>
       <Forms>
         <label for="title">Title</label>
@@ -19,7 +19,7 @@
       </Forms>
       <template slot="buttonsArea">
       <ActionButton
-        @clicked="editFotoModal = false"
+        @clicked="editPhotoModal = false"
         text="Cancel"
         option="closeModal"
         type="secondary" />
@@ -124,7 +124,7 @@ export default {
   props: ['albumId', 'photoId'],
   data() {
     return {
-      editFotoModal: false,
+      editPhotoModal: false,
       deletePhotoModal: false,
       movePhotoModal: false,
       commentText: '',

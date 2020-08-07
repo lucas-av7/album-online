@@ -19,8 +19,8 @@ export default {
   computed: {
     photoUrl() {
       if(this.album.photos.length == 0) return ''
-      const foto = this.album.photos[this.album.photos.length - 1]
-      return foto.url.replace(foto.photoId, foto.photoId + 'm') || ''
+      const photo = this.album.photos[this.album.photos.length - 1]
+      return photo.url.replace(photo.photoId, photo.photoId + 'm') || ''
     }
   }
 }
