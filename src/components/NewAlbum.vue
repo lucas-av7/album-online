@@ -9,7 +9,7 @@
 
       <label for="description">Description</label>
       <input type="text" name="description"
-      placeholder="Album description"
+      placeholder="Album description (optional)"
       v-model="albumDescription">
     </Forms>
     <div v-show="error" class="errosInput">
@@ -71,11 +71,7 @@ export default {
       if(this.albumTitle == '') {
         this.error = 'Error: Title is blank'
         return false
-      } else if (this.albumDescription == '') {
-        this.error = 'Error: Description is blank'
-        return false
       }
-
       // Checks if the title is already in use
       const albums = this.$store.getters.getAlbums
       const titleDuplicate = albums.filter(album => {

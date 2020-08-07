@@ -17,7 +17,7 @@
 
       <label for="description">Description</label>
       <input type="text" name="description"
-        placeholder="Photo description"
+        placeholder="Photo description (optional)"
         v-model="photoDescription">
 
       <label for="keywords">Keywords</label>
@@ -117,9 +117,6 @@ export default {
         return false
       } else if(this.photoTitle == '') {
         this.error = 'Error: Title is blank'
-        return false
-      } else if (this.photoDescription == '') {
-        this.error = 'Error: Description is blank'
         return false
       } else {
         this.error = ''
