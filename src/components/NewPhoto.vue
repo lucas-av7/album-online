@@ -125,9 +125,12 @@ export default {
       }
     },
     onFileSelected(event) {
-      const file = event.target.files[0]
-      this.selectedFile = file
-      this.imgPreview = URL.createObjectURL(file);
+      const isImage = event.target.files[0].type.indexOf('image')
+      if(isImage != -1) {
+        const file = event.target.files[0]
+        this.selectedFile = file
+        this.imgPreview = URL.createObjectURL(file)
+      }
     }
   }
 }
