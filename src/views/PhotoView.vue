@@ -1,7 +1,11 @@
 <template>
   <div class="photoView">
     <h1>{{ photo.title }}</h1>
-    <p>Album: {{ album.title }}</p>
+    <h3>Album:
+      <router-link class="albumLink"
+      :to="`/album/${album.albumId}`">
+      {{ album.title }}</router-link>
+    </h3>
     <MenuButton>
       <p @click="editPhotoModal = true, retrieveInfo()">Edit</p>
       <p @click="movePhotoModal = true">Move</p>
@@ -112,10 +116,18 @@
         <p v-for="(keyword, index) in photo.keywords"
           :key="index">#{{ keyword }}</p>
       </div>
-      <button class="arrow left">
+      <button
+        class="arrow left"
+        v-if="previusPhoto"
+        @click="switchPhoto(previusPhoto)"
+        title="Previus photo">
         <i class="fas fa-arrow-circle-left"></i>
       </button>
-      <button class="arrow right">
+      <button
+        class="arrow right"
+        v-if="nextPhoto"
+        @click="switchPhoto(nextPhoto)"
+        title="Next photo">
         <i class="fas fa-arrow-circle-right"></i>
       </button>
     </figure>
@@ -169,7 +181,8 @@ export default {
       editTitleText: '',
       editDescriptionText: '',
       editPhotoKeywords: [],
-      photoKeywordsText: ''
+      photoKeywordsText: '',
+      photoIndex: null
     }
   },
   computed: {
@@ -186,6 +199,14 @@ export default {
       return this.album.photos.filter(photo => {
         return photo.photoId == this.photoId
       })[0] || []
+    },
+    nextPhoto() {
+      if(this.photoIndex == this.album.photos.length - 1) return null
+      return this.album.photos[this.photoIndex + 1].photoId
+    },
+    previusPhoto() {
+      if(this.photoIndex == 0) return null
+      return this.album.photos[this.photoIndex - 1].photoId
     }
   },
   watch: {
@@ -200,6 +221,9 @@ export default {
     }
   },
   methods: {
+    switchPhoto(photoId) {
+      this.$router.push(`/photo/${this.albumId}/${photoId}`)
+    },
     retrieveInfo() {
       this.editTitleText = this.photo.title
       this.editDescriptionText = this.photo.description
@@ -284,6 +308,8 @@ export default {
       const photoIndex = this.$store.getters.getPhotoIndex({ albumIndex, photoId: this.photoId })
       if(photoIndex == -1) {
         this.$router.push('/') 
+      } else {
+        this.photoIndex = photoIndex
       }
     }
   }
@@ -304,6 +330,14 @@ export default {
 
   .photoView h1 {
     text-align: center;
+  }
+
+  .photoView h3 {
+    font-size: 1.2rem;
+  }
+
+  .albumLink {
+    color: var(--link-keywords);
   }
 
   figure {
@@ -400,8 +434,7 @@ export default {
 
   .arrow {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 20px;
     background-color: transparent;
     border: none;
     outline: none;
@@ -411,10 +444,10 @@ export default {
   }
 
   .arrow.left {
-    left: -32px;
+    left: -30px;
   }
 
   .arrow.right {
-    right: -32px;
+    right: -30px;
   }
 </style>
