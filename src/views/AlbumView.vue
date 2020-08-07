@@ -3,7 +3,7 @@
     <h1>{{ album.title }}</h1>
     <p>{{ album.description }}</p>
     <MenuButton>
-      <p @click="editAlbumModal = true">Edit</p>
+      <p @click="editAlbumModal = true, retrieveInfo()">Edit</p>
       <p @click="deleteAlbumModal = true">Delete album</p>
     </MenuButton>
 
@@ -13,10 +13,18 @@
       <h1>Edit album</h1>
       <Forms>
         <label for="title">Title</label>
-        <input type="text" name="title" placeholder="Album title">
+        <input
+          type="text"
+          name="title"
+          placeholder="Album title"
+          v-model="editTitleText">
 
         <label for="description">Description</label>
-        <input type="text" name="description" placeholder="Album description">
+        <input 
+          type="text"
+          name="description"
+          placeholder="Album description"
+          v-model="editDescriptionText">
       </Forms>
       <template slot="buttonsArea">
       <ActionButton
@@ -26,7 +34,8 @@
         type="secondary" />
       <ActionButton
         text="Save"
-        type="primary" />
+        type="primary"
+        @clicked="editAlbum()"  />
       </template>
     </Modal>
 
@@ -53,17 +62,29 @@ import MenuButton from '../components/UI/MenuButton'
 import Modal from '../components/UI/Modal'
 import ActionButton from '../components/UI/ActionButton'
 import Forms from '../components/UI/Forms'
+import regexMixin from '../mixin/regexMixin'
 
 export default {
   name: 'AlbumView',
   components: { Photos, MenuButton, Modal, ActionButton, Forms },
+  mixins: [regexMixin],
   data() {
     return {
       editAlbumModal: false,
-      deleteAlbumModal: false
+      deleteAlbumModal: false,
+      editTitleText: '',
+      editDescriptionText: ''
     }
   },
   props: ['id'],
+  watch: {
+    editTitleText() {
+      this.editTitleText = this.removeSpecialCharacters(this.editTitleText)
+    },
+    editDescriptionText() {
+      this.editDescriptionText = this.removeSpecialCharacters(this.editDescriptionText)
+    }
+  },
   computed: {
     album() {
       return this.$store.getters.getAlbums.filter(album => {
@@ -74,13 +95,36 @@ export default {
   created() {
     if(this.album.length == 0) {
       this.$router.push('/')
-    }
+    } 
   },
   methods: {
     deleteAlbum() {
       this.$store.dispatch('deleteAlbum', this.id)
       document.body.style.overflow = 'initial'
       this.$router.push('/')
+    },
+    retrieveInfo() {
+      this.editTitleText = this.album.title
+      this.editDescriptionText = this.album.description
+    },
+    editAlbum() {
+      this.editTitleText = this.editTitleText.trim()
+      this.editDescriptionText = this.editDescriptionText.trim()
+
+      if((this.editTitleText == '' || this.editDescriptionText == '')
+        || (this.editTitleText == this.album.title && this.editDescriptionText == this.album.description)) {
+        document.body.style.overflow = 'initial'
+        this.editAlbumModal = false
+      } else {
+        const editInfo = {
+          albumId: this.id,
+          newTitle: this.editTitleText,
+          newDescription: this.editDescriptionText
+        }
+        this.$store.dispatch('editAlbum', editInfo)
+        document.body.style.overflow = 'initial'
+        this.editAlbumModal = false
+      }
     }
   }
 }

@@ -7,6 +7,15 @@ export default {
     deleteAlbum({ commit, getters  }, payload ) {
       const albumIndex = getters.getAlbumIndex(payload)
       commit('deleteAlbum', albumIndex)
+    },
+    editAlbum({ commit, getters  }, payload ) {
+      const albumIndex = getters.getAlbumIndex(payload.albumId)
+      const editInfo = {
+        albumIndex,
+        newTitle: payload.newTitle,
+        newDescription: payload.newDescription
+      }
+      commit('editAlbum', editInfo)
     }
   },
   getters: {

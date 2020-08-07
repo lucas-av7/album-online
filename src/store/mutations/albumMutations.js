@@ -7,5 +7,10 @@ export default {
   deleteAlbum(state, payload) {
     state.albums.splice(payload, 1)
     localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
-  }
+  },
+  editAlbum(state, payload) {
+    state.albums[payload.albumIndex].title = payload.newTitle
+    state.albums[payload.albumIndex].description = payload.newDescription
+    localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
+  },
 }
