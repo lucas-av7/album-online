@@ -83,6 +83,10 @@
     <figure>
       <img :src="photo.url" :alt="photo.title">
       <figcaption>{{ photo.description }}</figcaption>
+      <div class="favorite" @click="favoriteToggle()">
+        <i v-if="!photo.favorited" class="far fa-heart heartEmpty"></i>
+        <i v-else class="fas fa-heart heartFull"></i>
+      </div>
       <div class="keywords">
         <p v-for="(keyword, index) in photo.keywords"
           :key="index">#{{ keyword }}</p>
@@ -223,6 +227,13 @@ export default {
         document.body.style.overflow = 'initial'
         this.editPhotoModal = false
       }
+    },
+    favoriteToggle() {
+      const photoInfo = {
+        albumId: this.albumId,
+        photoId: this.photoId,
+      }
+      this.$store.dispatch('favoriteToggle', photoInfo)
     }
   },
   created() {
@@ -269,6 +280,27 @@ export default {
 
   figcaption {
     text-align: center;
+  }
+
+  .favorite {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+
+  }
+
+  .favorite i {
+    font-size: 2rem;
+  }
+
+  .favorite i.heartEmpty {
+    color: var(--primary-text-color);
+    text-shadow: 1px 1px 3px black;
+  }
+
+  .favorite i.heartFull {
+    color: var(--danger);
+    text-shadow: 1px 1px 2px black;
   }
 
   .keywords {

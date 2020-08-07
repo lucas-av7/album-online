@@ -28,4 +28,9 @@ export default {
     state.albums[payload.albumIndex].photos[payload.photoIndex].description = payload.newDescription
     localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
   },
+  favoriteToggle(state, payload) {
+    state.albums[payload.albumIndex].photos[payload.photoIndex].favorited
+      = !state.albums[payload.albumIndex].photos[payload.photoIndex].favorited
+    localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
+  }
 }
