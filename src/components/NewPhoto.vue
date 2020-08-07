@@ -26,7 +26,7 @@
       <div class="keywordsContainer">
         <div class="keywordsForm">
           <input type="text" name="keywords"
-            placeholder="Photo keywords. Max: 5"
+            placeholder="At least 3 characters. Max: 5 keywords."
             v-model="photoKeywordsText"
             maxlength="15" @keypress.enter="addKeyword()">
           <SendButton type="plus" @clicked="addKeyword()" />
