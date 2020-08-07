@@ -23,6 +23,12 @@ export default {
 
       commit('addComment', { albumIndex, photoIndex, comment: payload.comment })
     },
+    deleteComment({ commit, getters }, payload){
+      const albumIndex = getters.getAlbumIndex(payload.albumId)
+      const photoIndex = getters.getPhotoIndex({ albumIndex, photoId: payload.photoId })
+
+      commit('deleteComment', { albumIndex, photoIndex, commentIndex: payload.commentIndex })
+    },
     movePhoto({ commit, getters }, payload) {
       const albumIndex = getters.getAlbumIndex(payload.albumId)
       const destinationAlbumIndex = getters.getAlbumIndex(payload.destinationAlbumId)

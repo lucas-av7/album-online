@@ -155,6 +155,10 @@
           <div class="commentText">
             <h3>Anonymous</h3>
             <p>{{ comment }}</p> 
+          <div class="deleteComment">
+            <i class="fas fa-times remove"
+              @click="deleteComment(index)"></i>
+          </div>
           </div>
         </div>
       </div>
@@ -243,6 +247,14 @@ export default {
       this.$store.dispatch('addComment', commentInfo)
       this.commentText = ''
       this.$refs.commentInput.blur()
+    },
+    deleteComment(commentIndex) {
+      const commentInfo = {
+        albumId: this.albumId,
+        photoId: this.photoId,
+        commentIndex
+      }
+      this.$store.dispatch('deleteComment', commentInfo)
     },
     movePhoto() {
       if(this.destinationAlbumId == null) return
@@ -428,11 +440,18 @@ export default {
     padding: 6px;
     border-bottom: 1px solid var(--border-color);
     word-break: break-word;
+    position: relative;
   }
 
   .comment .user {
     margin-right: 10px;
     font-size: 1.6rem;
+  }
+
+  .comment .deleteComment {
+    position: absolute;
+    top: 6px;
+    right: 10px;
   }
 
   .commentText h3 {

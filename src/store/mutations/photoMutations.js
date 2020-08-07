@@ -13,6 +13,10 @@ export default {
       .comments.push(payload.comment)
     localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
   },
+  deleteComment(state, payload) {
+    state.albums[payload.albumIndex].photos[payload.photoIndex].comments.splice(payload.commentIndex, 1)
+    localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
+  },
   movePhoto(state, payload) {
     const photo = state.albums[payload.albumIndex].photos.splice(payload.photoIndex, 1)[0]
     photo.albumId = payload.destinationAlbumId
