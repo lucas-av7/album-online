@@ -44,7 +44,7 @@
               <p v-for="(keyword, index) in editPhotoKeywords"
                 :key="index">
                 {{ keyword }}
-                <i class="fas fa-times remove"
+                <i class="fas fa-times-circle remove"
                   @click="editPhotoKeywords.splice(index, 1)"></i>
               </p>
             </div>

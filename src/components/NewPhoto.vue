@@ -35,7 +35,7 @@
           <p v-for="(keyword, index) in photoKeywords"
             :key="index">
             {{ keyword }}
-            <i class="fas fa-times remove"
+            <i class="fas fa-times-circle remove"
               @click="photoKeywords.splice(index, 1)"></i>
           </p>
         </div>
@@ -189,7 +189,7 @@ export default {
   }
 
   .keywordsList p {
-    padding: 8px 15px;
+    padding: 8px 20px;
     margin: 5px;
     border: 1px solid var(--link-keywords);
     border-radius: 5px;
@@ -200,11 +200,10 @@ export default {
 
   .keywordsList .remove {
     position: absolute;
-    top: -10px;
-    right: -8px;
-    font-size: 1.2rem;
+    top: -1px;
+    right: -1px;
+    font-size: 1rem;
     padding: 2px;
-    color: var(--danger);
     cursor: pointer;
   }
 </style>
