@@ -230,6 +230,7 @@ export default {
   },
   methods: {
     switchPhoto(photoId) {
+      if(this.$router.currentRoute.path == `/photo/${this.albumId}/${photoId}`) return
       this.$router.push(`/photo/${this.albumId}/${photoId}`)
     },
     retrieveInfo() {
