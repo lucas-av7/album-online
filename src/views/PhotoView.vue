@@ -157,7 +157,7 @@ export default {
       if(this.album.length == 0) return []
       return this.album.photos.filter(photo => {
         return photo.photoId == this.photoId
-      })[0]
+      })[0] || []
     }
   },
   watch: {
@@ -226,8 +226,14 @@ export default {
     }
   },
   created() {
-    if(this.album.length == 0) {
-      this.$router.push('/')
+    const albumIndex = this.$store.getters.getAlbumIndex(this.albumId)
+    if(albumIndex == -1){
+      this.$router.push('/') 
+    } else {
+      const photoIndex = this.$store.getters.getPhotoIndex({ albumIndex, photoId: this.photoId })
+      if(photoIndex == -1) {
+        this.$router.push('/') 
+      }
     }
   }
 }

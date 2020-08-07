@@ -7,7 +7,7 @@
       <p @click="deleteAlbumModal = true">Delete album</p>
     </MenuButton>
 
-    <Photos :albumId="id" />
+    <Photos v-if="albumIndex != -1" :albumId="id" />
 
     <Modal v-if="editAlbumModal" @clicked="editAlbumModal = false">
       <h1>Edit album</h1>
@@ -73,7 +73,8 @@ export default {
       editAlbumModal: false,
       deleteAlbumModal: false,
       editTitleText: '',
-      editDescriptionText: ''
+      editDescriptionText: '',
+      albumIndex: null
     }
   },
   props: ['id'],
@@ -93,8 +94,9 @@ export default {
     }
   },
   created() {
-    if(this.album.length == 0) {
-      this.$router.push('/')
+    this.albumIndex = this.$store.getters.getAlbumIndex(this.id)
+    if(this.albumIndex == -1){
+      this.$router.push('/') 
     } 
   },
   methods: {
