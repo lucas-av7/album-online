@@ -1,18 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import axios from 'axios'
-import FormData from 'form-data'
-
-let data = new FormData()
-let config = {
-  method: 'post',
-  url: 'https://api.imgur.com/3/image',
-  headers: { 
-    'Authorization': 'Client-ID 6f6d5293fd45be2', 
-  },
-  data : data
-};
+import { uploadPhoto } from '../services/imgurService'
 
 Vue.use(Vuex)
 
@@ -37,7 +26,8 @@ export default new Vuex.Store({
       localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
     },
     loadLocalStorage(state) {
-      if (localStorage.getItem('albumsClickApp') && localStorage.getItem('albumIdClickApp')) {
+      if (localStorage.getItem('albumsClickApp') 
+        && localStorage.getItem('albumIdClickApp')) {
         state.albums = JSON.parse(localStorage.getItem('albumsClickApp'));
         state.albumId = JSON.parse(localStorage.getItem('albumIdClickApp'));
       }
@@ -61,8 +51,7 @@ export default new Vuex.Store({
       commit('createAlbum', payload)
     },
     newPhoto({ commit }, payload) {
-      data.append('image', payload.imageToUpload)
-      axios(config)
+      uploadPhoto(payload)
         .then(response => {
           payload.url = response.data.data.link
           payload.photoId = response.data.data.id
