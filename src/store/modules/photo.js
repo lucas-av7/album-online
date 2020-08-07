@@ -2,7 +2,7 @@ import { uploadPhoto } from '../../services/imgurService'
 
 export default {
   actions: {
-    newPhoto({ commit, rootState }, payload) {
+    newPhoto({ dispatch, commit, rootState }, payload) {
       rootState.globalLoading = true
       uploadPhoto(payload)
         .then(response => {
@@ -12,9 +12,9 @@ export default {
           commit('newPhoto', payload)
           rootState.globalLoading = false
         })
-        .catch(error => {
+        .catch(() => {
           rootState.globalLoading = false
-          console.log(error);
+          dispatch('addError', 'Upload failed')
         });
     },
     addComment({ commit, getters }, payload) {

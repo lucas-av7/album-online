@@ -14,6 +14,7 @@
     </transition>
 
     <GlobalLoading v-if="globalLoading" />
+    <GlobalError v-if="globalErrorText" :error="globalErrorText" />
   </div>
 </template>
 
@@ -22,10 +23,17 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import SearchBox from './components/SearchBox'
 import GlobalLoading from './components/UI/GlobalLoading'
+import GlobalError from './components/UI/GlobalError'
 
 export default {
   name: 'App',
-  components: { Header, Footer, SearchBox, GlobalLoading },
+  components: {
+    Header,
+    Footer,
+    SearchBox,
+    GlobalLoading,
+    GlobalError
+    },
   data() {
     return {
       showFooter: true,
@@ -35,6 +43,9 @@ export default {
   computed: {
     globalLoading() {
       return this.$store.getters.globalLoading
+    },
+    globalErrorText() {
+      return this.$store.getters.globalError
     }
   },
   methods: {
