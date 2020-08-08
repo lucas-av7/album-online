@@ -11,8 +11,7 @@
             v-touch:swipe="swipeHandler">
           </div>
         <div class="menuContent"
-          @click="menu = false"
-          @mouseleave="menu = false">
+          @click="menu = false">
           <slot></slot>
         </div>
       </div>
