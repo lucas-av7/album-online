@@ -48,20 +48,20 @@ export default {
   }
 
   .modal-enter-active {
-    animation: 0.15s modalOpen ease;
+    animation: 0.3s modalOpen ease;
   }
 
   .modal-leave-active {
-    animation: 0.15s modalClose ease;
+    animation: 0.3s modalClose ease;
   }
 
   @keyframes modalOpen {
-    from { opacity: 0; transform: scale(0); }
-    to { opacity: 1; transform: scale(1); }
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   @keyframes modalClose {
-    from { opacity: 1; transform: scale(1); }
-    to { opacity: 0; transform: scale(0); }
+    from { opacity: 1;  }
+    to { opacity: 0; }
   }
 </style>
