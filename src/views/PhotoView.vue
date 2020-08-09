@@ -83,7 +83,9 @@
         <Forms>
           <label for="albumMove">Choose the album</label>
           <select name="albumMove" v-model="destinationAlbumId">
-            <option disabled selected :value="null">Select album</option>
+            <option disabled selected :value="null">
+              {{ albums.length > 1 ? 'Select album' : 'No other albums' }}
+            </option>
             <option
               v-for="(albumItem, index) in albums"
               :value="albumItem.albumId" :key="index"
