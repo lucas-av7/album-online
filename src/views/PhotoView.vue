@@ -377,7 +377,9 @@ export default {
   }
 
   .favorite {
-    margin-top: 5px;
+    margin: 5px auto 0;
+    width: 35px;
+    cursor: pointer;
   }
 
   .favorite i {
