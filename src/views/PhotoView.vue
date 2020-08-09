@@ -83,7 +83,7 @@
         <Forms>
           <label for="albumMove">Choose the album</label>
           <select name="albumMove" v-model="destinationAlbumId">
-            <option disabled selected :value="null">Select one album</option>
+            <option disabled selected :value="null">Select album</option>
             <option
               v-for="(albumItem, index) in albums"
               :value="albumItem.albumId" :key="index"
