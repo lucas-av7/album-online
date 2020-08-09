@@ -1,6 +1,8 @@
 # Click - Album online
 Crie álbuns online e faça upload das suas melhores fotos. 
 
+Veja online: [GH Pages](https://lucas-av7.github.io/click-challenge)
+
 ## Recursos da aplicação
 - Criar, renomear e apagar albuns
 - Enviar, renomear, mover e apagar fotos
