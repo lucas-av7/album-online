@@ -54,19 +54,20 @@ export default {
     z-index: 10;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    width: 90%;
-    max-width: 600px;
-    padding: 30px 20px;
+    width: 95%;
+    max-width: 550px;
+    max-height: 95vh;
+    padding: 50px 10px;
     margin: 0 auto;
     background-color: var(--secondary-color);
     border-radius: 10px;
+    overflow-y: auto;
   }
 
   .modalData h1 {
     color: var(--secondary-text-color);
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 
   .buttonsArea {
