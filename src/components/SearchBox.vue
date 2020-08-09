@@ -58,7 +58,7 @@ export default {
     width: 100%;
     height: 55px;
     margin: 0 auto;
-    border-top: 2px solid var(--border-color);
+    /* border-top: 2px solid var(--border-color); */
     box-shadow: 0 -1px 6px #0007;
     display: flex;
     align-items: center;
@@ -71,5 +71,16 @@ export default {
   .searchBox .inputTag {
     margin-bottom: 0;
     height: 55px;
+  }
+
+  @media screen and (min-width: 1000px) {
+    .searchBox {
+      max-width: 1000px;
+      left: 50%;
+      transform: translate(-50%);
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      overflow: hidden;
+    }
   }
 </style>

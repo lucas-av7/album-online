@@ -61,4 +61,14 @@ export default {
     border-left: 2px solid var(--border-color);
     border-right: 2px solid var(--border-color);
   }
+
+  @media screen and (min-width: 1000px) {
+    footer {
+      max-width: 1000px;
+      left: 50%;
+      transform: translate(-50%);
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+  }
 </style>
