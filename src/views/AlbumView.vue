@@ -3,15 +3,17 @@
     <h1>{{ album.title }}</h1>
     <p>{{ album.description }}</p>
     <MenuButton>
-      <p @click="editAlbumModal = true, retrieveInfo()">Edit</p>
-      <p @click="deleteAlbumModal = true">Delete album</p>
+      <h3>Album menu</h3>
+      <hr>
+      <p @click="editAlbumModal = true, retrieveInfo()">Rename</p>
+      <p @click="deleteAlbumModal = true">Delete</p>
     </MenuButton>
 
     <Photos v-if="albumIndex != -1" :albumId="id" />
 
     <transition name="modal">
       <Modal v-if="editAlbumModal" @clicked="editAlbumModal = false">
-        <h1>Edit album</h1>
+        <h1>Rename album</h1>
         <Forms>
           <label for="title">Title</label>
           <input

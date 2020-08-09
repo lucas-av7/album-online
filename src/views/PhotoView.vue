@@ -7,13 +7,15 @@
       {{ album.title }}</router-link>
     </h3>
     <MenuButton>
-      <p @click="editPhotoModal = true, retrieveInfo()">Edit</p>
+      <h3>Photo menu</h3>
+      <hr>
+      <p @click="editPhotoModal = true, retrieveInfo()">Rename</p>
       <p @click="movePhotoModal = true">Move</p>
       <p @click="deletePhotoModal = true">Delete</p>
     </MenuButton>
     <transition name="modal">
       <Modal v-if="editPhotoModal" @clicked="editPhotoModal = false">
-        <h1>Edit photo</h1>
+        <h1>Rename photo</h1>
         <Forms>
           <label for="title">Title</label>
           <input

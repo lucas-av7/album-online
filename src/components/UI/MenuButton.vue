@@ -8,7 +8,8 @@
       <div class="menuDropDown" v-show="menu">
           <div class="overlay"
             @click="menu = false"
-            v-touch:swipe="swipeHandler">
+            v-touch:swipe="swipeHandler"
+            @mousewheel="menu = false">
           </div>
         <div class="menuContent"
           @click="menu = false">
@@ -93,7 +94,7 @@ export default {
   }
   
   .menuContent {
-    padding: 10px 35px 10px 10px;
+    padding: 15px;
     border-radius: 10px;
     background-color: var(--secondary-color);
     color: var(--secondary-text-color);
@@ -105,7 +106,7 @@ export default {
   }
 
   .menuContent p {
-    margin: 15px 0;
+    margin-top: 15px;
     font-size: 1.2rem;
     cursor: pointer;
   }
