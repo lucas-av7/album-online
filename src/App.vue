@@ -2,23 +2,21 @@
   <div id="app"
     v-scroll="handleScroll">
     <Header />
-
     <transition name="switchView" mode="out-in">
       <router-view :key="$route.fullPath" />
     </transition>
-
     <transition name="footerTransition" mode="out-in">
       <Footer
       v-if="!searchBoxOpen && showFooter"
       @search="searchBoxOpen = true"/>
-
       <SearchBox
       v-if="searchBoxOpen"
       @close="searchBoxOpen = false" />
     </transition>
-
     <GlobalLoading v-if="globalLoading" />
-    <GlobalError v-if="globalErrorText" :error="globalErrorText" />
+    <transition name="errorAnimation">
+      <GlobalError v-if="globalErrorText" :error="globalErrorText" />
+    </transition>
   </div>
 </template>
 
@@ -125,6 +123,24 @@ export default {
   }
 
   @keyframes hideView {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  .errorAnimation-enter-active {
+    animation: showError 0.5s ease;
+  }
+
+  .errorAnimation-leave-active {
+    animation: hideError 0.5s ease;
+  }
+
+  @keyframes showError {
+    from { opacity: 0; }
+    to { opacity: 1;  }
+  }
+
+  @keyframes hideError {
     from { opacity: 1; }
     to { opacity: 0; }
   }
