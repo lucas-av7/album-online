@@ -117,8 +117,8 @@ export default {
       this.editTitleText = this.editTitleText.trim()
       this.editDescriptionText = this.editDescriptionText.trim()
 
-      if((this.editTitleText == '' || this.editDescriptionText == '')
-        || (this.editTitleText == this.album.title && this.editDescriptionText == this.album.description)) {
+      if(this.editTitleText == '' || (this.editTitleText == this.album.title
+        && this.editDescriptionText == this.album.description)) {
         document.body.style.overflow = 'initial'
         this.editAlbumModal = false
       } else {
