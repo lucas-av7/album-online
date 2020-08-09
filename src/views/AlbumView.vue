@@ -5,14 +5,14 @@
     <MenuButton>
       <h3>Album menu</h3>
       <hr>
-      <p @click="editAlbumModal = true, retrieveInfo()">Rename</p>
+      <p @click="renameAlbumModal = true, retrieveInfo()">Rename</p>
       <p @click="deleteAlbumModal = true">Delete</p>
     </MenuButton>
 
     <Photos v-if="albumIndex != -1" :albumId="id" />
 
     <transition name="modal">
-      <Modal v-if="editAlbumModal" @clicked="editAlbumModal = false">
+      <Modal v-if="renameAlbumModal" @clicked="renameAlbumModal = false">
         <h1>Rename album</h1>
         <Forms>
           <label for="title">Title</label>
@@ -33,7 +33,7 @@
         </Forms>
         <template slot="buttonsArea">
         <ActionButton
-          @clicked="editAlbumModal = false"
+          @clicked="renameAlbumModal = false"
           text="Cancel"
           type="secondary" />
         <ActionButton
@@ -74,7 +74,7 @@ export default {
   mixins: [regexMixin],
   data() {
     return {
-      editAlbumModal: false,
+      renameAlbumModal: false,
       deleteAlbumModal: false,
       editTitleText: '',
       editDescriptionText: '',
@@ -118,7 +118,7 @@ export default {
 
       if(this.editTitleText == '' || (this.editTitleText == this.album.title
         && this.editDescriptionText == this.album.description)) {
-        this.editAlbumModal = false
+        this.renameAlbumModal = false
       } else {
         const editInfo = {
           albumId: this.id,
@@ -126,7 +126,7 @@ export default {
           newDescription: this.editDescriptionText
         }
         this.$store.dispatch('editAlbum', editInfo)
-        this.editAlbumModal = false
+        this.renameAlbumModal = false
       }
     }
   }

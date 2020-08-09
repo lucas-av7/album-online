@@ -9,12 +9,12 @@
     <MenuButton>
       <h3>Photo menu</h3>
       <hr>
-      <p @click="editPhotoModal = true, retrieveInfo()">Rename</p>
+      <p @click="renamePhotoModal = true, retrieveInfo()">Rename</p>
       <p @click="movePhotoModal = true">Move</p>
       <p @click="deletePhotoModal = true">Delete</p>
     </MenuButton>
     <transition name="modal">
-      <Modal v-if="editPhotoModal" @clicked="editPhotoModal = false">
+      <Modal v-if="renamePhotoModal" @clicked="renamePhotoModal = false">
         <h1>Rename photo</h1>
         <Forms>
           <label for="title">Title</label>
@@ -54,7 +54,7 @@
         </Forms>
         <template slot="buttonsArea">
           <ActionButton
-            @clicked="editPhotoModal = false"
+            @clicked="renamePhotoModal = false"
             text="Cancel"
             type="secondary" />
           <ActionButton
@@ -182,7 +182,7 @@ export default {
   mixins: [regexMixin],
   data() {
     return {
-      editPhotoModal: false,
+      renamePhotoModal: false,
       deletePhotoModal: false,
       movePhotoModal: false,
       commentText: '',
@@ -292,7 +292,7 @@ export default {
       if(this.editTitleText == '' || (this.editTitleText == this.photo.title
             && this.editDescriptionText == this.photo.description
             && this.editPhotoKeywords.toString() == this.photo.keywords.toString())) {
-        this.editPhotoModal = false
+        this.renamePhotoModal = false
       } else {
         const editInfo = {
           albumId: this.albumId,
@@ -302,7 +302,7 @@ export default {
           newKeywords: this.editPhotoKeywords
         }
         this.$store.dispatch('editPhoto', editInfo)
-        this.editPhotoModal = false
+        this.renamePhotoModal = false
       }
     },
     favoriteToggle() {
