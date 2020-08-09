@@ -44,7 +44,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     margin-top: 20px;
-    justify-content: space-evenly;
+    justify-content: center;
   }
 
   .modal-enter-active {
