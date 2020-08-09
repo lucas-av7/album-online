@@ -290,8 +290,7 @@ export default {
       this.editDescriptionText = this.editDescriptionText.trim()
 
       // Checks for changes
-      if((this.editTitleText == '' || this.editDescriptionText == '')
-        || (this.editTitleText == this.photo.title
+      if(this.editTitleText == '' || (this.editTitleText == this.photo.title
             && this.editDescriptionText == this.photo.description
             && this.editPhotoKeywords.toString() == this.photo.keywords.toString())) {
         document.body.style.overflow = 'initial'
@@ -359,6 +358,7 @@ export default {
 
   figure {
     width: 85%;
+    max-width: 800px;
     padding: 10px;
     margin: 5px auto;
     position: relative;
@@ -378,7 +378,7 @@ export default {
     position: absolute;
     top: 25px;
     right: 25px;
-
+    cursor: pointer;
   }
 
   .favorite i {
@@ -415,14 +415,15 @@ export default {
   }
 
   .commentsContainer {
-    width: 100%;
+    width: 90%;
+    max-width: 800px;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
   .commentsContainer .form {
-    width: 85%;
+    width: 100%;
     display: flex;
     justify-content: center;
   }
@@ -453,6 +454,7 @@ export default {
     position: absolute;
     top: 6px;
     right: 10px;
+    cursor: pointer;
   }
 
   .commentText h3 {
