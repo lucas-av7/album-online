@@ -117,8 +117,8 @@
           <i class="fas fa-arrow-circle-left"></i>
         </button>
         <div class="favorite" @click="favoriteToggle()">
-          <i v-if="!photo.favorited" class="far fa-heart heartEmpty"></i>
-          <i v-else class="fas fa-heart heartFull"></i>
+          <i title="Add to favorite photos" v-if="!photo.favorited" class="far fa-heart heartEmpty"></i>
+          <i title="Remove from favorite photos" v-else class="fas fa-heart heartFull"></i>
         </div>
         <button
           class="arrow right"
@@ -398,8 +398,6 @@ export default {
     color: var(--primari-text-color);
 
   }
-
-
 
   .arrow {
     position: absolute;
