@@ -40,6 +40,7 @@ export default {
 <style>
   .albums {
     width: 100%;
+    max-width: 1200px;
     display: flex;
     flex-wrap: wrap;
     margin-top: 20px;
