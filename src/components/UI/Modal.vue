@@ -57,6 +57,7 @@ export default {
     justify-content: center;
     align-items: center;
     width: 90%;
+    max-width: 600px;
     padding: 30px 20px;
     margin: 0 auto;
     background-color: var(--secondary-color);
