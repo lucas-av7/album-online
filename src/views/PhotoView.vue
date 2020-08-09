@@ -108,9 +108,25 @@
     <figure>
       <img :src="photo.url" :alt="photo.title">
       <figcaption>{{ photo.description }}</figcaption>
-      <div class="favorite" @click="favoriteToggle()">
-        <i v-if="!photo.favorited" class="far fa-heart heartEmpty"></i>
-        <i v-else class="fas fa-heart heartFull"></i>
+      <div class="photoButtons">
+        <button
+          class="arrow left"
+          v-if="previusPhoto"
+          @click="switchPhoto(previusPhoto)"
+          title="Previus photo">
+          <i class="fas fa-arrow-circle-left"></i>
+        </button>
+        <div class="favorite" @click="favoriteToggle()">
+          <i v-if="!photo.favorited" class="far fa-heart heartEmpty"></i>
+          <i v-else class="fas fa-heart heartFull"></i>
+        </div>
+        <button
+          class="arrow right"
+          v-if="nextPhoto"
+          @click="switchPhoto(nextPhoto)"
+          title="Next photo">
+          <i class="fas fa-arrow-circle-right"></i>
+        </button>
       </div>
       <div class="keywords">
         <p v-for="(keyword, index) in photo.keywords"
@@ -120,20 +136,6 @@
           </router-link>
         </p>
       </div>
-      <button
-        class="arrow left"
-        v-if="previusPhoto"
-        @click="switchPhoto(previusPhoto)"
-        title="Previus photo">
-        <i class="fas fa-arrow-circle-left"></i>
-      </button>
-      <button
-        class="arrow right"
-        v-if="nextPhoto"
-        @click="switchPhoto(nextPhoto)"
-        title="Next photo">
-        <i class="fas fa-arrow-circle-right"></i>
-      </button>
     </figure>
     <div class="commentsContainer">
       <div class="form">
@@ -376,28 +378,49 @@ export default {
     word-wrap: break-word;
   }
 
+  .photoButtons {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 10px;
+  }
+
   .favorite {
-    margin: 5px auto 0;
     width: 35px;
     cursor: pointer;
   }
 
   .favorite i {
     font-size: 2rem;
+    color: var(--primari-text-color);
+
   }
 
-  .favorite i.heartEmpty {
-    color: var(--primary-text-color);
-    text-shadow: 1px 1px 3px black;
+
+
+  .arrow {
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 2rem;
+    color: var(--secondary-color);
   }
 
-  .favorite i.heartFull {
-    color: var(--danger);
-    text-shadow: 1px 1px 2px black;
+  .arrow.left {
+    left: -40px;
+  }
+
+  .arrow.right {
+    right: -40px;
   }
 
   .keywords {
-    margin: 5px auto 0;
+    margin: 10px auto 0;
     width: 100%;
     max-width: 500px;
     display: flex;
@@ -462,24 +485,5 @@ export default {
 
   .commentText h3 {
     font-size: 1.0rem;
-  }
-
-  .arrow {
-    position: absolute;
-    top: 20px;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    font-size: 2.2rem;
-    color: var(--secondary-color);
-  }
-
-  .arrow.left {
-    left: -30px;
-  }
-
-  .arrow.right {
-    right: -30px;
   }
 </style>
