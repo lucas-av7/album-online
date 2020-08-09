@@ -12,7 +12,7 @@ export default {
   props: ['error'],
   created() {
     setTimeout(() => {
-      this.$store.dispatch('addError', '')
+      this.$store.dispatch('addTextError', '')
     }, 4000);
   }
 }

@@ -14,7 +14,7 @@ export default {
         })
         .catch(() => {
           rootState.globalLoading = false
-          dispatch('addError', 'Upload failed')
+          dispatch('addTextError', 'Upload failed')
         });
     },
     addComment({ commit, getters }, payload) {

@@ -40,7 +40,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    addError({ state }, payload) {
+    addTextError({ state }, payload) {
       state.globalError = payload
     }
   }
