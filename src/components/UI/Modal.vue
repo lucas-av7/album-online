@@ -1,7 +1,7 @@
 <template>
   <div class="modal">
     <div class="overlayModal"
-      @click="$emit('clicked'), overflow()"></div>
+      @click="$emit('clicked')"></div>
     <div class="modalData">
       <slot></slot>
     <div class="buttonsArea">
@@ -16,10 +16,8 @@ export default {
   created() {
     document.body.style.overflow = 'hidden'
   },
-  methods: {
-    overflow() {
-      document.body.style.overflow = 'initial'
-    }
+  destroyed() {
+    document.body.style.overflow = 'initial'
   }
 }
 </script>

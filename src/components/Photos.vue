@@ -32,7 +32,6 @@ export default {
   methods: {
     closeModal() {
       this.newPhotoModal = false
-      document.body.style.overflow = 'initial'
     }
   }
 }

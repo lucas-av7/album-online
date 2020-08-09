@@ -31,7 +31,6 @@ export default {
   methods: {
     closeModal() {
       this.newAlbumModal = false
-      document.body.style.overflow = 'initial'
     }
   }
 }

@@ -21,7 +21,6 @@
       <ActionButton
         @clicked="$emit('close')"
         text="Cancel"
-        option="closeModal"
         type="secondary" />
       <ActionButton
         @clicked="create()"

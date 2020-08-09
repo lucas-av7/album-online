@@ -54,7 +54,6 @@
           <ActionButton
             @clicked="editPhotoModal = false"
             text="Cancel"
-            option="closeModal"
             type="secondary" />
           <ActionButton
             text="Save"
@@ -69,7 +68,6 @@
         <ActionButton
           @clicked="deletePhotoModal = false"
           text="Cancel"
-          option="closeModal"
           type="secondary" />
         <ActionButton
           @clicked="deletePhoto()"
@@ -96,7 +94,6 @@
         <ActionButton
           @clicked="movePhotoModal = false"
           text="Cancel"
-          option="closeModal"
           type="secondary" />
         <ActionButton
           @clicked="movePhoto()"
@@ -261,7 +258,6 @@ export default {
     },
     movePhoto() {
       if(this.destinationAlbumId == null) return
-      document.body.style.overflow = 'initial'
       let photoData = {
         photoId: this.photoId,
         albumId: this.albumId,
@@ -276,7 +272,6 @@ export default {
         albumId: this.albumId
       }
       this.$store.dispatch('deletePhoto', photoInfo)
-      document.body.style.overflow = 'initial'
       this.$router.push(`/album/${this.albumId}`)
     },
     editAddKeyword() {
@@ -295,7 +290,6 @@ export default {
       if(this.editTitleText == '' || (this.editTitleText == this.photo.title
             && this.editDescriptionText == this.photo.description
             && this.editPhotoKeywords.toString() == this.photo.keywords.toString())) {
-        document.body.style.overflow = 'initial'
         this.editPhotoModal = false
       } else {
         const editInfo = {
@@ -306,7 +300,6 @@ export default {
           newKeywords: this.editPhotoKeywords
         }
         this.$store.dispatch('editPhoto', editInfo)
-        document.body.style.overflow = 'initial'
         this.editPhotoModal = false
       }
     },

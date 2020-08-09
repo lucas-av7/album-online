@@ -33,7 +33,6 @@
         <ActionButton
           @clicked="editAlbumModal = false"
           text="Cancel"
-          option="closeModal"
           type="secondary" />
         <ActionButton
           text="Save"
@@ -48,7 +47,6 @@
         <ActionButton
           @clicked="deleteAlbumModal = false"
           text="Cancel"
-          option="closeModal"
           type="secondary" />
         <ActionButton
           text="Delete"
@@ -106,7 +104,6 @@ export default {
   methods: {
     deleteAlbum() {
       this.$store.dispatch('deleteAlbum', this.id)
-      document.body.style.overflow = 'initial'
       this.$router.push('/')
     },
     retrieveInfo() {
@@ -119,7 +116,6 @@ export default {
 
       if(this.editTitleText == '' || (this.editTitleText == this.album.title
         && this.editDescriptionText == this.album.description)) {
-        document.body.style.overflow = 'initial'
         this.editAlbumModal = false
       } else {
         const editInfo = {
@@ -128,7 +124,6 @@ export default {
           newDescription: this.editDescriptionText
         }
         this.$store.dispatch('editAlbum', editInfo)
-        document.body.style.overflow = 'initial'
         this.editAlbumModal = false
       }
     }

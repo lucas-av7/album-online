@@ -10,14 +10,7 @@
 <script>
 export default {
   name: 'ActionButton',
-  props: ['text', 'type', 'option'],
-  methods: {
-    options() {
-      if(this.option == 'closeModal') {
-        document.body.style.overflow = 'initial'
-      }
-    }
-  }
+  props: ['text', 'type']
 }
 </script>
 
