@@ -45,7 +45,6 @@ export default {
     flex-wrap: wrap;
     margin-top: 20px;
     justify-content: center;
-    align-items: center;
   }
 
   .modal-enter-active {
