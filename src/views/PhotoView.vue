@@ -43,11 +43,11 @@
               <SendButton type="plus" @clicked="editAddKeyword()" />
             </div>
             <div class="keywordsList">
-              <p v-for="(keyword, index) in editPhotoKeywords"
+              <p v-for="(keyword, index) in renamePhotoKeywords"
                 :key="index">
                 {{ keyword }}
                 <i class="fas fa-times-circle remove"
-                  @click="editPhotoKeywords.splice(index, 1)"></i>
+                  @click="renamePhotoKeywords.splice(index, 1)"></i>
               </p>
             </div>
           </div>
@@ -60,7 +60,7 @@
           <ActionButton
             text="Save"
             type="primary"
-            @clicked="editPhoto()" />
+            @clicked="renamePhoto()" />
         </template>
       </Modal>
 
@@ -189,7 +189,7 @@ export default {
       destinationAlbumId: null,
       editTitleText: '',
       editDescriptionText: '',
-      editPhotoKeywords: [],
+      renamePhotoKeywords: [],
       photoKeywordsText: '',
       photoIndex: null
     }
@@ -237,7 +237,7 @@ export default {
     retrieveInfo() {
       this.editTitleText = this.photo.title
       this.editDescriptionText = this.photo.description
-      this.editPhotoKeywords = [...this.photo.keywords]
+      this.renamePhotoKeywords = [...this.photo.keywords]
     },
     addComment() {
       if(this.commentText == '') return
@@ -277,21 +277,21 @@ export default {
       this.$router.push(`/album/${this.albumId}`)
     },
     editAddKeyword() {
-      if(this.editPhotoKeywords.includes(this.photoKeywordsText)) return
+      if(this.renamePhotoKeywords.includes(this.photoKeywordsText)) return
       if(this.photoKeywordsText.length > 2
-        && this.editPhotoKeywords.length < 5) {
-        this.editPhotoKeywords.push(this.photoKeywordsText)
+        && this.renamePhotoKeywords.length < 5) {
+        this.renamePhotoKeywords.push(this.photoKeywordsText)
         this.photoKeywordsText = ''
       }
     },
-    editPhoto() {
+    renamePhoto() {
       this.editTitleText = this.editTitleText.trim()
       this.editDescriptionText = this.editDescriptionText.trim()
 
       // Checks for changes
       if(this.editTitleText == '' || (this.editTitleText == this.photo.title
             && this.editDescriptionText == this.photo.description
-            && this.editPhotoKeywords.toString() == this.photo.keywords.toString())) {
+            && this.renamePhotoKeywords.toString() == this.photo.keywords.toString())) {
         this.renamePhotoModal = false
       } else {
         const editInfo = {
@@ -299,9 +299,9 @@ export default {
           photoId: this.photoId,
           newTitle: this.editTitleText,
           newDescription: this.editDescriptionText,
-          newKeywords: this.editPhotoKeywords
+          newKeywords: this.renamePhotoKeywords
         }
-        this.$store.dispatch('editPhoto', editInfo)
+        this.$store.dispatch('renamePhoto', editInfo)
         this.renamePhotoModal = false
       }
     },

@@ -27,7 +27,7 @@ export default {
     state.albums[payload.albumIndex].photos.splice(payload.photoIndex, 1)
     localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
   },
-  editPhoto(state, payload) {
+  renamePhoto(state, payload) {
     const photo = state.albums[payload.albumIndex].photos[payload.photoIndex]
     photo.title = payload.newTitle
     photo.description = payload.newDescription

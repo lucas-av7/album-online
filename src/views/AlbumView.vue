@@ -39,7 +39,7 @@
         <ActionButton
           text="Save"
           type="primary"
-          @clicked="editAlbum()"  />
+          @clicked="renameAlbum()"  />
         </template>
       </Modal>
 
@@ -112,7 +112,7 @@ export default {
       this.editTitleText = this.album.title
       this.editDescriptionText = this.album.description
     },
-    editAlbum() {
+    renameAlbum() {
       this.editTitleText = this.editTitleText.trim()
       this.editDescriptionText = this.editDescriptionText.trim()
 
@@ -125,7 +125,7 @@ export default {
           newTitle: this.editTitleText,
           newDescription: this.editDescriptionText
         }
-        this.$store.dispatch('editAlbum', editInfo)
+        this.$store.dispatch('renameAlbum', editInfo)
         this.renameAlbumModal = false
       }
     }

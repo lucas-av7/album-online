@@ -54,7 +54,7 @@ export default {
 
       commit('deletePhoto', photoInfo)
     },
-    editPhoto({ commit, getters  }, payload) {
+    renamePhoto({ commit, getters  }, payload) {
       const albumIndex = getters.getAlbumIndex(payload.albumId)
       const photoIndex = getters.getPhotoIndex({ albumIndex, photoId: payload.photoId })
       const editInfo = {
@@ -64,7 +64,7 @@ export default {
         newDescription: payload.newDescription,
         newKeywords: payload.newKeywords
       }
-      commit('editPhoto', editInfo)
+      commit('renamePhoto', editInfo)
     },
     favoriteToggle({ commit, getters }, payload) {
       const albumIndex = getters.getAlbumIndex(payload.albumId)
