@@ -118,7 +118,7 @@
           <router-link class="linkKeywords" :to="`/search/${keyword}`">
             #{{ keyword }}
           </router-link>
-          </p>
+        </p>
       </div>
       <button
         class="arrow left"
@@ -362,10 +362,12 @@ export default {
     padding: 10px;
     margin: 5px auto;
     position: relative;
+    text-align: center;
   }
 
   figure img {
-    width: 100%;
+    max-width: 100%;
+    max-height: 90vh;
     border: 10px solid #FFF0D7;
   }
 
@@ -375,10 +377,7 @@ export default {
   }
 
   .favorite {
-    position: absolute;
-    top: 25px;
-    right: 25px;
-    cursor: pointer;
+    margin-top: 5px;
   }
 
   .favorite i {
@@ -396,10 +395,12 @@ export default {
   }
 
   .keywords {
-    margin-top: 5px;
+    margin: 5px auto 0;
     width: 100%;
+    max-width: 500px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   .keywords p {
