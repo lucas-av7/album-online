@@ -14,15 +14,19 @@
     <MenuButton key="menu2" v-else>
       <h3>Selected photos</h3>
       <hr>
-      <p v-if="editInfo.selectedPhotos.length > 0"
-        @click="deleteSelectedPhotosModal = true">Delete</p>
-      <p v-if="editInfo.selectedPhotos.length > 0"
-        @click="moveSelectedPhotosModal = true">Move</p>
+      <p v-if="editInfo.selectedPhotos.length < album.photos.length"
+        @click="selectAll = true">
+        Select all
+      </p>
+      <template v-if="editInfo.selectedPhotos.length > 0">
+        <p @click="deleteSelectedPhotosModal = true">Delete</p>
+        <p @click="moveSelectedPhotosModal = true">Move</p>
+      </template>
       <p @click="edit(false)">Cancel</p>
     </MenuButton>
     </transition>
 
-    <Photos v-if="albumIndex != -1" :albumId="id" />
+    <Photos v-if="albumIndex != -1" :albumId="id" :selectAll="selectAll" />
 
     <transition name="modal">
       <Modal v-if="renameAlbumModal"
@@ -140,7 +144,8 @@ export default {
       editTitleText: '',
       editDescriptionText: '',
       albumIndex: null,
-      destinationAlbumId: null
+      destinationAlbumId: null,
+      selectAll: false
     }
   },
   props: ['id'],
@@ -193,6 +198,7 @@ export default {
     },
     edit(status) {
       this.$store.dispatch('editStatusToggle', status)
+      this.selectAll = false
     },
     deleteSelectedPhotos() {
       this.$store.dispatch('deleteSelectedPhotos', this.id)

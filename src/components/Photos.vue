@@ -1,7 +1,8 @@
 <template>
   <div class="photos">
     <Photo v-for="photo in photos"
-      :key="photo.id" :photo="photo" />
+      :key="photo.id" :photo="photo"
+      :selectAll="selectAll"  />
 
     <CreateAlbumPhoto v-show="!editStatus"
       type="photo" @clicked="newPhotoModal = true" />
@@ -26,7 +27,7 @@ export default {
       newPhotoModal: false,
     }
   },
-  props: ['albumId'],
+  props: ['albumId', 'selectAll'],
   computed: {
     photos() {
       return this.$store.getters.getAlbums.filter(album => {

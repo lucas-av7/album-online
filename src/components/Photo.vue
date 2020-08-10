@@ -29,6 +29,7 @@ export default {
   },
   props: {
     photo: { type: Object, required: true },
+    selectAll: { type: Boolean }
   },
   computed: {
     photoUrl() {
@@ -47,6 +48,9 @@ export default {
   watch: {
     editStatus() {
       this.selected = false
+    },
+    selectAll() {
+      if(this.selectAll) this.selectPhotoToggle()
     }
   }
 }
