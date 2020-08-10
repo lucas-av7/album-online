@@ -64,7 +64,7 @@ export default {
     width: 225px;
     height: 225px;
     margin: 70px auto;
-    animation: inductionClick 10s ease infinite;
+    animation: inductionClick 7s ease infinite;
   }
 
   .firstAlbum h2 {
