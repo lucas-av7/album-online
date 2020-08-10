@@ -9,23 +9,25 @@
     </template>
 
     <template v-else>
-      <MenuButton v-if="!editInfo.status">
-        <h3>Home menu</h3>
-        <hr>
-        <p @click="edit(true)">Edit</p>
-      </MenuButton>
-      <MenuButton key="menu2" v-else>
-        <h3>Selected albums</h3>
-        <hr>
-        <p v-if="editInfo.selectedAlbums.length < allAlbums.length"
-          @click="selectAll = true">
-          Select all
-        </p>
-        <template v-if="editInfo.selectedAlbums.length > 0">
-          <p @click="deleteSelectedAlbumsModal = true">Delete</p>
-        </template>
-        <p @click="edit(false)">Cancel</p>
-      </MenuButton>
+      <transition name="opacityAnimation" mode="out-in">
+        <MenuButton v-if="!editInfo.status">
+          <h3>Home menu</h3>
+          <hr>
+          <p @click="edit(true)">Edit</p>
+        </MenuButton>
+        <MenuButton key="menu2" v-else>
+          <h3>Selected albums</h3>
+          <hr>
+          <p v-if="editInfo.selectedAlbums.length < allAlbums.length"
+            @click="selectAll = true">
+            Select all
+          </p>
+          <template v-if="editInfo.selectedAlbums.length > 0">
+            <p @click="deleteSelectedAlbumsModal = true">Delete</p>
+          </template>
+          <p @click="edit(false)">Cancel</p>
+        </MenuButton>
+      </transition>
 
       <Albums :selectAll="selectAll"
         @selectAllReset="selectAll = false" />

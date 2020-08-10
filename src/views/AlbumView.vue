@@ -4,26 +4,26 @@
     <p>{{ album.description }}</p>
 
     <transition name="opacityAnimation" mode="out-in">
-    <MenuButton key="menu1" v-if="!editInfo.status">
-      <h3>Album menu</h3>
-      <hr>
-      <p v-if="album.photos.length > 0" @click="edit(true)">Edit</p>
-      <p @click="renameAlbumModal = true, retrieveInfo()">Rename</p>
-      <p @click="deleteAlbumModal = true">Delete</p>
-    </MenuButton>
-    <MenuButton key="menu2" v-else>
-      <h3>Selected photos</h3>
-      <hr>
-      <p v-if="editInfo.selectedPhotos.length < album.photos.length"
-        @click="selectAll = true">
-        Select all
-      </p>
-      <template v-if="editInfo.selectedPhotos.length > 0">
-        <p @click="deleteSelectedPhotosModal = true">Delete</p>
-        <p @click="moveSelectedPhotosModal = true">Move</p>
-      </template>
-      <p @click="edit(false)">Cancel</p>
-    </MenuButton>
+      <MenuButton key="menu1" v-if="!editInfo.status">
+        <h3>Album menu</h3>
+        <hr>
+        <p v-if="album.photos.length > 0" @click="edit(true)">Edit</p>
+        <p @click="renameAlbumModal = true, retrieveInfo()">Rename</p>
+        <p @click="deleteAlbumModal = true">Delete</p>
+      </MenuButton>
+      <MenuButton key="menu2" v-else>
+        <h3>Selected photos</h3>
+        <hr>
+        <p v-if="editInfo.selectedPhotos.length < album.photos.length"
+          @click="selectAll = true">
+          Select all
+        </p>
+        <template v-if="editInfo.selectedPhotos.length > 0">
+          <p @click="deleteSelectedPhotosModal = true">Delete</p>
+          <p @click="moveSelectedPhotosModal = true">Move</p>
+        </template>
+        <p @click="edit(false)">Cancel</p>
+      </MenuButton>
     </transition>
 
     <Photos v-if="albumIndex != -1"
