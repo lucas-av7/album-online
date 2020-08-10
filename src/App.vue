@@ -15,7 +15,7 @@
     </transition>
     <GlobalLoading v-if="globalLoading" />
     <transition name="errorAnimation">
-      <GlobalError v-if="globalErrorText" :error="globalErrorText" />
+      <GlobalError v-if="globalError" :error="globalError" />
     </transition>
   </div>
 </template>
@@ -26,6 +26,7 @@ import Footer from './components/Footer'
 import SearchBox from './components/SearchBox'
 import GlobalLoading from './components/UI/GlobalLoading'
 import GlobalError from './components/UI/GlobalError'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'App',
@@ -44,22 +45,12 @@ export default {
     }
   },
   computed: {
-    globalLoading() {
-      return this.$store.getters.globalLoading
-    },
-    globalErrorText() {
-      return this.$store.getters.globalError
-    }
+    ...mapGetters(['globalLoading', 'globalError']),
   },
   methods: {
     handleScroll() {
-      if(this.lastY > window.pageYOffset) {
-        this.showFooter = true
-        this.lastY = window.pageYOffset
-      } else {
-        this.showFooter = false
-        this.lastY = window.pageYOffset
-      }
+      this.showFooter = this.lastY > window.pageYOffset
+      this.lastY = window.pageYOffset
     }
   }
 }
