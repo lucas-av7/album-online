@@ -21,6 +21,7 @@ export default {
 <style>
   .globalError {
     width: 80%;
+    max-width: 350px;
     border-radius: 10px;
     position: fixed;
     bottom: 100px;
