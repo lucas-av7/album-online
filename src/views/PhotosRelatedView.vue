@@ -61,7 +61,7 @@ export default {
 
 <style>
   .searchView {
-    width: 95%;
+    width: 100%;
     min-height: calc(100vh - 55px);
     margin: 0 auto;
     display: flex;
