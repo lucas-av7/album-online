@@ -16,6 +16,8 @@
       <hr>
       <p v-if="editInfo.selectedPhotos.length > 0"
         @click="deleteSelectedPhotosModal = true">Delete</p>
+      <p v-if="editInfo.selectedPhotos.length > 0"
+        @click="moveSelectedPhotosModal = true">Move</p>
       <p @click="edit()">Cancel</p>
     </MenuButton>
     </transition>
@@ -84,6 +86,35 @@
           @clicked="deleteSelectedPhotos()"  />
         </template>
       </Modal>
+
+      <Modal v-if="moveSelectedPhotosModal"
+        @clicked="moveSelectedPhotosModal = false">
+        <h1>Move photo{{ editInfo.selectedPhotos.length > 1 ? 's' : '' }}?</h1>
+        <Forms>
+          <label for="albumMove">Choose the album</label>
+          <select name="albumMove" v-model="destinationAlbumId">
+            <option disabled selected :value="null">
+              {{ albums.length > 1 ? 'Select album' : 'No other albums' }}
+            </option>
+            <option
+              v-for="(albumItem, index) in albums"
+              :value="albumItem.albumId" :key="index"
+              :hidden="albumItem.albumId == id">
+              {{ albumItem.title }}
+            </option>
+          </select>
+        </Forms>
+        <template slot="buttonsArea">
+        <ActionButton
+          @clicked="movePhotoModal = false"
+          text="Cancel"
+          type="secondary" />
+        <ActionButton
+          @clicked="moveSelectedPhotos()"
+          text="Move"
+          type="primary" />
+        </template>
+      </Modal>
     </transition>
   </div>
 </template>
@@ -105,9 +136,11 @@ export default {
       renameAlbumModal: false,
       deleteAlbumModal: false,
       deleteSelectedPhotosModal: false,
+      moveSelectedPhotosModal: false,
       editTitleText: '',
       editDescriptionText: '',
-      albumIndex: null
+      albumIndex: null,
+      destinationAlbumId: null
     }
   },
   props: ['id'],
@@ -120,8 +153,11 @@ export default {
     }
   },
   computed: {
+    albums() {
+      return this.$store.getters.getAlbums
+    },
     album() {
-      return this.$store.getters.getAlbums.filter(album => {
+      return this.albums.filter(album => {
         return album.albumId == this.id
       })[0] || []
     },
@@ -167,6 +203,14 @@ export default {
     deleteSelectedPhotos() {
       this.$store.dispatch('deleteSelectedPhotos', this.id)
       this.deleteSelectedPhotosModal = false
+    },
+    moveSelectedPhotos() {
+      if(this.destinationAlbumId == null) return
+      this.$store.dispatch('moveSelectedPhotos',{
+        albumId: this.id,
+        destinationAlbumId: this.destinationAlbumId
+      })
+      this.$router.push(`/album/${this.destinationAlbumId}`)
     }
   }
 }

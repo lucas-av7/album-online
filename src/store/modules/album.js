@@ -41,6 +41,17 @@ export default {
       })
       state.edit.status = false
       state.edit.selectedPhotos = []
+    },
+    moveSelectedPhotos({ dispatch, state }, payload) {
+      state.edit.selectedPhotos.forEach(photoId => {
+        dispatch('movePhoto', { 
+          albumId: payload.albumId, 
+          destinationAlbumId: payload.destinationAlbumId,
+          photoId 
+        })
+      })
+      state.edit.status = false
+      state.edit.selectedPhotos = []
     }
   },
   getters: {
