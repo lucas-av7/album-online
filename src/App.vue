@@ -86,7 +86,6 @@ export default {
   body {
     background: linear-gradient(to right, #4CA8DA, #63AEAC);
     font-family: 'Roboto', sans-serif;
-    font-size: 62,5%;
     color: var(--primary-text-color);
   }
 
