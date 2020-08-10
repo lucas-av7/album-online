@@ -34,7 +34,6 @@ export default {
       } else {
         state.edit.selectedPhotos.splice(index, 1)
       }
-      console.log(state.edit.selectedPhotos)
     },
     deleteSelectedPhotos({ commit, state, getters }, albumId) {
       state.edit.selectedPhotos.forEach(photoId => {
