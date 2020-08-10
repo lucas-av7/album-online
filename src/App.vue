@@ -53,12 +53,12 @@ export default {
   },
   methods: {
     handleScroll() {
-      if(this.lastY > window.scrollY) {
+      if(this.lastY > window.pageYOffset) {
         this.showFooter = true
-        this.lastY = window.scrollY
+        this.lastY = window.pageYOffset
       } else {
         this.showFooter = false
-        this.lastY = window.scrollY
+        this.lastY = window.pageYOffset
       }
     }
   }
