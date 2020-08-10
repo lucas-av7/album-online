@@ -115,5 +115,10 @@ export default {
       width: 180px;
       height: 180px;
     }
+
+    .firstAlbum {
+      width: 330px;
+      height: 330px;
+    }
   }
 </style>
