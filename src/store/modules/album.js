@@ -23,9 +23,9 @@ export default {
       }
       commit('renameAlbum', editInfo)
     },
-    editStatusToggle({ state }) {
+    editStatusToggle({ state }, status) {
       state.edit.selectedPhotos = []
-      state.edit.status = !state.edit.status
+      state.edit.status = status
     },
     selectPhotoToggle({ state }, payload) {
       const index = state.edit.selectedPhotos.indexOf(payload)

@@ -7,7 +7,7 @@
     <MenuButton key="menu1" v-if="!editInfo.status">
       <h3>Album menu</h3>
       <hr>
-      <p v-if="album.photos.length > 0" @click="edit()">Edit</p>
+      <p v-if="album.photos.length > 0" @click="edit(true)">Edit</p>
       <p @click="renameAlbumModal = true, retrieveInfo()">Rename</p>
       <p @click="deleteAlbumModal = true">Delete</p>
     </MenuButton>
@@ -18,7 +18,7 @@
         @click="deleteSelectedPhotosModal = true">Delete</p>
       <p v-if="editInfo.selectedPhotos.length > 0"
         @click="moveSelectedPhotosModal = true">Move</p>
-      <p @click="edit()">Cancel</p>
+      <p @click="edit(false)">Cancel</p>
     </MenuButton>
     </transition>
 
@@ -165,12 +165,6 @@ export default {
       return this.$store.getters.getEditInfo
     }
   },
-  created() {
-    this.albumIndex = this.$store.getters.getAlbumIndex(this.id)
-    if(this.albumIndex == -1){
-      this.$router.push('/') 
-    }
-  },
   methods: {
     deleteAlbum() {
       this.$store.dispatch('deleteAlbum', this.id)
@@ -197,8 +191,8 @@ export default {
         this.renameAlbumModal = false
       }
     },
-    edit() {
-      this.$store.dispatch('editStatusToggle')
+    edit(status) {
+      this.$store.dispatch('editStatusToggle', status)
     },
     deleteSelectedPhotos() {
       this.$store.dispatch('deleteSelectedPhotos', this.id)
@@ -212,6 +206,15 @@ export default {
       })
       this.$router.push(`/album/${this.destinationAlbumId}`)
     }
+  },
+  created() {
+    this.albumIndex = this.$store.getters.getAlbumIndex(this.id)
+    if(this.albumIndex == -1){
+      this.$router.push('/') 
+    }
+  },
+  beforeDestroy() {
+    this.edit(false)
   }
 }
 </script>
