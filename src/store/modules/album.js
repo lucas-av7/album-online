@@ -2,7 +2,8 @@ export default {
   state: {
     edit: {
       status: false,
-      selectedPhotos: []
+      selectedPhotos: [],
+      selectedAlbums: []
     } 
   },
   actions: {
@@ -25,6 +26,7 @@ export default {
     },
     editStatusToggle({ state }, status) {
       state.edit.selectedPhotos = []
+      state.edit.selectedAlbums = []
       state.edit.status = status
     },
     selectPhotoToggle({ state }, payload) {
@@ -52,6 +54,21 @@ export default {
       })
       state.edit.status = false
       state.edit.selectedPhotos = []
+    },
+    selectAlbumToggle({ state }, albumId) {
+      const index = state.edit.selectedAlbums.indexOf(albumId)
+      if(index == -1) {
+        state.edit.selectedAlbums.push(albumId)
+      } else {
+        state.edit.selectedAlbums.splice(index, 1)
+      }
+    },
+    deleteSelectedAlbums({ dispatch, state }) {
+      state.edit.selectedAlbums.forEach(albumId => {
+        dispatch('deleteAlbum', albumId)
+      })
+      state.edit.status = false
+      state.edit.selectedAlbums = []
     }
   },
   getters: {

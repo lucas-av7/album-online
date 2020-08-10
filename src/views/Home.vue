@@ -7,7 +7,46 @@
         <NewAlbum v-if="newAlbumModal" @close="closeModal()" />
       </transition>
     </template>
-    <Albums v-else />
+
+    <template v-else>
+      <MenuButton v-if="!editInfo.status">
+        <h3>Home menu</h3>
+        <hr>
+        <p @click="edit(true)">Edit</p>
+      </MenuButton>
+      <MenuButton key="menu2" v-else>
+        <h3>Selected albums</h3>
+        <hr>
+        <p v-if="editInfo.selectedAlbums.length < allAlbums.length"
+          @click="selectAll = true">
+          Select all
+        </p>
+        <template v-if="editInfo.selectedAlbums.length > 0">
+          <p @click="deleteSelectedAlbumsModal = true">Delete</p>
+        </template>
+        <p @click="edit(false)">Cancel</p>
+      </MenuButton>
+
+      <Albums :selectAll="selectAll"
+        @selectAllReset="selectAll = false" />
+    </template>
+
+    <transition name="modal">
+      <Modal v-if="deleteSelectedAlbumsModal"
+        @clicked="deleteSelectedAlbumsModal = false">
+        <h1>Delete {{ editInfo.selectedAlbums.length }} album{{ editInfo.selectedAlbums.length > 1 ? 's' : '' }}?</h1>
+        <template slot="buttonsArea">
+        <ActionButton
+          @clicked="deleteSelectedAlbumsModal = false"
+          text="Cancel"
+          type="secondary" />
+        <ActionButton
+          text="Delete"
+          type="danger"
+          @clicked="deleteSelectedAlbums()"  />
+        </template>
+      </Modal>
+    </transition>
   </div>
 </template>
 
@@ -15,24 +54,43 @@
 import CreateAlbumPhoto from '../components/CreateAlbumPhoto'
 import Albums from '../components/Albums'
 import NewAlbum from '../components/NewAlbum'
+import MenuButton from '../components/UI/MenuButton'
+import Modal from '../components/UI/Modal'
+import ActionButton from '../components/UI/ActionButton'
 
 export default {
   name: 'Home',
-  components: { CreateAlbumPhoto, Albums, NewAlbum },
+  components: { CreateAlbumPhoto, Albums, NewAlbum, MenuButton, Modal, ActionButton },
   computed: {
     allAlbums() {
       return this.$store.getters.getAlbums
+    },
+    editInfo() {
+      return this.$store.getters.getEditInfo
     }
   },
   data() {
     return {
-      newAlbumModal: false
+      newAlbumModal: false,
+      selectAll: false,
+      deleteSelectedAlbumsModal: false
     }
   },
   methods: {
     closeModal() {
       this.newAlbumModal = false
+    },
+    edit(status) {
+      this.$store.dispatch('editStatusToggle', status)
+      this.selectAll = false
+    },
+    deleteSelectedAlbums() {
+      this.$store.dispatch('deleteSelectedAlbums', this.id)
+      this.deleteSelectedAlbumsModal = false
     }
+  },
+  beforeDestroy() {
+    this.edit(false)
   }
 }
 </script>

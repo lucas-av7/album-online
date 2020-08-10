@@ -2,8 +2,13 @@
   <div class="albums">
     <Album v-for="album in allAlbums"
       :key="album.albumId"
-      :album="album"/>
-    <CreateAlbumPhoto type="album" @clicked="newAlbumModal = true" />
+      :album="album"
+      :selectAll="selectAll"
+      @selectAllReset="$emit('selectAllReset')"  />
+
+    <CreateAlbumPhoto v-show="!editStatus"
+      type="album" @clicked="newAlbumModal = true" />
+
     <transition name="modal">
       <NewAlbum v-if="newAlbumModal" @close="closeModal()" />
     </transition>
@@ -17,6 +22,7 @@ import NewAlbum from './NewAlbum'
 
 export default {
   name: 'Albums',
+  props: ['selectAll'],
   components: { Album, CreateAlbumPhoto, NewAlbum },
   data() {
     return {
@@ -26,6 +32,9 @@ export default {
   computed: {
     allAlbums() {
       return this.$store.getters.getAlbums
+    },
+    editStatus() {
+      return this.$store.getters.getEditInfo.status
     }
   },
   methods: {
