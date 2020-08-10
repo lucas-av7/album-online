@@ -66,4 +66,27 @@ export default {
     object-fit: cover;
   }
 
+  @media screen and (min-width: 1000px) {
+    .album {
+      width: 150px;
+      margin: 4px;
+    }
+
+    .albumFrame {
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  @media screen and (min-width: 1400px) {
+    .album {
+      width: 180px;
+      margin: 10px;
+    }
+
+    .albumFrame {
+      width: 180px;
+      height: 180px;
+    }
+  }
 </style>

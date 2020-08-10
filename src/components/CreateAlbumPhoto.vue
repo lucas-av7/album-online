@@ -1,7 +1,7 @@
 <template>
   <div class="createAlbum">
     <template v-if="type == 'album'">
-      <div class="createAlbumFrame"
+      <div class="createAlbumPhotoFrame"
         :class="{ firstAlbum }"
         @click="$emit('clicked')">
         <i class="fas fa-book albumIcon"></i>
@@ -11,7 +11,7 @@
     </template>
 
     <template v-if="type == 'photo'">
-      <div class="createAlbumFrame"
+      <div class="createAlbumPhotoFrame"
         @click="$emit('clicked')">
         <i class="far fa-image albumIcon"></i>
         <h2>New photo</h2>
@@ -39,7 +39,7 @@ export default {
     margin: 3px;
   }
 
-  .createAlbumFrame {
+  .createAlbumPhotoFrame {
     width: 110px;
     height: 110px;
     border: 2px solid var(--border-color);
@@ -56,7 +56,7 @@ export default {
     color: var(--primary-text-color);
   }
 
-  .createAlbumFrame > h2 {
+  .createAlbumPhotoFrame > h2 {
     font-size: 1.0rem;
   }
 
@@ -87,6 +87,33 @@ export default {
     }
     100% {
       transform: scale(1);
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    .createAlbum {
+      margin: 4px;
+    }
+
+    .createAlbumPhotoFrame {
+      width: 150px;
+      height: 150px;
+    }
+
+    .firstAlbum {
+      width: 330px;
+      height: 330px;
+    }
+  }
+
+  @media screen and (min-width: 1400px) {
+    .createAlbum {
+      margin: 10px;
+    }
+
+    .createAlbumPhotoFrame {
+      width: 180px;
+      height: 180px;
     }
   }
 </style>
