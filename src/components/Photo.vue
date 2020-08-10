@@ -2,8 +2,7 @@
   <div class="photo">
     <div class="selectBox" v-if="editStatus">
       <div class="selectBoxOverlay"
-        @click="selected = !selected,
-        selectPhotoToggle()">
+        @click="selectPhotoToggle()">
       </div>
       <input type="checkbox" v-model="selected" >
     </div>
@@ -41,6 +40,7 @@ export default {
   },
   methods: {
     selectPhotoToggle() {
+      this.selected = !this.selected,
       this.$store.dispatch('selectPhotoToggle', this.photo.photoId)
     }
   },
