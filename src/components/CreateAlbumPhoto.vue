@@ -56,7 +56,7 @@ export default {
     color: var(--primary-text-color);
   }
 
-  .createAlbumPhotoFrame > h2 {
+  .createAlbumPhotoFrame h2 {
     font-size: 1.0rem;
   }
 
@@ -67,12 +67,12 @@ export default {
     animation: inductionClick 10s ease infinite;
   }
 
-  .firstAlbum > h2 {
+  .firstAlbum h2 {
     font-size: 1.5rem;
   }
 
   .firstAlbum .albumIcon {
-    font-size: 7.5rem;
+    font-size: 6rem;
   }
 
   @keyframes inductionClick {
@@ -100,9 +100,25 @@ export default {
       height: 150px;
     }
 
+    .albumIcon {
+      font-size: 3rem;
+    }
+
+    .createAlbumPhotoFrame h2 {
+      font-size: 1.5rem;
+    }
+
     .firstAlbum {
-      width: 330px;
-      height: 330px;
+      width: 280px;
+      height: 280px;
+    }
+
+    .firstAlbum h2 {
+      font-size: 2rem;
+    }
+
+    .firstAlbum .albumIcon {
+      font-size: 7rem;
     }
   }
 
@@ -116,9 +132,25 @@ export default {
       height: 180px;
     }
 
+    .albumIcon {
+      font-size: 4rem;
+    }
+
+    .createAlbumPhotoFrame h2 {
+      font-size: 1.7rem;
+    }
+
     .firstAlbum {
       width: 330px;
       height: 330px;
+    }
+
+    .firstAlbum h2 {
+      font-size: 2.5rem;
+    }
+
+    .firstAlbum .albumIcon {
+      font-size: 8rem;
     }
   }
 </style>
