@@ -35,11 +35,9 @@ export default {
         state.edit.selectedPhotos.splice(index, 1)
       }
     },
-    deleteSelectedPhotos({ commit, state, getters }, albumId) {
+    deleteSelectedPhotos({ dispatch, state }, albumId) {
       state.edit.selectedPhotos.forEach(photoId => {
-        const albumIndex = getters.getAlbumIndex(albumId)
-        const photoIndex = getters.getPhotoIndex({ albumIndex, photoId })
-        commit('deletePhoto', { albumIndex, photoIndex })
+        dispatch('deletePhoto', { albumId, photoId })
       })
       state.edit.status = false
       state.edit.selectedPhotos = []
