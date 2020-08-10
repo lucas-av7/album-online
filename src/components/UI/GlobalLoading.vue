@@ -38,13 +38,4 @@ export default {
     margin-top: 10px;
     font-size: 1.6rem;
   }
-
-  @keyframes rotate-center {
-  0% {
-    transform: rotate(0) scale(1);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 </style>

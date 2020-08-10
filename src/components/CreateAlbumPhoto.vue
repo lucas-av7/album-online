@@ -75,21 +75,6 @@ export default {
     font-size: 6rem;
   }
 
-  @keyframes inductionClick {
-    90% {
-      transform: scale(1);
-    }
-    93% {
-      transform: scale(0.95);
-    }
-    96% {
-      transform: scale(1.05);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-
   @media screen and (min-width: 1000px) {
     .createAlbum {
       margin: 4px;

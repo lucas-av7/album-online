@@ -67,6 +67,7 @@ export default {
 
 <style>
 @import './animations/vueTransitions.css';
+@import './animations/animations.css';
 
   * {
     padding: 0;
