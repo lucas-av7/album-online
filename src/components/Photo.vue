@@ -40,7 +40,8 @@ export default {
     }
   },
   methods: {
-    selectPhotoToggle() {
+    selectPhotoToggle(all) {
+      if(all == 'all' && this.selected) return
       this.selected = !this.selected,
       this.$store.dispatch('selectPhotoToggle', this.photo.photoId)
     }
@@ -49,8 +50,13 @@ export default {
     editStatus() {
       this.selected = false
     },
+    selected() {
+      if(this.selected == false) {
+        this.$emit('selectAllReset')
+      }
+    },
     selectAll() {
-      if(this.selectAll) this.selectPhotoToggle()
+      if(this.selectAll) this.selectPhotoToggle('all')
     }
   }
 }
@@ -141,7 +147,8 @@ export default {
       height: 150px;
     }
 
-    .photo input[type=checkbox] {
+    .photo input[type=checkbox],
+    .album input[type=checkbox] {
       left: 12px;
       top: 12px;
       width: 35px;

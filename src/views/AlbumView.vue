@@ -26,7 +26,10 @@
     </MenuButton>
     </transition>
 
-    <Photos v-if="albumIndex != -1" :albumId="id" :selectAll="selectAll" />
+    <Photos v-if="albumIndex != -1"
+      :albumId="id"
+      :selectAll="selectAll"
+      @selectAllReset="selectAll = false" />
 
     <transition name="modal">
       <Modal v-if="renameAlbumModal"

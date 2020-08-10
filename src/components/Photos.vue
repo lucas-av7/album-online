@@ -2,7 +2,8 @@
   <div class="photos">
     <Photo v-for="photo in photos"
       :key="photo.id" :photo="photo"
-      :selectAll="selectAll"  />
+      :selectAll="selectAll"
+      @selectAllReset="$emit('selectAllReset')"  />
 
     <CreateAlbumPhoto v-show="!editStatus"
       type="photo" @clicked="newPhotoModal = true" />
