@@ -39,7 +39,8 @@ export default {
   data() {
     return {
       showFooter: true,
-      searchBoxOpen: false
+      searchBoxOpen: false,
+      lastY: 0
     }
   },
   computed: {
@@ -52,10 +53,12 @@ export default {
   },
   methods: {
     handleScroll() {
-      if (window.scrollY > 0) {
-        this.showFooter = false
-      } else {
+      if(this.lastY > window.scrollY) {
         this.showFooter = true
+        this.lastY = window.scrollY
+      } else {
+        this.showFooter = false
+        this.lastY = window.scrollY
       }
     }
   }
