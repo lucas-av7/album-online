@@ -1,6 +1,17 @@
 <template>
   <div class="photo">
-    <router-link :to="`/photo/${photo.albumId}/${photo.photoId}`" class="linkRouter">
+    <div class="selectBox" v-if="editStatus">
+      <div class="selectBoxOverlay"
+        @click="selected = !selected,
+        selectPhotoToggle()">
+      </div>
+      <input type="checkbox" v-model="selected" >
+    </div>
+    <router-link
+      tag="button"
+      :to="`/photo/${photo.albumId}/${photo.photoId}`" 
+      class="linkRouter"
+      :disabled="editStatus">
       <div class="photoFrame">
         <img :src="photoUrl" :alt="photo.title">
       </div>
@@ -12,12 +23,30 @@
 <script>
 export default {
   name: 'Photo',
+  data() {
+    return {
+      selected: false
+    }
+  },
   props: {
-    photo: { type: Object, required: true }
+    photo: { type: Object, required: true },
   },
   computed: {
     photoUrl() {
       return this.photo.url.replace(this.photo.photoId, this.photo.photoId + 'm')
+    },
+    editStatus() {
+      return this.$store.getters.getEditInfo.status
+    }
+  },
+  methods: {
+    selectPhotoToggle() {
+      this.$store.dispatch('selectPhotoToggle', this.photo.photoId)
+    }
+  },
+  watch: {
+    editStatus() {
+      this.selected = false
     }
   }
 }
@@ -31,6 +60,7 @@ export default {
     user-select: none;
     margin: 3px;
     width: 110px;
+    position: relative;
   }
 
   .photo > p {
@@ -42,6 +72,39 @@ export default {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+  }
+
+  .selectBox {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .selectBoxOverlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    cursor: pointer;
+  }
+
+    .selectBox input[type=checkbox] {
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    width: 30px;
+    height: 30px;
+    z-index: 1;
+  }
+
+  button.linkRouter {
+    border: none;
+    outline: none;
+    background: transparent;
   }
 
   .photoFrame {
@@ -72,6 +135,13 @@ export default {
     .photoFrame {
       width: 150px;
       height: 150px;
+    }
+
+    .photo input[type=checkbox] {
+      left: 12px;
+      top: 12px;
+      width: 35px;
+      height: 35px;
     }
   }
 

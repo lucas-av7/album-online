@@ -1,9 +1,14 @@
 <template>
   <div class="photos">
-    <Photo v-for="photo in photos" :key="photo.id" :photo="photo" />
-    <CreateAlbumPhoto type="photo" @clicked="newPhotoModal = true" />
+    <Photo v-for="photo in photos"
+      :key="photo.id" :photo="photo" />
+
+    <CreateAlbumPhoto v-show="!editStatus"
+      type="photo" @clicked="newPhotoModal = true" />
+      
     <transition name="modal">
-      <NewPhoto v-if="newPhotoModal" @close="closeModal()" :albumId="albumId" />
+      <NewPhoto v-if="newPhotoModal"
+        @close="closeModal()" :albumId="albumId" />
     </transition>
   </div>
 </template>
@@ -27,6 +32,9 @@ export default {
       return this.$store.getters.getAlbums.filter(album => {
           return album.albumId == this.albumId
         })[0].photos || []
+    },
+    editStatus() {
+      return this.$store.getters.getEditInfo.status
     }
   },
   methods: {

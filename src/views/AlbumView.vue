@@ -2,17 +2,29 @@
   <div class="albumView">
     <h1>{{ album.title }}</h1>
     <p>{{ album.description }}</p>
-    <MenuButton>
+
+    <transition name="menuChange" mode="out-in">
+    <MenuButton key="menu1" v-if="!editInfo.status">
       <h3>Album menu</h3>
       <hr>
+      <p v-if="album.photos.length > 0" @click="edit()">Edit</p>
       <p @click="renameAlbumModal = true, retrieveInfo()">Rename</p>
       <p @click="deleteAlbumModal = true">Delete</p>
     </MenuButton>
+    <MenuButton key="menu2" v-else>
+      <h3>Selected photos</h3>
+      <hr>
+      <p v-if="editInfo.selectedPhotos.length > 0"
+        @click="deleteSelectedPhotosModal = true">Delete</p>
+      <p @click="edit()">Cancel</p>
+    </MenuButton>
+    </transition>
 
     <Photos v-if="albumIndex != -1" :albumId="id" />
 
     <transition name="modal">
-      <Modal v-if="renameAlbumModal" @clicked="renameAlbumModal = false">
+      <Modal v-if="renameAlbumModal"
+        @clicked="renameAlbumModal = false">
         <h1>Rename album</h1>
         <Forms>
           <label for="title">Title</label>
@@ -43,7 +55,8 @@
         </template>
       </Modal>
 
-      <Modal v-if="deleteAlbumModal" @clicked="deleteAlbumModal = false">
+      <Modal v-if="deleteAlbumModal"
+        @clicked="deleteAlbumModal = false">
         <h1>Delete album?</h1>
         <template slot="buttonsArea">
         <ActionButton
@@ -54,6 +67,21 @@
           text="Delete"
           type="danger"
           @clicked="deleteAlbum()"  />
+        </template>
+      </Modal>
+
+      <Modal v-if="deleteSelectedPhotosModal"
+        @clicked="deleteSelectedPhotosModal = false">
+        <h1>Delete photo{{ editInfo.selectedPhotos.length > 1 ? 's' : '' }}?</h1>
+        <template slot="buttonsArea">
+        <ActionButton
+          @clicked="deleteSelectedPhotosModal = false"
+          text="Cancel"
+          type="secondary" />
+        <ActionButton
+          text="Delete"
+          type="danger"
+          @clicked="deleteSelectedPhotos()"  />
         </template>
       </Modal>
     </transition>
@@ -76,6 +104,7 @@ export default {
     return {
       renameAlbumModal: false,
       deleteAlbumModal: false,
+      deleteSelectedPhotosModal: false,
       editTitleText: '',
       editDescriptionText: '',
       albumIndex: null
@@ -95,13 +124,16 @@ export default {
       return this.$store.getters.getAlbums.filter(album => {
         return album.albumId == this.id
       })[0] || []
+    },
+    editInfo() {
+      return this.$store.getters.getEditInfo
     }
   },
   created() {
     this.albumIndex = this.$store.getters.getAlbumIndex(this.id)
     if(this.albumIndex == -1){
       this.$router.push('/') 
-    } 
+    }
   },
   methods: {
     deleteAlbum() {
@@ -128,6 +160,13 @@ export default {
         this.$store.dispatch('renameAlbum', editInfo)
         this.renameAlbumModal = false
       }
+    },
+    edit() {
+      this.$store.dispatch('editStatusToggle')
+    },
+    deleteSelectedPhotos() {
+      this.$store.dispatch('deleteSelectedPhotos', this.id)
+      this.deleteSelectedPhotosModal = false
     }
   }
 }
@@ -147,5 +186,23 @@ export default {
 
   .albumView h1 {
     text-align: center;
+  }
+
+  .menuChange-enter-active {
+    animation: 0.1s menuIn linear;
+  }
+
+  .menuChange-leave-active {
+    animation: 0.1s menuOut linear;
+  }
+
+  @keyframes menuIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes menuOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
   }
 </style>
