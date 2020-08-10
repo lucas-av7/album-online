@@ -222,10 +222,10 @@ export default {
   },
   watch: {
     editTitleText() {
-      this.editTitleText = this.removeSpecialCharacters(this.editTitleText)
+      this.editTitleText = this.removeDoubleSpaces(this.editTitleText)
     },
     editDescriptionText() {
-      this.editDescriptionText = this.removeSpecialCharacters(this.editDescriptionText)
+      this.editDescriptionText = this.removeDoubleSpaces(this.editDescriptionText)
     },
     photoKeywordsText() {
       this.photoKeywordsText = this.removeSpecialCharactersKeywords(this.photoKeywordsText).toLowerCase()

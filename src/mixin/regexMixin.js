@@ -1,7 +1,7 @@
 export default {
   methods: {
-    removeSpecialCharacters(string) {
-      return string.replace(/[!@#$%^&*()_+\-=[\]{};'`:"\\|,.<>/?~]/i, '').replace(/  +/g, ' ')
+    removeDoubleSpaces(string) {
+      return string.replace(/  +/g, ' ')
     },
     removeSpecialCharactersKeywords(string) {
       return string.replace(/[!@#$%^&*()_+\-=[\]{};'`:"\\|,.<>/?~ ]/i, '')

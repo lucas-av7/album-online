@@ -84,10 +84,10 @@ export default {
   },
   watch: {
     photoTitle() {
-      this.photoTitle = this.removeSpecialCharacters(this.photoTitle)
+      this.photoTitle = this.removeDoubleSpaces(this.photoTitle)
     },
     photoDescription() {
-      this.photoDescription = this.removeSpecialCharacters(this.photoDescription)
+      this.photoDescription = this.removeDoubleSpaces(this.photoDescription)
     },
     photoKeywordsText() {
       this.photoKeywordsText = this.removeSpecialCharactersKeywords(this.photoKeywordsText).toLowerCase()

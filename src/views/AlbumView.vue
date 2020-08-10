@@ -154,10 +154,10 @@ export default {
   props: ['id'],
   watch: {
     editTitleText() {
-      this.editTitleText = this.removeSpecialCharacters(this.editTitleText)
+      this.editTitleText = this.removeDoubleSpaces(this.editTitleText)
     },
     editDescriptionText() {
-      this.editDescriptionText = this.removeSpecialCharacters(this.editDescriptionText)
+      this.editDescriptionText = this.removeDoubleSpaces(this.editDescriptionText)
     }
   },
   computed: {

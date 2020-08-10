@@ -49,10 +49,10 @@ export default {
   },
   watch: {
     albumTitle() {
-      this.albumTitle = this.removeSpecialCharacters(this.albumTitle)
+      this.albumTitle = this.removeDoubleSpaces(this.albumTitle)
     },
     albumDescription() {
-      this.albumDescription = this.removeSpecialCharacters(this.albumDescription)
+      this.albumDescription = this.removeDoubleSpaces(this.albumDescription)
     }
   },
   methods: {
