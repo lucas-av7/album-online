@@ -98,10 +98,11 @@ export default {
 
   .searchView .photos {
     width: 100%;
+    max-width: 1200px;
     display: flex;
     flex-wrap: wrap;
-    margin-top: 20px;
-    justify-content: space-evenly;
+    margin: 20px 0 55px;
+    justify-content: center;
   }
 
   .searchView .favoriteIcon {
