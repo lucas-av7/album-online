@@ -2,7 +2,7 @@
   <div id="app"
     v-scroll="handleScroll">
     <Header />
-    <transition name="switchView" mode="out-in">
+    <transition name="opacityAnimation" mode="out-in">
       <router-view :key="$route.fullPath" />
     </transition>
     <transition name="footerTransition" mode="out-in">
@@ -66,6 +66,8 @@ export default {
 </script>
 
 <style>
+@import './animations/vueTransitions.css';
+
   * {
     padding: 0;
     margin: 0;
@@ -89,61 +91,8 @@ export default {
     color: var(--primary-text-color);
   }
 
-  .footerTransition-enter-active {
-    animation: showFooter 0.3s ease-out;
-  }
-
-  .footerTransition-leave-active {
-    animation: hideFooter 0.3s ease-out;
-  }
-
-  @keyframes showFooter {
-    from { opacity: 0; bottom: -55px; }
-    to { opacity: 1; bottom: 0; }
-  }
-
-  @keyframes hideFooter {
-    from { opacity: 1; bottom: 0; }
-    to { opacity: 0; bottom: -55px; }
-  }
-
   .linkRouter {
     color: transparent;
   }
 
-  .switchView-enter-active {
-    animation: showView 0.15s ease;
-  }
-
-  .switchView-leave-active {
-    animation: hideView 0.15s ease;
-  }
-
-  @keyframes showView {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes hideView {
-    from { opacity: 1; }
-    to { opacity: 0; }
-  }
-
-  .errorAnimation-enter-active {
-    animation: showError 0.5s ease;
-  }
-
-  .errorAnimation-leave-active {
-    animation: hideError 0.5s ease;
-  }
-
-  @keyframes showError {
-    from { opacity: 0; }
-    to { opacity: 1;  }
-  }
-
-  @keyframes hideError {
-    from { opacity: 1; }
-    to { opacity: 0; }
-  }
 </style>

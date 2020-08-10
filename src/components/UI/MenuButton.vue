@@ -111,21 +111,4 @@ export default {
     cursor: pointer;
   }
 
-  .menuDropDown-enter-active {
-    animation: 0.15s menuOpen ease;
-  }
-
-  .menuDropDown-leave-active {
-    animation: 0.15s menuClose ease;
-  }
-
-  @keyframes menuOpen {
-    from { opacity: 0; transform: scale(0.3); transform-origin: top right; }
-    to { opacity: 1; transform: scale(1); transform-origin: top right; z-index: 10;}
-  }
-
-  @keyframes menuClose {
-    from { opacity: 1; transform: scale(1); transform-origin: top right; z-index: 10;}
-    to { opacity: 0; transform: scale(0.3); transform-origin: top right; }
-  }
 </style>

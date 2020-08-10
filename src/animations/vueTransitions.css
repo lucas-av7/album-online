@@ -1,0 +1,75 @@
+/* Only Opacity */
+.opacityAnimation-enter-active {
+  animation: opacityFull 0.15s ease;
+}
+
+.opacityAnimation-leave-active {
+  animation: opacityZero 0.15s ease;
+}
+
+@keyframes opacityFull {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes opacityZero {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* Footer transition */
+.footerTransition-enter-active {
+  animation: showFooter 0.3s ease-out;
+}
+
+.footerTransition-leave-active {
+  animation: hideFooter 0.3s ease-out;
+}
+
+@keyframes showFooter {
+  from { opacity: 0; bottom: -55px; }
+  to { opacity: 1; bottom: 0; }
+}
+
+@keyframes hideFooter {
+  from { opacity: 1; bottom: 0; }
+  to { opacity: 0; bottom: -55px; }
+}
+
+/* Error box animation */
+.errorAnimation-enter-active {
+  animation: opacityFull 0.5s ease;
+}
+
+.errorAnimation-leave-active {
+  animation: opacityZero 0.5s ease;
+}
+
+/* Modal animation */
+
+.modal-enter-active {
+  animation: 0.3s opacityFull ease;
+}
+
+.modal-leave-active {
+  animation: 0.3s opacityZero ease;
+}
+
+/* Menu dropdown animations */
+.menuDropDown-enter-active {
+  animation: 0.15s menuOpen ease;
+}
+
+.menuDropDown-leave-active {
+  animation: 0.15s menuClose ease;
+}
+
+@keyframes menuOpen {
+  from { opacity: 0; transform: scale(0.3); transform-origin: top right; }
+  to { opacity: 1; transform: scale(1); transform-origin: top right; z-index: 10;}
+}
+
+@keyframes menuClose {
+  from { opacity: 1; transform: scale(1); transform-origin: top right; z-index: 10;}
+  to { opacity: 0; transform: scale(0.3); transform-origin: top right; }
+}

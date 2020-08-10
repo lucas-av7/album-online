@@ -3,7 +3,7 @@
     <h1>{{ album.title }}</h1>
     <p>{{ album.description }}</p>
 
-    <transition name="menuChange" mode="out-in">
+    <transition name="opacityAnimation" mode="out-in">
     <MenuButton key="menu1" v-if="!editInfo.status">
       <h3>Album menu</h3>
       <hr>
@@ -244,21 +244,4 @@ export default {
     text-align: center;
   }
 
-  .menuChange-enter-active {
-    animation: 0.1s menuIn linear;
-  }
-
-  .menuChange-leave-active {
-    animation: 0.1s menuOut linear;
-  }
-
-  @keyframes menuIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes menuOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-  }
 </style>
