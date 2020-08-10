@@ -113,7 +113,7 @@
         </Forms>
         <template slot="buttonsArea">
         <ActionButton
-          @clicked="movePhotoModal = false"
+          @clicked="moveSelectedPhotosModal = false"
           text="Cancel"
           type="secondary" />
         <ActionButton
