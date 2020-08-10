@@ -7,8 +7,8 @@ import Vue2TouchEvents from 'vue2-touch-events'
 Vue.use(Vue2TouchEvents)
 
 Vue.directive('scroll', {
-  inserted: function (el, binding) {
-    let f = function (evt) {
+  inserted(el, binding) {
+    let f = evt => {
       if (binding.value(evt, el)) {
         window.removeEventListener('scroll', f)
       }
@@ -22,6 +22,6 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
-  beforeCreate() { this.$store.commit('loadLocalStorage');},
+  beforeCreate() { this.$store.commit('loadLocalStorage'); },
   render: h => h(App)
 }).$mount('#app')
