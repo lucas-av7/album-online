@@ -81,7 +81,7 @@
 
       <Modal v-if="deleteSelectedPhotosModal"
         @clicked="deleteSelectedPhotosModal = false">
-        <h1>Delete photo{{ editInfo.selectedPhotos.length > 1 ? 's' : '' }}?</h1>
+        <h1>Delete {{ editInfo.selectedPhotos.length }} photo{{ editInfo.selectedPhotos.length > 1 ? 's' : '' }}?</h1>
         <template slot="buttonsArea">
         <ActionButton
           @clicked="deleteSelectedPhotosModal = false"
@@ -96,7 +96,7 @@
 
       <Modal v-if="moveSelectedPhotosModal"
         @clicked="moveSelectedPhotosModal = false">
-        <h1>Move photo{{ editInfo.selectedPhotos.length > 1 ? 's' : '' }}?</h1>
+        <h1>Move {{ editInfo.selectedPhotos.length }} photo{{ editInfo.selectedPhotos.length > 1 ? 's' : '' }}?</h1>
         <Forms>
           <label for="albumMove">Choose the album</label>
           <select name="albumMove" v-model="destinationAlbumId">
