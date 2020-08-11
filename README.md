@@ -15,8 +15,12 @@ Veja online: [GH Pages](https://lucas-av7.github.io/click-challenge)
 
 ## Tecnologias usadas
 - [VueJS](https://vuejs.org/) - *Framework front-end*
+- [Vue-router](https://router.vuejs.org/) - Navegação por rotas
+- [Vuex](https://vuex.vuejs.org/) - Gerenciador de estado
 - [Vue2TouchEvents](https://www.npmjs.com/package/vue2-touch-events) - Eventos de toque na tela
+- [Axios](https://www.npmjs.com/package/axios) - Comunicação à API
 - [API Imgur](https://api.imgur.com/) - Hospedagem das fotos
+- [Form-Data](https://www.npmjs.com/package/form-data) - *Upload* das imagens
 
 ## Como iniciar o projeto
 *É preciso ter instalado o [NodeJS](https://nodejs.org/en/) para continuar*
