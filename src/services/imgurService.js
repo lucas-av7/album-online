@@ -12,6 +12,6 @@ let config = {
 };
 
 export const uploadPhoto = photo => {
-  config.data.append('image', photo.imageToUpload)
+  config.data.append('image', photo)
   return axios(config)
 }

@@ -1,11 +1,6 @@
 export default {
   newPhoto(state, payload) {
-    const albumId = payload.albumId
-    state.albums.forEach(album => {
-      if(album.albumId == albumId) {
-        album.photos.push(payload)
-      }
-    })
+    state.albums[payload.albumIndex].photos.push(payload.photo)
     localStorage.setItem('albumsClickApp', JSON.stringify(state.albums))
   },
   addComment(state, payload) {
