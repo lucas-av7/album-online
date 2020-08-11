@@ -17,6 +17,7 @@
       </div>
     </router-link>
     <p>{{ album.title }}</p>
+    <p class="albumLength">{{ album.photos.length }}</p>
   </div>
 </template>
 
@@ -104,6 +105,12 @@ export default {
     height: 100%;
     width: 100%;
     object-fit: cover;
+  }
+
+  p.albumLength {
+    color: var(--border-color);
+    font-size: 0.9rem;
+    margin-top: -3px;
   }
 
   @media screen and (min-width: 1000px) {
