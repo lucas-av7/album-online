@@ -212,11 +212,11 @@ export default {
       })[0] || []
     },
     nextPhoto() {
-      if(this.photoIndex == this.album.photos.length - 1) return null
+      if(this.photoIndex == -1 || this.photoIndex == this.album.photos.length - 1) return null
       return this.album.photos[this.photoIndex + 1].photoId
     },
     previusPhoto() {
-      if(this.photoIndex == 0) return null
+      if(this.photoIndex == -1 || this.photoIndex == 0) return null
       return this.album.photos[this.photoIndex - 1].photoId
     }
   },
@@ -318,10 +318,12 @@ export default {
   created() {
     const albumIndex = this.$store.getters.getAlbumIndex(this.albumId)
     if(albumIndex == -1){
+      this.photoIndex = -1
       this.$router.push('/') 
     } else {
       const photoIndex = this.$store.getters.getPhotoIndex({ albumIndex, photoId: this.photoId })
       if(photoIndex == -1) {
+        this.photoIndex = -1
         this.$router.push('/') 
       } else {
         this.photoIndex = photoIndex

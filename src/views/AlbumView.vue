@@ -7,7 +7,7 @@
       <MenuButton key="menu1" v-if="!editInfo.status">
         <h3>Album menu</h3>
         <hr>
-        <p v-if="album.photos.length > 0" @click="edit(true)">Edit</p>
+        <p v-if="album.photos && album.photos.length > 0" @click="edit(true)">Edit</p>
         <p @click="renameAlbumModal = true, retrieveInfo()">Rename</p>
         <p @click="deleteAlbumModal = true">Delete</p>
       </MenuButton>
