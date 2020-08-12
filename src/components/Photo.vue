@@ -11,7 +11,7 @@
       :to="`/photo/${photo.albumId}/${photo.photoId}`" 
       class="linkRouter"
       :disabled="editStatus">
-      <div class="photoFrame">
+      <div class="photoFrame" :class="{ selectedPhoto: selected }">
         <img :src="photoUrl" :alt="photo.title">
       </div>
     </router-link>
@@ -104,10 +104,10 @@ export default {
 
     .selectBox input[type=checkbox] {
     position: absolute;
-    left: 6px;
-    top: 6px;
-    width: 30px;
-    height: 30px;
+    left: 12px;
+    top: 12px;
+    width: 25px;
+    height: 25px;
     z-index: 1;
   }
 
@@ -136,6 +136,10 @@ export default {
     object-fit: cover;
   }
 
+  .selectedPhoto {
+    border: 5px solid var(--primary-color);
+  }
+
   @media screen and (min-width: 1000px) {
     .photo {
       width: 150px;
@@ -149,8 +153,6 @@ export default {
 
     .photo input[type=checkbox],
     .album input[type=checkbox] {
-      left: 12px;
-      top: 12px;
       width: 35px;
       height: 35px;
     }

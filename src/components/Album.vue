@@ -11,7 +11,7 @@
       :to="`/album/${album.albumId}`"
       class="linkRouter"
       :disabled="editStatus">
-      <div class="albumFrame">
+      <div class="albumFrame" :class="{ selectedAlbum: selected }">
         <i v-if="photoUrl == ''" class="far fa-folder-open albumIcon"></i>
         <img v-else :src="photoUrl" :alt="album.title">
       </div>
@@ -111,6 +111,10 @@ export default {
     color: var(--border-color);
     font-size: 0.9rem;
     margin-top: -3px;
+  }
+
+  .selectedAlbum {
+    border: 5px solid var(--primary-color);
   }
 
   @media screen and (min-width: 1000px) {
